@@ -85,7 +85,7 @@ public class Fragment_Home extends Fragment {
             public boolean onTabSelected(int position, boolean wasSelected) {
                 switch (position) {
                     case 0:
-                        // activity.DisplayFragmentMain();
+                         activity.DisplayFragmentMain();
                         break;
                     case 1:
                         // activity.DisplayFragmentOrders();
@@ -95,7 +95,7 @@ public class Fragment_Home extends Fragment {
 
                         break;
                     case 3:
-                        //  activity.DisplayFragmentProfile();
+                         activity.DisplayFragmentMore();
                         break;
 
 
@@ -105,25 +105,22 @@ public class Fragment_Home extends Fragment {
         });
     }
 
-   /* public void UpdateAHBottomNavigationPosition(int pos) {
+    public void UpdateAHBottomNavigationPosition(int pos) {
 
         if (pos == 0) {
             tv_title.setText(getString(R.string.home));
         } else if (pos == 1) {
-            tv_title.setText(getString(R.string.needs));
+           // tv_title.setText(getString(R.string.needs));
 
         } else if (pos == 2) {
-            tv_title.setText(getString(R.string.offers));
+          //  tv_title.setText(getString(R.string.offers));
 
         } else if (pos == 3) {
-            tv_title.setText(getString(R.string.accountِ));
-
-        } else if (pos == 4) {
             tv_title.setText(getString(R.string.more));
 
         }
         bottomNavigationView.setSelectedBackgroundVisible(true);
 
         bottomNavigationView.setCurrentItem(pos, false);
-    }*/
+    }
 }

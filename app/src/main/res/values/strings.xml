@@ -13,6 +13,13 @@
     <string name="orders">My Order</string>
     <string name="accountِ">Account</string>
     <string name="more">more</string>
+    <string name="bank_account">Bank Accounts</string>
+    <string name="Condition">Terms and Conditions</string>
+    <string name="about">About App</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="language_setting">Language setting</string>
+    <string name="Log_out">Log out</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="water_arrive">Water Arrive</string>
     <string name="choose_the_type_of_load">Choose the type of load <font color='red'>*</font></string>

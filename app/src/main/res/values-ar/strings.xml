@@ -11,6 +11,12 @@
     <string name="home">الرئيسية</string>
     <string name="orders" >طلباتى</string>
     <string name="more" >المزيد</string>
+    <string name="bank_account">الحسابات البنكية</string>
+    <string name="Condition">الشروط والاحكام</string>
+    <string name="about">عن التطبيق</string>
+    <string name="contact_us">اتصل بنا</string>
+    <string name="language_setting">اعدادات اللغه</string>
+    <string name="Log_out">تسجيل الخروج</string>
     <string name="accountِ">حسابى</string>
     <string name="water_arrive">توصيل المياه</string>
     <string name="choose_the_type_of_load">إختر نوع الحمولة <font color='red'>*</font></string>
