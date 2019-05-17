@@ -91,7 +91,7 @@ public class Fragment_Home extends Fragment {
                         // activity.DisplayFragmentOrders();
                         break;
                     case 2:
-                        //   activity.DisplayFragmentOffers();
+                           activity.DisplayFragmentProfile();
 
                         break;
                     case 3:
@@ -113,7 +113,7 @@ public class Fragment_Home extends Fragment {
            // tv_title.setText(getString(R.string.needs));
 
         } else if (pos == 2) {
-          //  tv_title.setText(getString(R.string.offers));
+           tv_title.setText(getString(R.string.accountِ));
 
         } else if (pos == 3) {
             tv_title.setText(getString(R.string.more));

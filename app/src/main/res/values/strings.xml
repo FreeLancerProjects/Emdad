@@ -50,7 +50,8 @@
     <string name="other_services">Other Services</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="user_Full_name">User_Full_name</string>
+    <string name="edit">Edit</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 </resources>
