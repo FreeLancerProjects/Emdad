@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray0"
+    android:clickable="true"
+    android:focusable="true"
+    android:fillViewport="true"
+    tools:context=".Activites_Fragments.Fragments.Fragment_seconed_shipping_Transportation">
+
+    <!-- TODO: Update blank fragment layout -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/txt_charge_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:text="@string/fill_in_the_charger_information_below"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/lin_num_phone_charge"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/txt_charge_info">
+
+            <TextView
+                android:id="@+id/txt_phone_num_code"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/text_left_shape"
+                android:gravity="center"
+                android:text="+966"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/txt_phone_num"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/text_right_shape"
+                android:padding="5dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="539-044-145"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:id="@+id/lin_company_name"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/linear_shape"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/lin_num_phone_charge">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:alpha=".6"
+                android:backgroundTint="#fff"
+                android:padding="5dp"
+                android:src="@drawable/ic_company_name"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:hint="@string/company_name"
+                android:textSize="14sp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:singleLine="true" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:id="@+id/lin_responsible_person"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/linear_shape"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/lin_company_name">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:alpha=".6"
+                android:backgroundTint="#fff"
+                android:padding="5dp"
+                android:src="@drawable/ic_user"
+                android:tint="@color/black"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:hint="@string/responsible_person"
+                android:textSize="14sp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:singleLine="true" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:id="@+id/lin_email_charge"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/linear_shape"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/lin_responsible_person">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:alpha=".6"
+                android:backgroundTint="#fff"
+                android:padding="5dp"
+                android:src="@drawable/ic_mail"
+                android:tint="@color/black"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:hint="@string/user_email"
+                android:textSize="14sp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:singleLine="true" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:id="@+id/lin_nume_of_charge"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/linear_shape"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/lin_email_charge">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:alpha=".6"
+                android:padding="5dp"
+                android:src="@drawable/ic_window"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:hint="@string/the_shipment_number_of_the_sender"
+                android:textSize="14sp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:singleLine="true" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:id="@+id/lin_country_load"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/linear_shape"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/lin_nume_of_charge">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:alpha=".6"
+                android:padding="5dp"
+                android:src="@drawable/ic_flag"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+
+                />
+
+
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                ></Spinner>
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:id="@+id/lin_city_load"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/linear_shape"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/lin_country_load">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:alpha=".6"
+                android:padding="5dp"
+                android:src="@drawable/ic_placeholder"
+                android:tint="@color/black"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                />
+
+
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                ></Spinner>
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:id="@+id/lin_your_location_on_map"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/linear_shape"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/lin_city_load">
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:hint="@string/select_your_location_on_the_map"
+                android:textSize="14sp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:singleLine="true"
+
+                />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:padding="5dp"
+                android:src="@drawable/ic_placeholder"
+                android:tint="@color/yellow1"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lin_history_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/lin_your_location_on_map">
+
+            <LinearLayout
+
+                android:id="@+id/lin_history_load"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="15dp"
+                android:layout_weight="1"
+                android:background="@drawable/linear_shape"
+                android:orientation="horizontal">
+
+
+
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    ></Spinner>
+
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:id="@+id/lin_time_load"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="15dp"
+                android:layout_weight="1"
+                android:background="@drawable/linear_shape"
+                android:orientation="horizontal">
+
+
+
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    ></Spinner>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/next_shipping"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/button2_shape"
+            android:text="@string/next"
+            android:textColor="@color/yellow1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lin_history_time"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/button2_shape"
+            android:text="@string/previous"
+            android:textColor="@color/yellow1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lin_history_time"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

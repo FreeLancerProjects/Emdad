@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">إمداد</string>
+    <string name="login" >دخول</string>
+    <string name="skip">تخطى</string>
+    <string name="user_name">إسم المستخدم</string>
+    <string name="user_password">كلمة المرور</string>
+    <string name="user_email">البريد الإلكترونى</string>
+    <string name="user_phone">رقم الجوال</string>
+    <string name="register">تسجيل</string>
+    <string name="home">الرئيسية</string>
+    <string name="orders" >طلباتى</string>
+    <string name="more" >المزيد</string>
+    <string name="accountِ">حسابى</string>
+    <string name="water_arrive">توصيل المياه</string>
+    <string name="choose_the_type_of_load">إختر نوع الحمولة <font color='red'>*</font></string>
+    <string name="number_of_trucks">عدد الشاحنات <font color='red'>*</font></string>
+    <string name="what_kind_of_truck_do_you_need">ما نوع الشاحنة التى تريدها ؟ <font color='red'>*</font></string>
+    <string name="fill_in_the_charger_information_below">قم بتعبئة معلومات الشاحن ادناه</string>
+    <string name="choose">اختر</string>
+    <string name="company_name">اسم الشركة</string>
+    <string name="responsible_person">الطرف المسئول</string>
+    <string name="the_shipment_number_of_the_sender">رقم الشحنة الخاص بالمرسل</string>
+    <string name="country_load">بلد التحميل</string>
+    <string name="city_load">مدينة التحميل</string>
+    <string name="select_your_location_on_the_map">حدد موقعك على الخريطة</string>
+    <string name="history_of_load">تاريخ التحميل</string>
+    <string name="time_of_load">وقت التحميل</string>
+    <string name="next">التالى --></string>
+    <string name="previous">--السابق</string>
+    <string name="please_provide_us_with_the_delivery_information">نرجو تزويدنا بمعلومات التوصيل</string>
+    <string name="country_arrive">بلد التنزيل</string>
+    <string name="city_Arrive">مدينة التنزيل</string>
+    <string name="time_of_arrive">وقت التنزيل</string>
+    <string name="shipping_and_transportation">شحن ونقل</string>
+    <string name="rental_equipment">تاجير معدات</string>
+    <string name="other_services">خدمات اخرى</string>
+
+</resources>
