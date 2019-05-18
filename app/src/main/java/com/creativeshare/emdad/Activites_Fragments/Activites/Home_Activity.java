@@ -5,11 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_About_App;
-import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Account;
+import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Profile;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_First_shipping_Transportation;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Home;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Main_Shipping_Transportation;
@@ -26,7 +25,7 @@ public class Home_Activity extends AppCompatActivity {
 
     private Fragment_Home fragment_home;
     private Fragment_main fragment_main;
-    private Fragment_Account fragment_profile;
+    private Fragment_Profile fragment_profile;
     private Fragment_more fragment_more;
     private Fragment_About_App fragment_about_app;
     private Fragment_Main_Shipping_Transportation fragment_main_shipping_transportation;
@@ -115,7 +114,7 @@ public class Home_Activity extends AppCompatActivity {
         }
 
         if (fragment_profile == null) {
-            fragment_profile = Fragment_Account.newInstance();
+            fragment_profile = Fragment_Profile.newInstance();
         }
 
         if (fragment_profile.isAdded()) {
