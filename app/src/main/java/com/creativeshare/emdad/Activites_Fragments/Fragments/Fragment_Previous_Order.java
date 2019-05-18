@@ -12,14 +12,7 @@ import android.view.ViewGroup;
 
 import com.creativeshare.emdad.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Fragment_Previous_Order.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Fragment_Previous_Order#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class Fragment_Previous_Order extends Fragment {
 
     public static Fragment_Previous_Order newInstance() {

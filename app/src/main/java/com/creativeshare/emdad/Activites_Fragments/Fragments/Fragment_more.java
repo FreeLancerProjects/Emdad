@@ -69,6 +69,12 @@ public class Fragment_more extends Fragment {
                 activity.DisplayFragmentAbout();
             }
         });
+        terms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.DisplayFragmentTerms_Condition();
+            }
+        });
     }
 
 

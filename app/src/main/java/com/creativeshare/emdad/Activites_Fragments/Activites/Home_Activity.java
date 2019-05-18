@@ -13,6 +13,7 @@ import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Profile;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_First_shipping_Transportation;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Home;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Main_Shipping_Transportation;
+import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Terms_Condition;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Third_shipping_Transportation;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_main;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_more;
@@ -29,6 +30,7 @@ public class Home_Activity extends AppCompatActivity {
     private Fragment_Orders fragment_orders;
     private Fragment_Profile fragment_profile;
     private Fragment_more fragment_more;
+    private Fragment_Terms_Condition fragment_terms_condition;
     private Fragment_About_App fragment_about_app;
     private Fragment_Main_Shipping_Transportation fragment_main_shipping_transportation;
     private Fragment_First_shipping_Transportation fragment_first_shipping_transportation;
@@ -184,6 +186,20 @@ public class Home_Activity extends AppCompatActivity {
         }
 
     }
+
+    public void DisplayFragmentTerms_Condition() {
+        fragment_count+=1;
+
+        fragment_terms_condition = Fragment_Terms_Condition.newInstance().newInstance();
+
+
+        if (fragment_terms_condition.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_terms_condition).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_terms_condition, "fragment_terms_condition").addToBackStack("fragment_terms_condition").commit();
+
+        }
+    }
     public void DisplayFragmentAbout() {
         fragment_count+=1;
 
@@ -197,6 +213,7 @@ public class Home_Activity extends AppCompatActivity {
 
         }
     }
+
     public void DisplayFragmentshipping_main() {
         fragment_count+=1;
 
@@ -298,7 +315,6 @@ Back();    }
         finish();
 
     }
-
 
 
 }
