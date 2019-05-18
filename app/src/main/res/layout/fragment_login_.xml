@@ -132,7 +132,7 @@
 
 
             <TextView
-                android:id="@+id/login_skip"
+                android:id="@+id/skip"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:gravity="right"

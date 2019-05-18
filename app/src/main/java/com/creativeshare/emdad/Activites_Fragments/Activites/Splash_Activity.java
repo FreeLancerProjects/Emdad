@@ -31,30 +31,7 @@ public class Splash_Activity extends AppCompatActivity {
         Animation animation;
 
         animation= AnimationUtils.loadAnimation(getBaseContext(),R.anim.lanuch);
-         /*  IndicatorSeekBar seekBar = IndicatorSeekBar
-                .with(getApplicationContext())
-                .max(110)
-                .min(10)
-                .progress(53)
-                .tickCount(7)
-                .showTickMarksType(TickMarkType.OVAL)
 
-                .tickMarksSize(13)//dp
-                .showTickTexts(true)
-                .tickTextsSize(13)//sp
-                .tickTextsTypeFace(Typeface.MONOSPACE)
-                .showIndicatorType(IndicatorType.ROUNDED_RECTANGLE)
-                .indicatorColor(Color.parseColor("#f0bc08"))
-                .indicatorTextColor(Color.parseColor("#ffffff"))
-                .indicatorTextSize(13)//sp
-                .thumbColor(Color.parseColor("#f0bc08"))
-                .thumbSize(14)
-                .trackProgressColor(Color.parseColor("#f0bc08"))
-                .trackProgressSize(4)
-                .trackBackgroundColor(Color.parseColor("#f0bc08"))
-                .trackBackgroundSize(2)
-                .onlyThumbDraggable(false)
-                .build();*/
         im.startAnimation(animation);
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override

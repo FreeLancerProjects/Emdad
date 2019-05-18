@@ -101,4 +101,9 @@ public class Login_Activity extends AppCompatActivity {
     public void onBackPressed() {
         finish();
     }
+
+    public void skip() {
+        Intent intent=new Intent(Login_Activity.this,Home_Activity.class);
+        startActivity(intent);
+    }
 }
