@@ -43,5 +43,6 @@
     <string name="other_services">خدمات اخرى</string>
     <string name="user_Full_name">الاسم يالكامل</string>
     <string name="edit">كلمة المرور</string>
+    <string name="current">السابقه</string>
 
 </resources>
