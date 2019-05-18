@@ -218,7 +218,7 @@ public class Home_Activity extends AppCompatActivity {
     public void DisplayFragmentContact_us() {
         fragment_count+=1;
 
-        fragment_contact_us = Fragment_Contact_US.newInstance().newInstance();
+        fragment_contact_us = Fragment_Contact_US.newInstance();
 
 
         if (fragment_contact_us.isAdded()) {
