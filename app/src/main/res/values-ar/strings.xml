@@ -45,5 +45,7 @@
     <string name="edit">كلمة المرور</string>
     <string name="current">الحالية</string>
     <string name="previou">السابقة</string>
+    <string name="call">إرسال</string>
+    <string name="Message">اترك رسالتك</string>
 
 </resources>

@@ -23,7 +23,7 @@ import com.creativeshare.emdad.preferences.Preferences;
  * create an instance of this fragment.
  */
 public class Fragment_more extends Fragment {
-    private ImageView call,terms,bank_img,logout_img,lang_img,about;
+    private ImageView contact_us,terms,bank_img,logout_img,lang_img,about;
     private LinearLayout logout;
     private Home_Activity activity;
     private Preferences preferences;
@@ -44,7 +44,7 @@ public class Fragment_more extends Fragment {
     }
 
     private void intitview(View view) {
-        call =  view.findViewById(R.id.call);
+        contact_us =  view.findViewById(R.id.call);
         terms = view.findViewById(R.id.term);
         bank_img =  view.findViewById(R.id.bank_img);
         logout_img =  view.findViewById(R.id.logout_img);
@@ -55,7 +55,7 @@ public class Fragment_more extends Fragment {
         preferences = Preferences.getInstance();
         activity = (Home_Activity) getActivity();
         if (preferences.getlang(activity).equals("ar")) {
-            call.setRotation(180);
+            contact_us.setRotation(180);
             terms.setRotation(180);
             bank_img.setRotation(180);
             lang_img.setRotation(180);
@@ -73,6 +73,12 @@ public class Fragment_more extends Fragment {
             @Override
             public void onClick(View v) {
                 activity.DisplayFragmentTerms_Condition();
+            }
+        });
+        contact_us.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.DisplayFragmentContact_us();
             }
         });
     }

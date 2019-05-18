@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_About_App;
+import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Contact_US;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Orders;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Profile;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_First_shipping_Transportation;
@@ -32,6 +33,7 @@ public class Home_Activity extends AppCompatActivity {
     private Fragment_more fragment_more;
     private Fragment_Terms_Condition fragment_terms_condition;
     private Fragment_About_App fragment_about_app;
+    private Fragment_Contact_US fragment_contact_us;
     private Fragment_Main_Shipping_Transportation fragment_main_shipping_transportation;
     private Fragment_First_shipping_Transportation fragment_first_shipping_transportation;
     private Fragment_seconed_shipping_Transportation fragment_seconed_shipping_transportation;
@@ -213,7 +215,19 @@ public class Home_Activity extends AppCompatActivity {
 
         }
     }
+    public void DisplayFragmentContact_us() {
+        fragment_count+=1;
 
+        fragment_contact_us = Fragment_Contact_US.newInstance().newInstance();
+
+
+        if (fragment_contact_us.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_contact_us).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_contact_us, "fragment_contact_us").addToBackStack("fragment_contact_us").commit();
+
+        }
+    }
     public void DisplayFragmentshipping_main() {
         fragment_count+=1;
 
@@ -315,6 +329,7 @@ Back();    }
         finish();
 
     }
+
 
 
 }
