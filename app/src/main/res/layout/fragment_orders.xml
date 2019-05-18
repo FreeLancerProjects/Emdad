@@ -9,19 +9,29 @@
         android:id="@+id/tab_orders"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/yellow1"
+        app:tabTextColor="@color/white"
+        app:tabIndicatorColor="@color/white"
+        >
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tab_current"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:text="@string/current" />
+            android:text="@string/current"
+            android:background="@color/white"
+
+            />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tab_previous"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:text="@string/previous" />
+            android:text="@string/previou"
+            android:background="@color/white"
+
+            />
 
 
     </com.google.android.material.tabs.TabLayout>

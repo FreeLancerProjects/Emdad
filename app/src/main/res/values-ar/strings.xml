@@ -32,8 +32,8 @@
     <string name="select_your_location_on_the_map">حدد موقعك على الخريطة</string>
     <string name="history_of_load">تاريخ التحميل</string>
     <string name="time_of_load">وقت التحميل</string>
-    <string name="next">التالى --></string>
-    <string name="previous">--السابق</string>
+    <string name="next">التالى --</string>
+    <string name="previous">-- السابق</string>
     <string name="please_provide_us_with_the_delivery_information">نرجو تزويدنا بمعلومات التوصيل</string>
     <string name="country_arrive">بلد التنزيل</string>
     <string name="city_Arrive">مدينة التنزيل</string>
@@ -43,6 +43,7 @@
     <string name="other_services">خدمات اخرى</string>
     <string name="user_Full_name">الاسم يالكامل</string>
     <string name="edit">كلمة المرور</string>
-    <string name="current">السابقه</string>
+    <string name="current">الحالية</string>
+    <string name="previou">السابقة</string>
 
 </resources>

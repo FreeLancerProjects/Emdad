@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_About_App;
+import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Orders;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Profile;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_First_shipping_Transportation;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Home;
@@ -25,6 +26,7 @@ public class Home_Activity extends AppCompatActivity {
 
     private Fragment_Home fragment_home;
     private Fragment_main fragment_main;
+    private Fragment_Orders fragment_orders;
     private Fragment_Profile fragment_profile;
     private Fragment_more fragment_more;
     private Fragment_About_App fragment_about_app;
@@ -68,13 +70,11 @@ public class Home_Activity extends AppCompatActivity {
     }
     public void DisplayFragmentMain() {
 
-       /* if (fragment_orders != null && fragment_orders.isAdded()) {
+       if (fragment_orders != null && fragment_orders.isAdded()) {
             fragmentManager.beginTransaction().hide(fragment_orders).commit();
         }
 
-        if (fragment_offers != null && fragment_offers.isAdded()) {
-            fragmentManager.beginTransaction().hide(fragment_offers).commit();
-        }*/
+
         if (fragment_profile != null && fragment_profile.isAdded()) {
             fragmentManager.beginTransaction().hide(fragment_profile).commit();
         }
@@ -97,15 +97,42 @@ public class Home_Activity extends AppCompatActivity {
         }
 
     }
+    public void DisplayFragmentOrders() {
+
+        if (fragment_profile != null && fragment_profile.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_profile).commit();
+        }
+
+
+        if (fragment_more != null && fragment_more.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_more).commit();
+        }
+        if (fragment_main != null && fragment_main.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_main).commit();
+        }
+
+        if (fragment_orders == null) {
+            fragment_orders = Fragment_Orders.newInstance();
+        }
+
+        if (fragment_orders.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_orders).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_main_child, fragment_orders, "fragment_orders").addToBackStack("fragment_orders").commit();
+
+        }
+        if (fragment_home != null && fragment_home.isAdded()) {
+            fragment_home.UpdateAHBottomNavigationPosition(1);
+        }
+
+    }
     public void DisplayFragmentProfile() {
 
-       /* if (fragment_orders != null && fragment_orders.isAdded()) {
+        if (fragment_orders != null && fragment_orders.isAdded()) {
             fragmentManager.beginTransaction().hide(fragment_orders).commit();
         }
 
-        if (fragment_offers != null && fragment_offers.isAdded()) {
-            fragmentManager.beginTransaction().hide(fragment_offers).commit();
-        }*/
+
         if (fragment_more != null && fragment_more.isAdded()) {
             fragmentManager.beginTransaction().hide(fragment_more).commit();
         }
@@ -130,13 +157,11 @@ public class Home_Activity extends AppCompatActivity {
     }
     public void DisplayFragmentMore() {
 
-       /* if (fragment_orders != null && fragment_orders.isAdded()) {
+        if (fragment_orders != null && fragment_orders.isAdded()) {
             fragmentManager.beginTransaction().hide(fragment_orders).commit();
         }
 
-        if (fragment_offers != null && fragment_offers.isAdded()) {
-            fragmentManager.beginTransaction().hide(fragment_offers).commit();
-        }*/
+
         if (fragment_profile != null && fragment_profile.isAdded()) {
             fragmentManager.beginTransaction().hide(fragment_profile).commit();
         }

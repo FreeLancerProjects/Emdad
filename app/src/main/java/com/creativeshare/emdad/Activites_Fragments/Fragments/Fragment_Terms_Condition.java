@@ -15,25 +15,23 @@ import com.creativeshare.emdad.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Fragment_Previous_Order.OnFragmentInteractionListener} interface
+ * {@link Fragment_Terms_Condition.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Fragment_Previous_Order#newInstance} factory method to
+ * Use the {@link Fragment_Terms_Condition#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Fragment_Previous_Order extends Fragment {
+public class Fragment_Terms_Condition extends Fragment {
 
-    public static Fragment_Previous_Order newInstance() {
-       return new Fragment_Previous_Order();
+    public static Fragment_Terms_Condition newInstance() {
+       return new Fragment_Terms_Condition();
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-      View view= inflater.inflate(R.layout.fragment_previous_order, container, false);
-      return view;
+       View view= inflater.inflate(R.layout.fragment_terms_condition, container, false);
+       return view;
     }
-
 
 }

@@ -33,17 +33,17 @@
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
             android:layout_marginTop="8dp"
+            android:layout_marginRight="15dp"
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@+id/txt_charge_info">
 
             <TextView
                 android:id="@+id/txt_phone_num_code"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
                 android:background="@drawable/text_left_shape"
-                android:padding="5dp"
+                android:gravity="center"
                 android:text="+966"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
@@ -51,13 +51,17 @@
             <TextView
                 android:id="@+id/txt_phone_num"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/text_right_shape"
                 android:padding="5dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 android:text="539-044-145"
                 android:textColor="@color/black"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:gravity="center_vertical"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -76,12 +80,12 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
 
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:alpha=".6"
                 android:backgroundTint="#fff"
                 android:padding="5dp"
                 android:src="@drawable/ic_company_name"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
 
 
                 />
@@ -92,10 +96,10 @@
                 android:layout_weight="1"
                 android:background="@color/white"
                 android:hint="@string/company_name"
-                android:textSize="14sp"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:textSize="14sp" />
 
 
         </LinearLayout>
@@ -115,12 +119,12 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:alpha=".6"
                 android:padding="5dp"
                 android:src="@drawable/ic_user"
                 android:tint="@color/black"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
 
                 />
 
@@ -130,10 +134,10 @@
                 android:layout_weight="1"
                 android:background="@color/white"
                 android:hint="@string/responsible_person"
-                android:textSize="14sp"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:textSize="14sp" />
 
 
         </LinearLayout>
@@ -153,14 +157,13 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:alpha=".6"
                 android:backgroundTint="#fff"
                 android:padding="3dp"
                 android:src="@drawable/ic_mail"
-                android:tint="@color/black"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                />
+                android:tint="@color/black" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -168,10 +171,10 @@
                 android:layout_weight="1"
                 android:background="@color/white"
                 android:hint="@string/user_email"
-                android:textSize="14sp"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:textSize="14sp" />
 
 
         </LinearLayout>
@@ -191,12 +194,11 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:alpha=".6"
-                android:padding="5dp"
-                android:src="@drawable/ic_window"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                />
+                android:alpha=".6"
+                android:padding="5dp"
+                android:src="@drawable/ic_window" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -204,10 +206,10 @@
                 android:layout_weight="1"
                 android:background="@color/white"
                 android:hint="@string/the_shipment_number_of_the_sender"
-                android:textSize="14sp"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:textSize="14sp" />
 
 
         </LinearLayout>
@@ -227,19 +229,16 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:alpha=".6"
-                android:padding="5dp"
-                android:src="@drawable/ic_flag"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                />
-
+                android:alpha=".6"
+                android:padding="5dp"
+                android:src="@drawable/ic_flag" />
 
 
             <Spinner
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                ></Spinner>
+                android:layout_height="wrap_content"></Spinner>
 
         </LinearLayout>
 
@@ -258,21 +257,18 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:alpha=".6"
                 android:backgroundTint="#fff"
                 android:padding="5dp"
                 android:src="@drawable/ic_placeholder"
-                android:tint="@color/black"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                />
-
+                android:tint="@color/black" />
 
 
             <Spinner
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                ></Spinner>
+                android:layout_height="wrap_content"></Spinner>
 
         </LinearLayout>
 
@@ -295,20 +291,20 @@
                 android:layout_weight="1"
                 android:background="@color/white"
                 android:hint="@string/select_your_location_on_the_map"
-                android:textSize="14sp"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:textSize="14sp" />
 
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
                 android:padding="5dp"
                 android:src="@drawable/ic_placeholder"
                 android:tint="@color/yellow1"
-                android:layout_marginTop="5dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
 
                 />
 
@@ -334,17 +330,15 @@
                 android:orientation="horizontal">
 
 
-
                 <Spinner
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    ></Spinner>
+                    android:layout_height="wrap_content"></Spinner>
 
             </LinearLayout>
 
         </LinearLayout>
 
-        <Button
+        <LinearLayout
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_marginStart="15dp"
@@ -352,14 +346,31 @@
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="15dp"
             android:background="@drawable/button2_shape"
-            android:text="@string/next"
-            android:textColor="@color/yellow1"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/lin_history_time"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
 
-        <Button
+            >
+
+            <Button
+                android:id="@+id/next_shipping"
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:text="@string/next"
+                android:textColor="@color/yellow1" />
+
+            <ImageView
+                android:id="@+id/image_next"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_right_previous" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_marginStart="15dp"
@@ -367,12 +378,30 @@
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="15dp"
             android:background="@drawable/button2_shape"
-            android:text="@string/previous"
-            android:textColor="@color/yellow1"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/lin_history_time"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
+            tools:ignore="RtlCompat">
+
+            <ImageView
+                android:id="@+id/image_previous"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_left_arrow_previous" />
+
+            <Button
+                android:id="@+id/previous"
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:text="@string/previous"
+                android:textColor="@color/yellow1"
+                android:textSize="11sp" />
+
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

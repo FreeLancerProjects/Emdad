@@ -88,7 +88,7 @@ public class Fragment_Home extends Fragment {
                          activity.DisplayFragmentMain();
                         break;
                     case 1:
-                        // activity.DisplayFragmentOrders();
+                         activity.DisplayFragmentOrders();
                         break;
                     case 2:
                            activity.DisplayFragmentProfile();
@@ -110,7 +110,7 @@ public class Fragment_Home extends Fragment {
         if (pos == 0) {
             tv_title.setText(getString(R.string.home));
         } else if (pos == 1) {
-           // tv_title.setText(getString(R.string.needs));
+            tv_title.setText(getString(R.string.orders));
 
         } else if (pos == 2) {
            tv_title.setText(getString(R.string.accountِ));
