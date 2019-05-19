@@ -3,14 +3,17 @@ package com.creativeshare.emdad.Activites_Fragments.Activites;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.fragment.app.FragmentManager;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.View;
 import android.widget.ImageView;
 
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Login;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Signup;
 import com.creativeshare.emdad.Language.Language;
+import com.creativeshare.emdad.Model.UserModel;
 import com.creativeshare.emdad.R;
 import com.creativeshare.emdad.preferences.Preferences;
 
@@ -24,16 +27,18 @@ public class Login_Activity extends AppCompatActivity {
     private ImageView sign_login;
     private String current_lang;
     private Preferences preferences;
+
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(Language.updateResources(newBase, Language.getLanguage(newBase)));
 
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_);
-         intitview();
+        intitview();
         if (savedInstanceState == null) {
             fragmentManager = this.getSupportFragmentManager();
 
@@ -43,28 +48,28 @@ public class Login_Activity extends AppCompatActivity {
     }
 
     private void intitview() {
-        preferences=Preferences.getInstance();
-        current_lang= preferences.getlang(this);
-        sign_login=findViewById(R.id.login_sign_arrow);
-        if(current_lang.equals("en")){
-            sign_login.setRotation(180);}
-            sign_login.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(fragmentLogin!=null&&fragmentLogin.isVisible()){
-                        DisplaysignupFragment();
-                    }
-                    else{
-                        DisplayLoginFragment();
-                    }
+        preferences = Preferences.getInstance();
+        current_lang = preferences.getlang(this);
+        sign_login = findViewById(R.id.login_sign_arrow);
+        if (current_lang.equals("en")) {
+            sign_login.setRotation(180);
+        }
+        sign_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (fragmentLogin != null && fragmentLogin.isVisible()) {
+                    DisplaysignupFragment();
+                } else {
+                    DisplayLoginFragment();
                 }
-            });
+            }
+        });
 
 
     }
 
     private void DisplayLoginFragment() {
-        if(fragmentsignup!=null&&fragmentsignup.isAdded()){
+        if (fragmentsignup != null && fragmentsignup.isAdded()) {
             fragmentManager.beginTransaction().hide(fragmentsignup).commit();
         }
         if (fragmentLogin == null) {
@@ -76,8 +81,9 @@ public class Login_Activity extends AppCompatActivity {
             fragmentManager.beginTransaction().add(R.id.fragment_login_register, fragmentLogin, "fragmentLogin").addToBackStack("fragmentLogin").commit();
         }
     }
+
     private void DisplaysignupFragment() {
-        if(fragmentLogin!=null&&fragmentLogin.isAdded()){
+        if (fragmentLogin != null && fragmentLogin.isAdded()) {
             fragmentManager.beginTransaction().hide(fragmentLogin).commit();
         }
         if (fragmentsignup == null) {
@@ -90,8 +96,9 @@ public class Login_Activity extends AppCompatActivity {
         }
     }
 
-    public void openHome() {
-        Intent intent=new Intent(Login_Activity.this,Home_Activity.class);
+    public void openHome(UserModel userModel) {
+        preferences.create_update_userdata(this, userModel);
+        Intent intent = new Intent(Login_Activity.this, Home_Activity.class);
         startActivity(intent);
         finish();
 
@@ -103,7 +110,7 @@ public class Login_Activity extends AppCompatActivity {
     }
 
     public void skip() {
-        Intent intent=new Intent(Login_Activity.this,Home_Activity.class);
+        Intent intent = new Intent(Login_Activity.this, Home_Activity.class);
         startActivity(intent);
     }
 }

@@ -70,7 +70,7 @@
             android:enabled="false"
             app:bsb_bubble_color="@color/yellow1"
             app:bsb_second_track_color="@color/yellow1"
-            app:bsb_section_count="5"
+            app:bsb_section_count="4"
             app:bsb_show_section_mark="true"
             app:bsb_thumb_color="@color/yellow1"
             app:bsb_track_color="@color/white"

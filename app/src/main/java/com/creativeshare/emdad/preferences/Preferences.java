@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 
+import com.creativeshare.emdad.Model.UserModel;
 import com.creativeshare.emdad.Tags.Tags;
+import com.google.gson.Gson;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -42,7 +44,7 @@ public class Preferences {
 String session=preferences.getString("lang", Tags.pref_lang);
         return session;
     }
-  /*  public void create_update_userdata(Context context, UserModel usermodel){
+    public void create_update_userdata(Context context, UserModel usermodel){
         SharedPreferences sharedPreferences=context.getSharedPreferences("user",Context.MODE_PRIVATE);
         Gson gson=new Gson();
         String user_data=gson.toJson(usermodel);
@@ -75,7 +77,7 @@ String session=preferences.getString("lang", Tags.pref_lang);
         String session=preferences.getString("state",Tags.session_logout);
         return session;
     }
-    public void create_update_order(Context context, List<Orders_Cart_Model> buy_models){
+  /*  public void create_update_order(Context context, List<Orders_Cart_Model> buy_models){
         SharedPreferences sharedPreferences=context.getSharedPreferences("order",Context.MODE_PRIVATE);
         Gson gson=new Gson();
         String user_order=gson.toJson(buy_models);

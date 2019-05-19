@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:fitsSystemWindows="true"
-    >
+    android:fitsSystemWindows="true">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha=".6"
-        android:orientation="vertical"
-        android:background="@color/gray">
+        android:background="@color/gray"
+        android:orientation="vertical">
 
 
         <ImageView
@@ -30,15 +30,13 @@
             android:id="@+id/cons_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/login2"
             android:layout_weight="1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/Frame_img_login">
+            android:background="@drawable/login2">
 
 
             <LinearLayout
 
-                android:id="@+id/lin_user_name"
+                android:id="@+id/lin_name"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="25dp"
@@ -57,13 +55,46 @@
                     />
 
                 <EditText
+                    android:id="@+id/name_signup"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:hint="@string/name"
+                    android:singleLine="true" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+
+                android:id="@+id/lin_user_name"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/linear_shape"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/lin_name">
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:backgroundTint="#fff"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_user"
+
+                    />
+
+                <EditText
                     android:id="@+id/user_signup"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@color/white"
                     android:hint="@string/user_name"
-                    android:inputType="textEmailAddress"
                     android:singleLine="true" />
 
 
@@ -102,7 +133,7 @@
                     >
 
                     <EditText
-                        android:id="@+id/password_login"
+                        android:id="@+id/password_signup"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@color/white"
@@ -116,14 +147,15 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
+
             <LinearLayout
 
                 android:id="@+id/lin_email_signup"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginRight="25dp"
                 android:background="@drawable/linear_shape"
                 android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@+id/lin_pass_signup">
@@ -149,42 +181,64 @@
 
 
             </LinearLayout>
+
             <LinearLayout
 
                 android:id="@+id/lin_phone_signup"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginRight="25dp"
                 android:background="@drawable/linear_shape"
                 android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@+id/lin_email_signup">
 
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:backgroundTint="#fff"
-                    android:padding="5dp"
-                    android:src="@drawable/ic_phone"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_phone" />
+
+                <com.rilixtech.CountryCodePicker
+                    android:id="@+id/ccp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    app:ccp_showFlag="false"
+                    app:ccp_showFullName="false"
+                    app:ccp_textColor="@color/yellow1"
+                    app:ccp_textSize="13sp"
 
                     />
 
-                <EditText
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@color/yellow1"
+                    tools:ignore="RtlCompat" />
+
+                <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/phone_signup"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@color/white"
                     android:hint="@string/user_phone"
-                    android:inputType="textEmailAddress"
-                    android:singleLine="true" />
+                    android:inputType="phone"
+                    android:maxLines="1"
+                    android:paddingStart="10dp"
+                    tools:ignore="RtlCompat" />
 
 
             </LinearLayout>
 
             <Button
-                android:id="@+id/bt_login"
+                android:id="@+id/bt_signup"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_marginLeft="110dp"
@@ -196,6 +250,15 @@
                 android:textSize="18sp"
                 app:layout_constraintTop_toBottomOf="@+id/lin_phone_signup" />
 
+            <ProgressBar
+                android:id="@+id/progBar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias=".25" />
 
             <TextView
                 android:id="@+id/skip"
@@ -208,11 +271,12 @@
                 android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/bt_login"
+                app:layout_constraintTop_toBottomOf="@id/bt_signup"
                 app:layout_constraintVertical_bias="1" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
+
 </ScrollView>

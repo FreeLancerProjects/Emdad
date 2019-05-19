@@ -268,7 +268,7 @@ public class Home_Activity extends AppCompatActivity {
             fragmentManager.beginTransaction().add(R.id.fragment_shipping_transportation,fragment_seconed_shipping_transportation,"fragment_seconed_shipping_transportation").addToBackStack("fragment_seconed_shipping_transportation").commit();
         }
         if(fragment_main_shipping_transportation!=null){
-            fragment_main_shipping_transportation.update_bar(20);
+            fragment_main_shipping_transportation.update_bar(25);
         }
     }
     public void DisplayFragmentshipping_Third() {
@@ -282,7 +282,7 @@ public class Home_Activity extends AppCompatActivity {
             fragmentManager.beginTransaction().add(R.id.fragment_shipping_transportation,fragment_third_shipping_transportation,"fragment_third_shipping_transportation").addToBackStack("fragment_third_shipping_transportation").commit();
         }
         if(fragment_main_shipping_transportation!=null){
-            fragment_main_shipping_transportation.update_bar(40);
+            fragment_main_shipping_transportation.update_bar(50);
         }
     }
     @Override

@@ -6,12 +6,14 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.creativeshare.emdad.Activites_Fragments.Activites.Home_Activity;
 import com.creativeshare.emdad.R;
@@ -68,6 +70,12 @@ public class Fragment_Third_shipping_Transportation extends Fragment {
             }
         });
 
+
+
+
+        TelephonyManager tm = (TelephonyManager)activity.getSystemService(activity.getApplicationContext().TELEPHONY_SERVICE);
+        String countryCode = tm.getNetworkCountryIso();
+        Toast.makeText(activity,countryCode+"",Toast.LENGTH_LONG).show();
     }
 
 

@@ -53,6 +53,6 @@ private Home_Activity activity;
         bubbleSeekBar.setProgress(i);
     }
     public void update_bar() {
-        bubbleSeekBar.setProgress(bubbleSeekBar.getProgressFloat()-20);
+        bubbleSeekBar.setProgress(bubbleSeekBar.getProgressFloat()-25);
     }
 }

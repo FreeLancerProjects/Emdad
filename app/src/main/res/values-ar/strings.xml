@@ -47,5 +47,9 @@
     <string name="previou">السابقة</string>
     <string name="call">إرسال</string>
     <string name="Message">اترك رسالتك</string>
+    <string name="name">الاسم بالكامل</string>
+    <string name="wait">wait</string>
+    <string name="notifications">Notification</string>
+    <string name="ok">Ok</string>
 
 </resources>
