@@ -28,11 +28,12 @@ import java.util.Locale;
 
 public class Fragment_seconed_shipping_Transportation extends Fragment {
     private Button next, previous;
-    private ImageView next_img, previous_img,date, clock;
+    private ImageView next_img, previous_img, date, clock;
     private CountryCodePicker phonecode;
-    private EditText txtdate, txtclock,txt_phone;
+    private EditText txtdate, txtclock, txt_phone;
     private Home_Activity activity;
-    private String current_lang;
+    private String current_lang, timeclock="";
+    private int years, months, days, hour, minute;
 
     public static Fragment_seconed_shipping_Transportation newInstance() {
         return new Fragment_seconed_shipping_Transportation();
@@ -55,7 +56,7 @@ public class Fragment_seconed_shipping_Transportation extends Fragment {
         previous = view.findViewById(R.id.previous);
         next_img = view.findViewById(R.id.image_next);
         previous_img = view.findViewById(R.id.image_previous);
-       phonecode = view.findViewById(R.id.txt_phone_num_code);
+        phonecode = view.findViewById(R.id.txt_phone_num_code);
         txt_phone = view.findViewById(R.id.txt_phone_num);
         txtdate = view.findViewById(R.id.txt_date);
         txtclock = view.findViewById(R.id.txt_clock);
@@ -76,26 +77,11 @@ public class Fragment_seconed_shipping_Transportation extends Fragment {
                 TimePickerDialog timePickerDialog = new TimePickerDialog(activity, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
-
-                        /*if(hourOfDay<10||minutes<10){
-                            if(hourOfDay<10&&minutes<10){
-                                txtclock.setText("0"+hourOfDay + ": 0" + minutes );
-
-                            }
-                            else {
-                                if(hourOfDay<10){
-                                    txtclock.setText("0"+hourOfDay + ":" + minutes );
-
-                                }
-                                if(minutes<10){
-                                    txtclock.setText(hourOfDay + ": 0" + minutes );
-
-                                }
-                            }
-                        }
-                        else{*/
-
-                        txtclock.setText(hourOfDay + ":" + minutes );
+                        hour = hourOfDay;
+                        minute = minutes;
+                        timeclock += hourOfDay < 10 ? "0" + hourOfDay : hourOfDay;
+                        timeclock += minutes < 10 ? ": 0" + minutes : ":" + minutes;
+                        txtclock.setText(timeclock);
                     }
                 }, 00, 00, false);
                 timePickerDialog.show();
@@ -108,6 +94,9 @@ public class Fragment_seconed_shipping_Transportation extends Fragment {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(activity, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        days = dayOfMonth;
+                        months = month;
+                        years = year;
                         if (current_lang.equals("ar")) {
                             txtdate.setText(year + "-" + month + "-" + dayOfMonth);
                         } else {
@@ -123,6 +112,7 @@ public class Fragment_seconed_shipping_Transportation extends Fragment {
             @Override
             public void onClick(View v) {
                 activity.DisplayFragmentshipping_Third();
+
             }
         });
         previous.setOnClickListener(new View.OnClickListener() {

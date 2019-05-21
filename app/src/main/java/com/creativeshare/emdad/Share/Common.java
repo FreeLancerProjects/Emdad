@@ -17,6 +17,10 @@ import androidx.core.content.ContextCompat;
 
 import com.creativeshare.emdad.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 
 public class Common {
     public  static int re =0;
@@ -300,6 +304,18 @@ public class Common {
     public static boolean isValidMail(String email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
+    public static long getTimeInMillis(int day, int month, int year,int hour,int mintue) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, day,hour,mintue);
+        return calendar.getTimeInMillis();
+    }
+    public static String getTimeStamp(long timeinMillies) {
+        String date = null;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm"); // modify format
+        date = formatter.format(new Date(timeinMillies));
+        System.out.println("Today is " + date);
 
+        return date;
+    }
 
 }
