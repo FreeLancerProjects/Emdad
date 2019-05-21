@@ -304,7 +304,7 @@ public class Common {
     public static boolean isValidMail(String email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
-    public static long getTimeInMillis(int day, int month, int year,int hour,int mintue) {
+    public static long getTimeInMillis(int day, int month, int year,int mintue ,int hour ) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, day,hour,mintue);
         return calendar.getTimeInMillis();
@@ -313,8 +313,6 @@ public class Common {
         String date = null;
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm"); // modify format
         date = formatter.format(new Date(timeinMillies));
-        System.out.println("Today is " + date);
-
         return date;
     }
 

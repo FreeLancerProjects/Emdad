@@ -15,9 +15,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.creativeshare.emdad.Activites_Fragments.Activites.Home_Activity;
 import com.creativeshare.emdad.R;
+import com.creativeshare.emdad.Share.Common;
 import com.hbb20.CountryCodePicker;
 
 import java.sql.Time;
@@ -111,6 +113,7 @@ public class Fragment_seconed_shipping_Transportation extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 activity.DisplayFragmentshipping_Third();
 
             }
