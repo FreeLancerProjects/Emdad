@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/gray0"
     android:clickable="true"
-    android:focusable="true"
     android:fillViewport="true"
+    android:focusable="true"
     tools:context=".Activites_Fragments.Fragments.Fragment_seconed_shipping_Transportation">
 
     <!-- TODO: Update blank fragment layout -->
@@ -45,12 +45,11 @@
                 android:background="@drawable/text_left_shape"
                 android:gravity="center"
                 android:textColor="@color/black"
+                app:ccp_autoDetectCountry="true"
+                app:ccp_autoDetectLanguage="true"
                 app:ccp_showFlag="false"
                 app:ccp_showFullName="false"
-                app:ccp_autoDetectLanguage="true"
-                app:ccp_textSize="13.5sp"
-                app:ccp_autoDetectCountry="true"
-                />
+                app:ccp_textSize="13.5sp" />
 
             <EditText
                 android:id="@+id/txt_phone_num"
@@ -58,13 +57,12 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/text_right_shape"
+                android:gravity="center_vertical"
                 android:padding="5dp"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:textColor="@color/black"
-                android:textSize="15sp"
-                android:gravity="center_vertical"
-                />
+                android:textSize="15sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -333,9 +331,26 @@
                 android:orientation="horizontal">
 
 
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></Spinner>
+                <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                    android:background="@color/white"
+
+                />
+
+                <ImageView
+                    android:id="@+id/date_clock"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:alpha=".6"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_down_arrow"
+                    android:tint="@color/black"
+
+                    />
 
             </LinearLayout>
 

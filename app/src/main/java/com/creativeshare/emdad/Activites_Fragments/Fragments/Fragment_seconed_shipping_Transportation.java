@@ -20,6 +20,9 @@ import com.creativeshare.emdad.Activites_Fragments.Activites.Home_Activity;
 import com.creativeshare.emdad.R;
 import com.hbb20.CountryCodePicker;
 
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Locale;
 
 
@@ -66,15 +69,35 @@ public class Fragment_seconed_shipping_Transportation extends Fragment {
 
         }
         phonecode.registerCarrierNumberEditText(txt_phone);
+
         clock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TimePickerDialog timePickerDialog = new TimePickerDialog(activity, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
+
+                        /*if(hourOfDay<10||minutes<10){
+                            if(hourOfDay<10&&minutes<10){
+                                txtclock.setText("0"+hourOfDay + ": 0" + minutes );
+
+                            }
+                            else {
+                                if(hourOfDay<10){
+                                    txtclock.setText("0"+hourOfDay + ":" + minutes );
+
+                                }
+                                if(minutes<10){
+                                    txtclock.setText(hourOfDay + ": 0" + minutes );
+
+                                }
+                            }
+                        }
+                        else{*/
+
                         txtclock.setText(hourOfDay + ":" + minutes );
                     }
-                }, 0, 0, true);
+                }, 00, 00, false);
                 timePickerDialog.show();
 
             }

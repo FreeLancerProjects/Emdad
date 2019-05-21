@@ -1,5 +1,7 @@
 package com.creativeshare.emdad.Activites_Fragments.Fragments;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,9 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.creativeshare.emdad.Activites_Fragments.Activites.Home_Activity;
@@ -27,7 +31,7 @@ import java.util.Locale;
 public class Fragment_Third_shipping_Transportation extends Fragment {
     private EditText  txt_phone;
     private Button previous,next;
-    private ImageView next_img,previous_img;
+    private ImageView next_img,previous_img,date_clock;
     private CountryCodePicker phonecode;
     private Home_Activity activity;
     private Preferences preferences;
@@ -58,8 +62,10 @@ public class Fragment_Third_shipping_Transportation extends Fragment {
         next=view.findViewById(R.id.next_shipping);
         next_img=view.findViewById(R.id.image_next);
         previous_img=view.findViewById(R.id.image_previous);
+        date_clock=view.findViewById(R.id.date_clock);
         phonecode = view.findViewById(R.id.txt_phone_num_code);
         txt_phone = view.findViewById(R.id.txt_phone_num);
+
         if(current_lang.equals("ar")){
             phonecode.setBackground(getResources().getDrawable(R.drawable.text_right_shape));
             txt_phone.setBackground(getResources().getDrawable(R.drawable.text_left_shape));
@@ -74,7 +80,24 @@ public class Fragment_Third_shipping_Transportation extends Fragment {
                 activity.Back();
             }
         });
+date_clock.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        TimePickerDialog timePickerDialog=new TimePickerDialog(activity, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int hour, int mintues) {
+                DatePickerDialog datePickerDialog=new DatePickerDialog(activity, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
 
+                    }
+                },00,00,00);
+                datePickerDialog.show();
+            }
+        },00,00,false);
+        timePickerDialog.show();
+    }
+});
 
 
 
