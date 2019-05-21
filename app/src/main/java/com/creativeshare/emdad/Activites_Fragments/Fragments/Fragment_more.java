@@ -14,14 +14,7 @@ import com.creativeshare.emdad.Activites_Fragments.Activites.Home_Activity;
 import com.creativeshare.emdad.R;
 import com.creativeshare.emdad.preferences.Preferences;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Fragment_more.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Fragment_more#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class Fragment_more extends Fragment {
     private ImageView contact_us,terms,bank_img,logout_img,lang_img,about;
     private LinearLayout logout;

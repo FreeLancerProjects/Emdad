@@ -15,14 +15,7 @@ import com.creativeshare.emdad.Activites_Fragments.Activites.Home_Activity;
 import com.creativeshare.emdad.R;
 import com.creativeshare.emdad.preferences.Preferences;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Fragment_About_App.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Fragment_About_App#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class Fragment_About_App extends Fragment {
     private Home_Activity activity;
     private Preferences preferences;

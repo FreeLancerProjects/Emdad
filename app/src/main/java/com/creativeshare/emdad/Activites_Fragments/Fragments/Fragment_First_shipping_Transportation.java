@@ -14,14 +14,7 @@ import com.creativeshare.emdad.Activites_Fragments.Activites.Home_Activity;
 import com.creativeshare.emdad.R;
 import com.creativeshare.emdad.preferences.Preferences;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Fragment_First_shipping_Transportation.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Fragment_First_shipping_Transportation#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class Fragment_First_shipping_Transportation extends Fragment {
     private Button next;
     private Home_Activity activity;

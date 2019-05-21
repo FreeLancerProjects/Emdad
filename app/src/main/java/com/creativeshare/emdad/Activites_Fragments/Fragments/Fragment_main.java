@@ -13,14 +13,7 @@ import android.widget.LinearLayout;
 import com.creativeshare.emdad.Activites_Fragments.Activites.Home_Activity;
 import com.creativeshare.emdad.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Fragment_main.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Fragment_main#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class Fragment_main extends Fragment {
     private LinearLayout water,shipping_and_transportation,equipment,otherservices;
     Home_Activity home_activity;
