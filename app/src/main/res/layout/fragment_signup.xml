@@ -199,8 +199,7 @@
                     android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/ic_phone" />
-
-                <com.rilixtech.CountryCodePicker
+                <com.hbb20.CountryCodePicker
                     android:id="@+id/ccp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -208,9 +207,8 @@
                     android:gravity="center_vertical"
                     app:ccp_showFlag="false"
                     app:ccp_showFullName="false"
-                    app:ccp_textColor="@color/yellow1"
                     app:ccp_textSize="13sp"
-
+                    app:ccp_autoDetectLanguage="true"
                     />
 
                 <View
@@ -220,9 +218,11 @@
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="2dp"
                     android:background="@color/yellow1"
-                    tools:ignore="RtlCompat" />
+                    tools:ignore="RtlCompat"
 
-                <androidx.appcompat.widget.AppCompatEditText
+                    />
+
+                <EditText
                     android:id="@+id/phone_signup"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"

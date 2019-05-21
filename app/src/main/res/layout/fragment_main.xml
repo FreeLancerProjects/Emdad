@@ -100,7 +100,7 @@
                             android:layout_width="0dp"
                             android:layout_height="115dp"
                             android:layout_marginStart="5dp"
-                            android:layout_marginEnd="20dp"
+                            android:layout_marginEnd="10dp"
                             android:layout_weight="1"
                             android:background="@drawable/card1"
                             android:descendantFocusability="blocksDescendants"
@@ -110,10 +110,13 @@
                             tools:ignore="RtlCompat">
 
                             <ImageView
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"
+                                android:layout_width="90dp"
+                                android:layout_height="90dp"
                                 android:src="@drawable/ic_water_truck"
-                                android:tint="@color/white" />
+                                android:tint="@color/white"
+                                android:padding="8dp"
+
+                                />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -121,7 +124,7 @@
                                 android:gravity="center"
                                 android:text="@string/water_arrive"
                                 android:textColor="@color/white"
-                                android:textSize="17sp"
+                                android:textSize="14.5sp"
                                 android:textStyle="bold"
 
                                 />
@@ -131,7 +134,7 @@
                             android:id="@+id/card_shipping_and_transportation"
                             android:layout_width="0dp"
                             android:layout_height="115dp"
-                            android:layout_marginStart="20dp"
+                            android:layout_marginStart="10dp"
                             android:layout_marginEnd="5dp"
                             android:layout_weight="1"
                             android:background="@drawable/card2"
@@ -140,10 +143,12 @@
                             tools:ignore="RtlCompat">
 
                             <ImageView
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"
+                                android:layout_width="90dp"
+                                android:layout_height="90dp"
+                                android:src="@drawable/shipping_transport"
+                                android:padding="8dp"
 
-                                android:src="@drawable/shipping_transport" />
+                                />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -151,41 +156,45 @@
                                 android:gravity="center"
                                 android:text="@string/shipping_and_transportation"
                                 android:textColor="@color/white"
-                                android:textSize="17sp"
-                                android:textStyle="bold" />
+                                android:textSize="14.5sp"
+                                android:textStyle="bold"
+                                android:singleLine="true"
+                                />
                         </LinearLayout>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="50dp"
-                        android:weightSum="2"
+                        android:layout_marginTop="30dp"
                         android:orientation="horizontal"
-                        android:paddingRight="5dp"
                         android:paddingLeft="5dp"
-                        >
+                        android:paddingRight="5dp"
+                        android:weightSum="2">
 
                         <LinearLayout
                             android:id="@+id/card_equipment"
                             android:layout_width="0dp"
                             android:layout_height="115dp"
-                            android:layout_weight="1"
                             android:layout_marginStart="5dp"
-                            android:layout_marginEnd="20dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_weight="1"
                             android:background="@drawable/card3"
+                            android:descendantFocusability="blocksDescendants"
                             android:gravity="center"
                             android:orientation="vertical"
-                            android:descendantFocusability="blocksDescendants"
 
 
                             tools:ignore="RtlCompat">
 
                             <ImageView
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"
+                                android:layout_width="90dp"
+                                android:layout_height="90dp"
+                                android:src="@drawable/equipment"
+                                android:padding="8dp"
 
-                                android:src="@drawable/equipment" />
+
+                                />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -193,7 +202,7 @@
                                 android:gravity="center"
                                 android:text="@string/rental_equipment"
                                 android:textColor="@color/white"
-                                android:textSize="17sp"
+                                android:textSize="14.5sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
 
@@ -201,18 +210,20 @@
                             android:id="@+id/card_other_services"
                             android:layout_width="0dp"
                             android:layout_height="115dp"
-                            android:layout_weight="1"
-                            android:layout_marginStart="20dp"
+                            android:layout_marginStart="10dp"
                             android:layout_marginEnd="5dp"
+                            android:layout_weight="1"
                             android:background="@drawable/card4"
                             android:gravity="center"
                             android:orientation="vertical"
                             tools:ignore="RtlCompat">
 
                             <ImageView
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"
-                                android:src="@drawable/other_services" />
+                                android:layout_width="90dp"
+                                android:layout_height="90dp"
+                                android:src="@drawable/other_services"
+                                android:padding="15dp"
+                                />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -220,7 +231,7 @@
                                 android:gravity="center"
                                 android:text="@string/other_services"
                                 android:textColor="@color/white"
-                                android:textSize="17sp"
+                                android:textSize="14.5sp"
                                 android:textStyle="bold"
 
                                 />

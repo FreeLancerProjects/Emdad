@@ -17,8 +17,6 @@ import com.creativeshare.emdad.Model.UserModel;
 import com.creativeshare.emdad.R;
 import com.creativeshare.emdad.preferences.Preferences;
 
-import java.util.Locale;
-
 
 public class Login_Activity extends AppCompatActivity {
     private FragmentManager fragmentManager;
@@ -57,15 +55,19 @@ public class Login_Activity extends AppCompatActivity {
         sign_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (fragmentLogin != null && fragmentLogin.isVisible()) {
-                    DisplaysignupFragment();
-                } else {
-                    DisplayLoginFragment();
-                }
+                Back();
             }
         });
 
 
+    }
+
+    private void Back() {
+        if (fragmentLogin != null && fragmentLogin.isVisible()) {
+            finish();
+        } else {
+            DisplayLoginFragment();
+        }
     }
 
     private void DisplayLoginFragment() {
@@ -82,7 +84,7 @@ public class Login_Activity extends AppCompatActivity {
         }
     }
 
-    private void DisplaysignupFragment() {
+  public void DisplaysignupFragment() {
         if (fragmentLogin != null && fragmentLogin.isAdded()) {
             fragmentManager.beginTransaction().hide(fragmentLogin).commit();
         }
@@ -106,7 +108,7 @@ public class Login_Activity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        finish();
+        Back();
     }
 
     public void skip() {

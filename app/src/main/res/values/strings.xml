@@ -45,7 +45,7 @@
     <string name="country_arrive">country Arrive</string>
     <string name="city_Arrive">city_Arrive</string>
     <string name="time_of_arrive">Time Of Arrive</string>
-    <string name="shipping_and_transportation">Shipping and transportation</string>
+    <string name="shipping_and_transportation">Shipment and transfer</string>
     <string name="rental_equipment">Rental equipment</string>
     <string name="other_services">Other Services</string>
 
@@ -64,6 +64,7 @@
     <string name="wait">wait</string>
     <string name="notifications">Notification</string>
     <string name="ok">Ok</string>
+    <string name="new_user">New user</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

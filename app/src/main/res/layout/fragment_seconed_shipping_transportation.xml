@@ -333,10 +333,13 @@
                 android:orientation="horizontal">
 
 
-                <Spinner
+                <EditText
+                    android:id="@+id/clock"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"></Spinner>
+                    android:layout_marginTop="5dp"
+                    android:background="@color/white"
+                   /> >
 
             </LinearLayout>
 
@@ -353,10 +356,13 @@
                 android:orientation="horizontal">
 
 
-                <Spinner
+                <EditText
+                    android:id="@+id/date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"></Spinner>
+                    android:layout_marginTop="5dp"
+                    android:background="@color/white"
+                    />
 
             </LinearLayout>
         </LinearLayout>

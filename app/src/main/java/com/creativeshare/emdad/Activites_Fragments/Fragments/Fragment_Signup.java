@@ -23,7 +23,9 @@ import com.creativeshare.emdad.Model.UserModel;
 import com.creativeshare.emdad.R;
 import com.creativeshare.emdad.Share.Common;
 import com.creativeshare.emdad.remote.Api;
-import com.rilixtech.CountryCodePicker;
+import com.hbb20.CountryCodePicker;
+
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,8 +34,7 @@ import retrofit2.Response;
 
 public class Fragment_Signup extends Fragment {
     private CountryCodePicker ccp;
-    private AppCompatEditText edtPhoneNumber;
-    private EditText userfullname, username, userpass, useremail;
+    private EditText userfullname, username, userpass, useremail, edtPhoneNumber;
     private String fullname, name, pass, email, phone, phonecode;
     private Button signup;
     private ProgressBar progBar;
@@ -66,12 +67,19 @@ public class Fragment_Signup extends Fragment {
         progBar = view.findViewById(R.id.progBar);
         progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(login_activity, R.color.yellow1), PorterDuff.Mode.SRC_IN);
         progBar.setVisibility(View.GONE);
-
-        ccp.registerPhoneNumberTextView(edtPhoneNumber);
-        signup.setOnClickListener(new View.OnClickListener() {
+        ccp.registerCarrierNumberEditText(edtPhoneNumber);
+        ccp.setPhoneNumberValidityChangeListener(new CountryCodePicker.PhoneNumberValidityChangeListener() {
+            @Override
+            public void onValidityChanged(boolean isValidNumber) {
+                if(ccp.isValidFullNumber()){
+                    edtPhoneNumber.setError("");
+                }
+            }
+        });
+signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-progBar.setVisibility(View.VISIBLE);
+                progBar.setVisibility(View.VISIBLE);
                 Signup(view);
             }
         });
@@ -83,12 +91,12 @@ progBar.setVisibility(View.VISIBLE);
         name = username.getText().toString();
         pass = userpass.getText().toString();
         email = useremail.getText().toString();
-        phonecode = ccp.getSelectedCountryCode();
+        //phonecode = ccp.getSelectedCountryCode();
         phone = edtPhoneNumber.getText().toString();
 
-        if (!ccp.isValid() || fullname.isEmpty() || name.isEmpty() || pass.isEmpty() || email.isEmpty() || !Common.isValidMail(email) || phone.isEmpty()) {
+        if (!ccp.isValidFullNumber() || fullname.isEmpty() || name.isEmpty() || pass.isEmpty() || email.isEmpty() || !Common.isValidMail(email) || phone.isEmpty()) {
             progBar.setVisibility(View.GONE);
-            if (!ccp.isValid() || phone.isEmpty()) {
+            if (!ccp.isValidFullNumber() || phone.isEmpty()) {
                 edtPhoneNumber.setError("");
             }
             if (fullname.isEmpty()) {
@@ -103,8 +111,7 @@ progBar.setVisibility(View.VISIBLE);
             if (email.isEmpty() || !Common.isValidMail(email)) {
                 useremail.setError("");
             }
-        }
-        else {
+        } else {
             Common.CloseKeyBoard(login_activity, view);
             Api.getService().register(fullname, name, email, pass, phonecode, phone, 1).enqueue(new Callback<UserModel>() {
                 @Override

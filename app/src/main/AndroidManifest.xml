@@ -12,13 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Activites_Fragments.Activites.Home_Activity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:windowSoftInputMode="adjustPan"
-            ></activity>
-        <activity
             android:name=".Activites_Fragments.Activites.Login_Activity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".Activites_Fragments.Activites.Home_Activity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:windowSoftInputMode="adjustPan" />
         <activity

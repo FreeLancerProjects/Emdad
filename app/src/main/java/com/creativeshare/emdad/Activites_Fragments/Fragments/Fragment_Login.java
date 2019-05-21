@@ -29,7 +29,7 @@ import retrofit2.Response;
 
 public class Fragment_Login extends Fragment {
     private Button login;
-    private TextView skip;
+    private TextView skip,newuser;
     private EditText useremail, userpass;
     private ProgressBar progBar;
     private String email, pass;
@@ -54,6 +54,7 @@ public class Fragment_Login extends Fragment {
         login_activity = (Login_Activity) getActivity();
         login = view.findViewById(R.id.bt_login);
         skip = view.findViewById(R.id.skip);
+        newuser=view.findViewById(R.id.newuser);
         useremail = view.findViewById(R.id.email_login);
         userpass = view.findViewById(R.id.password_login);
         progBar = view.findViewById(R.id.progBar);
@@ -71,6 +72,12 @@ public class Fragment_Login extends Fragment {
                 login_activity.skip();
             }
         });
+        newuser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                login_activity.DisplaysignupFragment();
+            }
+        });
     }
 
     private void login(View view) {
@@ -86,6 +93,7 @@ public class Fragment_Login extends Fragment {
                 userpass.setError("");
             }
         } else {
+            Common.CloseKeyBoard(login_activity,view);
             Api.getService().login(email, pass).enqueue(new Callback<UserModel>() {
                 @Override
                 public void onResponse(Call<UserModel> call, Response<UserModel> response) {

@@ -51,5 +51,6 @@
     <string name="wait">wait</string>
     <string name="notifications">Notification</string>
     <string name="ok">Ok</string>
+    <string name="new_user">New user</string>
 
 </resources>

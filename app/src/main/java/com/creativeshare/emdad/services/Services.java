@@ -28,12 +28,12 @@ public interface Services {
     @POST("api/registerClient")
     Call<UserModel> register(
             @Field("name") String name,
-            @Field("user_name")String user_name,
-            @Field("email")String email,
+            @Field("user_name") String user_name,
+            @Field("email") String email,
             @Field("password") String password,
-            @Field("phone_code")String phone_code,
-            @Field("phone")String phone,
-            @Field("software_type")int software_type
+            @Field("phone_code") String phone_code,
+            @Field("phone") String phone,
+            @Field("software_type") int software_type
     );
 
 
