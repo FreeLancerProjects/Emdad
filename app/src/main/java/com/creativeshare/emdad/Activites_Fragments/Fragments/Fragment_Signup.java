@@ -71,7 +71,7 @@ public class Fragment_Signup extends Fragment {
         ccp.setPhoneNumberValidityChangeListener(new CountryCodePicker.PhoneNumberValidityChangeListener() {
             @Override
             public void onValidityChanged(boolean isValidNumber) {
-                if(ccp.isValidFullNumber()){
+                if(!ccp.isValidFullNumber()){
                     edtPhoneNumber.setError("");
                 }
             }

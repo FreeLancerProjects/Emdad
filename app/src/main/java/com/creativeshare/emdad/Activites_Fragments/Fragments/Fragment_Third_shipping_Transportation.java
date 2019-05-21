@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,14 +19,16 @@ import android.widget.Toast;
 import com.creativeshare.emdad.Activites_Fragments.Activites.Home_Activity;
 import com.creativeshare.emdad.R;
 import com.creativeshare.emdad.preferences.Preferences;
+import com.hbb20.CountryCodePicker;
 
 import java.util.Locale;
 
 
 public class Fragment_Third_shipping_Transportation extends Fragment {
-    private TextView txt_code_phone, txt_phone;
+    private EditText  txt_phone;
     private Button previous,next;
     private ImageView next_img,previous_img;
+    private CountryCodePicker phonecode;
     private Home_Activity activity;
     private Preferences preferences;
     private String current_lang;
@@ -55,14 +58,16 @@ public class Fragment_Third_shipping_Transportation extends Fragment {
         next=view.findViewById(R.id.next_shipping);
         next_img=view.findViewById(R.id.image_next);
         previous_img=view.findViewById(R.id.image_previous);
-        txt_code_phone = view.findViewById(R.id.txt_phone_num_code);
+        phonecode = view.findViewById(R.id.txt_phone_num_code);
         txt_phone = view.findViewById(R.id.txt_phone_num);
         if(current_lang.equals("ar")){
-            txt_code_phone.setBackground(getResources().getDrawable(R.drawable.text_right_shape));
+            phonecode.setBackground(getResources().getDrawable(R.drawable.text_right_shape));
             txt_phone.setBackground(getResources().getDrawable(R.drawable.text_left_shape));
             previous_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_right_previous));
             next_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_left_arrow_previous));
         }
+
+        phonecode.registerCarrierNumberEditText(txt_phone);
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,9 +78,7 @@ public class Fragment_Third_shipping_Transportation extends Fragment {
 
 
 
-        TelephonyManager tm = (TelephonyManager)activity.getSystemService(activity.getApplicationContext().TELEPHONY_SERVICE);
-        String countryCode = tm.getNetworkCountryIso();
-        Toast.makeText(activity,countryCode+"",Toast.LENGTH_LONG).show();
+
     }
 
 

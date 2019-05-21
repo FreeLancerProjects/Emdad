@@ -2,12 +2,8 @@ package com.creativeshare.emdad.Activites_Fragments.Fragments;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 
-import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -22,15 +18,16 @@ import android.widget.TimePicker;
 
 import com.creativeshare.emdad.Activites_Fragments.Activites.Home_Activity;
 import com.creativeshare.emdad.R;
+import com.hbb20.CountryCodePicker;
 
 import java.util.Locale;
 
 
 public class Fragment_seconed_shipping_Transportation extends Fragment {
     private Button next, previous;
-    private ImageView next_img, previous_img;
-    private TextView txt_code_phone, txt_phone;
-    private EditText date, clock;
+    private ImageView next_img, previous_img,date, clock;
+    private CountryCodePicker phonecode;
+    private EditText txtdate, txtclock,txt_phone;
     private Home_Activity activity;
     private String current_lang;
 
@@ -55,47 +52,49 @@ public class Fragment_seconed_shipping_Transportation extends Fragment {
         previous = view.findViewById(R.id.previous);
         next_img = view.findViewById(R.id.image_next);
         previous_img = view.findViewById(R.id.image_previous);
-        txt_code_phone = view.findViewById(R.id.txt_phone_num_code);
+       phonecode = view.findViewById(R.id.txt_phone_num_code);
         txt_phone = view.findViewById(R.id.txt_phone_num);
+        txtdate = view.findViewById(R.id.txt_date);
+        txtclock = view.findViewById(R.id.txt_clock);
         date = view.findViewById(R.id.date);
         clock = view.findViewById(R.id.clock);
         if (current_lang.equals("ar")) {
-            txt_code_phone.setBackground(getResources().getDrawable(R.drawable.text_right_shape));
+            phonecode.setBackground(getResources().getDrawable(R.drawable.text_right_shape));
             txt_phone.setBackground(getResources().getDrawable(R.drawable.text_left_shape));
             previous_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_right_previous));
             next_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_left_arrow_previous));
 
         }
+        phonecode.registerCarrierNumberEditText(txt_phone);
         clock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TimePickerDialog timePickerDialog = new TimePickerDialog(activity, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
-
+                        txtclock.setText(hourOfDay + ":" + minutes );
                     }
                 }, 0, 0, true);
                 timePickerDialog.show();
 
             }
         });
-date.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        DatePickerDialog datePickerDialog=new DatePickerDialog(activity, new DatePickerDialog.OnDateSetListener() {
+        date.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-if(current_lang.equals("ar")){
-date.setText(year+"-"+month+"-"+dayOfMonth);
-}
-else{
-    date.setText(dayOfMonth+"-"+month+"-"+year);
-}
+            public void onClick(View v) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(activity, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        if (current_lang.equals("ar")) {
+                            txtdate.setText(year + "-" + month + "-" + dayOfMonth);
+                        } else {
+                            txtdate.setText(dayOfMonth + "-" + month + "-" + year);
+                        }
+                    }
+                }, 0, 0, 0);
+                datePickerDialog.show();
             }
-        },0,0,0);
-        datePickerDialog.show();
-    }
-});
+        });
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -209,6 +209,7 @@
                     app:ccp_showFullName="false"
                     app:ccp_textSize="13sp"
                     app:ccp_autoDetectLanguage="true"
+                    app:ccp_autoDetectCountry="true"
                     />
 
                 <View

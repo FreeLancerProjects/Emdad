@@ -5,7 +5,7 @@
     <string name="user_name">user_name</string>
     <string name="user_password">user_password</string>
     <string name="user_email">Email</string>
-    <string name="user_phone">user_phone</string>
+    <string name="user_phone">phone</string>
     <string name="register">register</string>
 
     <!-- TODO: Remove or change this placeholder text -->
