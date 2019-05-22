@@ -1,157 +1,202 @@
-<ScrollView android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="false"
-    android:fitsSystemWindows="true"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray0"
+    android:clickable="true"
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    android:focusable="true">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/too1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="50dp"
+        app:layout_constraintTop_toTopOf="parent">
 
 
+        <ImageView
+            android:id="@+id/cart"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="5dp"
+            android:src="@drawable/logo_login" />
 
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/shipping_and_transportation"
+            android:textColor="@color/yellow1"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="end"
+            android:padding="10dp"
+            android:src="@drawable/ic_left_arrow"
+
+            />
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/too1">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
             <TextView
                 android:id="@+id/txt_time_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="15dp"
                 android:gravity="center_vertical"
                 android:text="@string/specify_the_delivery_date"
                 android:textColor="@color/black"
                 android:textSize="15sp"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+
+                android:id="@+id/lin_time"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"                />
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="15dp"
+                android:layout_weight="1"
+                android:background="@drawable/linear_shape"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/txt_time_title">
 
-        <LinearLayout
 
-            android:id="@+id/lin_time"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="15dp"
-            android:layout_weight="1"
-            android:background="@drawable/linear_shape"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/txt_time_title"
-            >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/white"
 
+                    />
+
+                <ImageView
+                    android:id="@+id/date_clock"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:alpha=".6"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_down_arrow"
+                    android:tint="@color/black"
+
+                    />
+
+            </LinearLayout>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/txt_size_title"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="15dp"
+                android:gravity="center_vertical"
+                android:text="@string/specify_the_delivery_date"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:layout_constraintTop_toBottomOf="@+id/lin_time" />
+
+            <LinearLayout
+
+                android:id="@+id/lin_size"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="15dp"
                 android:layout_weight="1"
-                android:background="@color/white"
+                android:background="@drawable/linear_shape"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/txt_size_title">
 
-                />
 
-            <ImageView
-                android:id="@+id/date_clock"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:alpha=".6"
-                android:padding="5dp"
-                android:src="@drawable/ic_down_arrow"
-                android:tint="@color/black"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/white"
 
-                />
+                    />
 
-        </LinearLayout>
+                <ImageView
+                    android:id="@+id/image_size"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:alpha=".6"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_down_arrow"
+                    android:tint="@color/black"
 
-<TextView
-    android:id="@+id/txt_size_title"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_vertical"
-    android:text="@string/specify_the_delivery_date"
-    android:textColor="@color/black"
-    android:textSize="15sp"
-    app:layout_constraintTop_toBottomOf="@+id/lin_time"
-    android:layout_marginTop="8dp"
-    android:layout_marginLeft="15dp"
-    android:layout_marginRight="15dp"/>
-        <LinearLayout
+                    />
 
-            android:id="@+id/lin_size"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="15dp"
-            android:layout_weight="1"
-            android:background="@drawable/linear_shape"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/txt_size_title"
-            >
-
+            </LinearLayout>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/txt_download"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/white"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="15dp"
+                android:text="@string/download_site"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:layout_constraintTop_toBottomOf="@+id/lin_size" />
 
-                />
 
-            <ImageView
-                android:id="@+id/image_size"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:alpha=".6"
-                android:padding="5dp"
-                android:src="@drawable/ic_down_arrow"
-                android:tint="@color/black"
+            <fragment
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintBottom_toTopOf="@+id/com"
+                app:layout_constraintTop_toBottomOf="@+id/txt_download" />
 
-                />
-
-        </LinearLayout>
-<TextView
-    android:id="@+id/txt_download"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/download_site"
-    app:layout_constraintTop_toBottomOf="@+id/lin_size"
-    android:textColor="@color/black"
-    android:textSize="15sp"
-    android:layout_marginTop="8dp"
-    android:layout_marginLeft="15dp"
-    android:layout_marginRight="15dp"/>/>
-
-        />
-        <fragment
-            android:id="@+id/map"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
-            app:layout_constraintBottom_toTopOf="@+id/com"
-            app:layout_constraintTop_toBottomOf="@+id/txt_download" />
-
-        <Button
-            android:id="@+id/com"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="15dp"
-            android:background="@drawable/button_shape"
-            android:text="@string/send_order"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/map"
-            app:layout_constraintVertical_bias="1" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+            <Button
+                android:id="@+id/com"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/button_shape"
+                android:text="@string/send_order"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/map"
+                app:layout_constraintVertical_bias="1" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
