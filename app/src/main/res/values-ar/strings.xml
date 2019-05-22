@@ -59,13 +59,14 @@
     <string name="image_of_load">نرجو تحميل صورة للحمولة</string>
     <string name="image_contain_info">سيتم حذف الصور التى تحتوى على معلومات تواصل</string>
     <string name="please_let_us_know_your_preferred_payment_method">الرجاء ابلاغنا بطريقة الدفع المفضله لديكم</string>
-    <string name="repayment_with_an_emdad_office_or_a_delegate_return">Repayment with an Emdad office or a delegate (return)</string>
-    <string name="payment_on_delivery">Payment on delivery</string>
-    <string name="credit">credit</string>
-    <string name="send_order">Send Order</string>
-    <string name="specify_the_delivery_date">Specify the delivery date</string>
-    <string name="download_site">Download site</string>
-    <string name="date_of_load">date_of_load</string>
-    <string name="time_date_download">time_date_download</string>
+    <string name="repayment_with_an_emdad_office_or_a_delegate_return">السداد لدى مكتب إمداد او مندوبة(رجعه)</string>
+    <string name="payment_on_delivery">السداد عند التسليم</string>
+    <string name="credit">إئتمان</string>
+    <string name="send_order">إرسال الطلب</string>
+    <string name="specify_the_delivery_date">حدد موعد التوصيل</string>
+    <string name="download_site">موقع التنزيل</string>
+    <string name="date_of_load">تاريخ التحميل</string>
+    <string name="time_date_download">وقت التحميل</string>
+    <string name="size_of_wit">حجم الوايت</string>
 
 </resources>

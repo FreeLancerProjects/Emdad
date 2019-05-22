@@ -115,7 +115,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="15dp"
                 android:gravity="center_vertical"
-                android:text="@string/specify_the_delivery_date"
+                android:text="@string/size_of_wit"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 app:layout_constraintTop_toBottomOf="@+id/lin_time" />
