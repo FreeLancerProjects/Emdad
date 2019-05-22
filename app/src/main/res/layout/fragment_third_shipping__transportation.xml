@@ -331,11 +331,12 @@
                 android:orientation="horizontal">
 
 
-                <EditText
+                <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                     android:background="@color/white"
+                    android:hint="@string/time_date_download"
 
                 />
 

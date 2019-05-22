@@ -336,13 +336,14 @@
 
 
 
-                <EditText
+                <TextView
                     android:id="@+id/txt_clock"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:background="@color/white"
                     android:layout_weight="1"
+                    android:hint="@string/time_of_load"
                     />
                 >
                 <ImageView
@@ -374,13 +375,14 @@
 
 
 
-                <EditText
+                <TextView
                     android:id="@+id/txt_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:background="@color/white"
                     android:layout_weight="1"
+                    android:hint="@string/date_of_load"
 
                     />
                 <ImageView

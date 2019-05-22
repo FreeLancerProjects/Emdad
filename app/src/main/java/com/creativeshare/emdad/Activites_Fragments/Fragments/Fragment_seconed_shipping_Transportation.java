@@ -32,7 +32,8 @@ public class Fragment_seconed_shipping_Transportation extends Fragment {
     private Button next, previous;
     private ImageView next_img, previous_img, date, clock;
     private CountryCodePicker phonecode;
-    private EditText txtdate, txtclock, txt_phone;
+    private EditText  txt_phone;
+    private TextView txtdate, txtclock;
     private Home_Activity activity;
     private String current_lang, timeclock="";
     private int years, months, days, hour, minute;
