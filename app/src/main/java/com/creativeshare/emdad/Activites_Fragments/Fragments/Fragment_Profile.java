@@ -33,7 +33,7 @@ public class Fragment_Profile extends Fragment {
 
     private void intitview(View view) {
         circleImageView=view.findViewById(R.id.accout_img);
-       // circleImageView.setImageResource(R.drawable.ic_photographer);
+        circleImageView.setImageResource(R.drawable.ic_photo_camera);
     }
 
 

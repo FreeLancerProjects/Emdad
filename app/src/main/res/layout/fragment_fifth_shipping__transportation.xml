@@ -87,8 +87,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:src="@drawable/ic_debit_card"
-                android:tint="@color/yellow1"
+                android:src="@drawable/pay_deliver"
                 />
 
             <TextView

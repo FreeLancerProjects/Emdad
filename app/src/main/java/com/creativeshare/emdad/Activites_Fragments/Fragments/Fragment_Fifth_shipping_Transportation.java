@@ -1,7 +1,6 @@
 package com.creativeshare.emdad.Activites_Fragments.Fragments;
 
-import android.content.Context;
-import android.net.Uri;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;

@@ -10,7 +10,6 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:fitsSystemWindows="true"
         android:background="@color/white"
         >
 
@@ -21,7 +20,6 @@
             android:layout_height="match_parent"
             android:background="@color/black"
 
-            android:fitsSystemWindows="true"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <androidx.appcompat.widget.Toolbar
@@ -62,6 +60,7 @@
                 android:layout_marginBottom="8dp"
                 android:isIndicator="false"
                 android:numStars="5"
+
 
                 tools:ignore="RtlCompat" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -189,7 +188,6 @@
         android:layout_height="80dp"
         android:layout_margin="@dimen/fab_margin"
         app:civ_circle_background_color="@color/gray2"
-        app:civ_border_overlay="true"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
