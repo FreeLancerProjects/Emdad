@@ -49,6 +49,12 @@ public class Fragment_main extends Fragment {
                 home_activity.DisplayFragmentshipping_First();
             }
         });
+        water.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                home_activity.DisplayFragmentWater();
+            }
+        });
     }
 
 

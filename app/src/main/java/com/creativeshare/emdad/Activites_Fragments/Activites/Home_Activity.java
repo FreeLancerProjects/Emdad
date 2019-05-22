@@ -8,7 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_About_App;
+import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Connecting_Water;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Contact_US;
+import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Fifth_shipping_Transportation;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Fourth_shipping_Transpoortation;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Orders;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Profile;
@@ -35,12 +37,13 @@ public class Home_Activity extends AppCompatActivity {
     private Fragment_Terms_Condition fragment_terms_condition;
     private Fragment_About_App fragment_about_app;
     private Fragment_Contact_US fragment_contact_us;
+    private Fragment_Connecting_Water fragment_connecting_water;
     private Fragment_Main_Shipping_Transportation fragment_main_shipping_transportation;
     private Fragment_First_shipping_Transportation fragment_first_shipping_transportation;
     private Fragment_seconed_shipping_Transportation fragment_seconed_shipping_transportation;
     private Fragment_Third_shipping_Transportation fragment_third_shipping_transportation;
     private Fragment_Fourth_shipping_Transpoortation fragment_fourth_shipping_transpoortation;
-
+    private Fragment_Fifth_shipping_Transportation fragment_fifth_shipping_transportation;
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(Language.updateResources(newBase, Language.getLanguage(newBase)));
@@ -236,7 +239,19 @@ public class Home_Activity extends AppCompatActivity {
 
         }
     }
+    public void DisplayFragmentWater() {
+        fragment_count += 1;
 
+        fragment_connecting_water = Fragment_Connecting_Water.newInstance().newInstance();
+
+
+        if (fragment_connecting_water.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_connecting_water).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_connecting_water, "fragment_connecting_water").addToBackStack("fragment_connecting_water").commit();
+
+        }
+    }
     public void DisplayFragmentshipping_main() {
         fragment_count += 1;
 
@@ -312,6 +327,23 @@ public class Home_Activity extends AppCompatActivity {
         }
     }
 
+    public void DisplayFragmentshipping_Fifth() {
+        fragment_count += 1;
+
+        fragment_fifth_shipping_transportation = Fragment_Fifth_shipping_Transportation.newInstance();
+
+        if (fragment_fifth_shipping_transportation.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_fifth_shipping_transportation).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_shipping_transportation, fragment_fifth_shipping_transportation, "fragment_fifth_shipping_transportation").addToBackStack("fragment_fifth_shipping_transportation").commit();
+        }
+        if (fragment_main_shipping_transportation != null) {
+            fragment_main_shipping_transportation.update_bar(100);
+
+
+        }
+    }
+
     @Override
     public void onBackPressed() {
         Back();
@@ -359,6 +391,7 @@ public class Home_Activity extends AppCompatActivity {
         finish();
 
     }
+
 
 
 }
