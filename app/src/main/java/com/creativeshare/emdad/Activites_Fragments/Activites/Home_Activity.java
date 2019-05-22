@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_About_App;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Contact_US;
+import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Fourth_shipping_Transpoortation;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Orders;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Profile;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_First_shipping_Transportation;
@@ -38,6 +39,7 @@ public class Home_Activity extends AppCompatActivity {
     private Fragment_First_shipping_Transportation fragment_first_shipping_transportation;
     private Fragment_seconed_shipping_Transportation fragment_seconed_shipping_transportation;
     private Fragment_Third_shipping_Transportation fragment_third_shipping_transportation;
+    private Fragment_Fourth_shipping_Transpoortation fragment_fourth_shipping_transpoortation;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -50,7 +52,7 @@ public class Home_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         fragmentManager = this.getSupportFragmentManager();
         setContentView(R.layout.activity_home_);
-        if(savedInstanceState==null){
+        if (savedInstanceState == null) {
             DisplayFragmentHome();
             DisplayFragmentMain();
         }
@@ -72,9 +74,10 @@ public class Home_Activity extends AppCompatActivity {
         }
 
     }
+
     public void DisplayFragmentMain() {
 
-       if (fragment_orders != null && fragment_orders.isAdded()) {
+        if (fragment_orders != null && fragment_orders.isAdded()) {
             fragmentManager.beginTransaction().hide(fragment_orders).commit();
         }
 
@@ -101,6 +104,7 @@ public class Home_Activity extends AppCompatActivity {
         }
 
     }
+
     public void DisplayFragmentOrders() {
 
         if (fragment_profile != null && fragment_profile.isAdded()) {
@@ -130,6 +134,7 @@ public class Home_Activity extends AppCompatActivity {
         }
 
     }
+
     public void DisplayFragmentProfile() {
 
         if (fragment_orders != null && fragment_orders.isAdded()) {
@@ -159,6 +164,7 @@ public class Home_Activity extends AppCompatActivity {
         }
 
     }
+
     public void DisplayFragmentMore() {
 
         if (fragment_orders != null && fragment_orders.isAdded()) {
@@ -184,13 +190,13 @@ public class Home_Activity extends AppCompatActivity {
 
         }
         if (fragment_home != null && fragment_home.isAdded()) {
-             fragment_home.UpdateAHBottomNavigationPosition(3);
+            fragment_home.UpdateAHBottomNavigationPosition(3);
         }
 
     }
 
     public void DisplayFragmentTerms_Condition() {
-        fragment_count+=1;
+        fragment_count += 1;
 
         fragment_terms_condition = Fragment_Terms_Condition.newInstance().newInstance();
 
@@ -202,8 +208,9 @@ public class Home_Activity extends AppCompatActivity {
 
         }
     }
+
     public void DisplayFragmentAbout() {
-        fragment_count+=1;
+        fragment_count += 1;
 
         fragment_about_app = Fragment_About_App.newInstance().newInstance();
 
@@ -215,8 +222,9 @@ public class Home_Activity extends AppCompatActivity {
 
         }
     }
+
     public void DisplayFragmentContact_us() {
-        fragment_count+=1;
+        fragment_count += 1;
 
         fragment_contact_us = Fragment_Contact_US.newInstance();
 
@@ -228,10 +236,11 @@ public class Home_Activity extends AppCompatActivity {
 
         }
     }
-    public void DisplayFragmentshipping_main() {
-        fragment_count+=1;
 
-            fragment_main_shipping_transportation = Fragment_Main_Shipping_Transportation.newInstance().newInstance();
+    public void DisplayFragmentshipping_main() {
+        fragment_count += 1;
+
+        fragment_main_shipping_transportation = Fragment_Main_Shipping_Transportation.newInstance().newInstance();
 
 
         if (fragment_main_shipping_transportation.isAdded()) {
@@ -244,67 +253,87 @@ public class Home_Activity extends AppCompatActivity {
     }
 
     public void DisplayFragmentshipping_First() {
-        fragment_count+=1;
+        fragment_count += 1;
 
-            fragment_first_shipping_transportation=Fragment_First_shipping_Transportation.newInstance();
+        fragment_first_shipping_transportation = Fragment_First_shipping_Transportation.newInstance();
 
-        if(fragment_first_shipping_transportation.isAdded()){
+        if (fragment_first_shipping_transportation.isAdded()) {
             fragmentManager.beginTransaction().show(fragment_first_shipping_transportation).commit();
-        }else{
-            fragmentManager.beginTransaction().add(R.id.fragment_shipping_transportation,fragment_first_shipping_transportation,"fragment_first_shipping_transportation").addToBackStack("fragment_first_shipping_transportation").commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_shipping_transportation, fragment_first_shipping_transportation, "fragment_first_shipping_transportation").addToBackStack("fragment_first_shipping_transportation").commit();
         }
 
 
     }
 
     public void DisplayFragmentshipping_second() {
-        fragment_count+=1;
+        fragment_count += 1;
 
-        fragment_seconed_shipping_transportation=Fragment_seconed_shipping_Transportation.newInstance();
+        fragment_seconed_shipping_transportation = Fragment_seconed_shipping_Transportation.newInstance();
 
-        if(fragment_seconed_shipping_transportation.isAdded()){
+        if (fragment_seconed_shipping_transportation.isAdded()) {
             fragmentManager.beginTransaction().show(fragment_seconed_shipping_transportation).commit();
-        }else{
-            fragmentManager.beginTransaction().add(R.id.fragment_shipping_transportation,fragment_seconed_shipping_transportation,"fragment_seconed_shipping_transportation").addToBackStack("fragment_seconed_shipping_transportation").commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_shipping_transportation, fragment_seconed_shipping_transportation, "fragment_seconed_shipping_transportation").addToBackStack("fragment_seconed_shipping_transportation").commit();
         }
-        if(fragment_main_shipping_transportation!=null){
+        if (fragment_main_shipping_transportation != null) {
             fragment_main_shipping_transportation.update_bar(25);
         }
     }
+
     public void DisplayFragmentshipping_Third() {
-        fragment_count+=1;
+        fragment_count += 1;
 
-        fragment_third_shipping_transportation=Fragment_Third_shipping_Transportation.newInstance();
+        fragment_third_shipping_transportation = Fragment_Third_shipping_Transportation.newInstance();
 
-        if(fragment_third_shipping_transportation.isAdded()){
+        if (fragment_third_shipping_transportation.isAdded()) {
             fragmentManager.beginTransaction().show(fragment_third_shipping_transportation).commit();
-        }else{
-            fragmentManager.beginTransaction().add(R.id.fragment_shipping_transportation,fragment_third_shipping_transportation,"fragment_third_shipping_transportation").addToBackStack("fragment_third_shipping_transportation").commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_shipping_transportation, fragment_third_shipping_transportation, "fragment_third_shipping_transportation").addToBackStack("fragment_third_shipping_transportation").commit();
         }
-        if(fragment_main_shipping_transportation!=null){
+        if (fragment_main_shipping_transportation != null) {
             fragment_main_shipping_transportation.update_bar(50);
         }
     }
+
+    public void DisplayFragmentshipping_Fourth() {
+        fragment_count += 1;
+
+        fragment_fourth_shipping_transpoortation = Fragment_Fourth_shipping_Transpoortation.newInstance();
+
+        if (fragment_fourth_shipping_transpoortation.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_fourth_shipping_transpoortation).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_shipping_transportation, fragment_fourth_shipping_transpoortation, "fragment_fourth_shipping_transpoortation").addToBackStack("fragment_fourth_shipping_transpoortation").commit();
+        }
+        if (fragment_main_shipping_transportation != null) {
+            fragment_main_shipping_transportation.update_bar(75);
+
+        }
+    }
+
     @Override
     public void onBackPressed() {
-Back();    }
+        Back();
+    }
+
     public void Back() {
         if (fragment_count > 1) {
-            if(fragment_main_shipping_transportation!=null&&fragment_main_shipping_transportation.isVisible()){
-                if(fragment_count>3){
-                    fragment_count-=1;
+            if (fragment_main_shipping_transportation != null && fragment_main_shipping_transportation.isVisible()) {
+                if (fragment_count > 3) {
+                    fragment_count -= 1;
                     fragment_main_shipping_transportation.update_bar();
                     super.onBackPressed();
-                }
-                else{
-                    fragment_count-=2;
+                } else {
+                    fragment_count -= 2;
                     super.onBackPressed();
                     super.onBackPressed();
 
                 }
-            }else{
-            fragment_count -= 1;
-            super.onBackPressed();}
+            } else {
+                fragment_count -= 1;
+                super.onBackPressed();
+            }
         } else {
 
             if (fragment_home != null && fragment_home.isVisible()) {
@@ -312,8 +341,8 @@ Back();    }
                    /* if (userModel == null) {
                         NavigateToSignInActivity();
                     } else {*/
-                        finish();
-                   // }
+                    finish();
+                    // }
                 } else {
                     DisplayFragmentMain();
                 }
@@ -323,13 +352,13 @@ Back();    }
         }
 
     }
+
     public void NavigateToSignInActivity() {
         Intent intent = new Intent(this, Login_Activity.class);
         startActivity(intent);
         finish();
 
     }
-
 
 
 }

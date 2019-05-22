@@ -101,7 +101,12 @@ date_clock.setOnClickListener(new View.OnClickListener() {
 
 
 
-
+next.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        activity.DisplayFragmentshipping_Fourth();
+    }
+});
     }
 
 

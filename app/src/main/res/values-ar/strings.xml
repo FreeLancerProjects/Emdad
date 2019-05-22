@@ -52,5 +52,10 @@
     <string name="notifications">Notification</string>
     <string name="ok">Ok</string>
     <string name="new_user">New user</string>
+    <string name="description_of_the_load">Description of the load</string>
+    <string name="value_of_the_load">Value of the load</string>
+    <string name="image_of_load">Please upload a picture of the load</string>
+    <string name="weight_of_load">weight of load</string>
+    <string name="image_contain_info">Images containing contact information will be deleted</string>
 
 </resources>
