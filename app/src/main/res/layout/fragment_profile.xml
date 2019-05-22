@@ -3,15 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:background="@color/white"
-        >
+        android:background="@color/white">
 
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -58,11 +56,12 @@
                 android:layout_gravity="center|bottom"
                 android:layout_marginEnd="15dp"
                 android:layout_marginBottom="8dp"
-                android:isIndicator="false"
+                android:isIndicator="true"
                 android:numStars="5"
-
-
-                tools:ignore="RtlCompat" />
+                android:rating="50"
+                tools:ignore="RtlCompat"
+                android:progressTint="@color/yellow1"
+                />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -71,8 +70,8 @@
         android:layout_width="100dp"
         android:layout_height="105dp"
         android:layout_marginEnd="6dp"
-        android:orientation="horizontal"
         android:background="@drawable/circle"
+        android:orientation="horizontal"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end"
         tools:ignore="RtlCompat"></LinearLayout>
