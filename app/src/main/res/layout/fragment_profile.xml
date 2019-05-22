@@ -49,7 +49,7 @@
             </androidx.appcompat.widget.Toolbar>
 
             <RatingBar
-                android:id="@+id/MyRating"
+                android:id="@+id/myrating"
                 style="?android:attr/ratingBarStyleIndicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
