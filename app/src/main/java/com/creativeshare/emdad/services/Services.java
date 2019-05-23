@@ -3,6 +3,7 @@ package com.creativeshare.emdad.services;
 
 
 
+import com.creativeshare.emdad.Model.Slider_Model;
 import com.creativeshare.emdad.Model.UserModel;
 
 import okhttp3.ResponseBody;
@@ -35,7 +36,8 @@ public interface Services {
             @Field("phone") String phone,
             @Field("software_type") int software_type
     );
-
+    @GET("api/slider")
+    Call<Slider_Model> get_slider();
 
 
 }

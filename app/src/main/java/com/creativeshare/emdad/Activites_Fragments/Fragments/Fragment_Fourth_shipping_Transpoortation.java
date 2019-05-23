@@ -13,16 +13,19 @@ import android.widget.ImageView;
 import com.creativeshare.emdad.Activites_Fragments.Activites.Home_Activity;
 import com.creativeshare.emdad.R;
 import com.creativeshare.emdad.preferences.Preferences;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 
 public class Fragment_Fourth_shipping_Transpoortation extends Fragment {
-    private Button previous,next;
-    private ImageView next_img,previous_img;
+    private Button previous, next;
+    private ImageView next_img, previous_img;
+    private RoundedImageView roundedImageView1, roundedImageView2;
     private Home_Activity activity;
     private Preferences preferences;
     private String current_lang;
+
     public static Fragment_Fourth_shipping_Transpoortation newInstance() {
-       return new Fragment_Fourth_shipping_Transpoortation();
+        return new Fragment_Fourth_shipping_Transpoortation();
     }
 
 
@@ -30,21 +33,26 @@ public class Fragment_Fourth_shipping_Transpoortation extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-       View view= inflater.inflate(R.layout.fragment_fourth_shipping__transpoortation, container, false);
-       intitview(view);
-       return view;
+        View view = inflater.inflate(R.layout.fragment_fourth_shipping__transpoortation, container, false);
+        intitview(view);
+        return view;
     }
 
     private void intitview(View view) {
-        preferences=Preferences.getInstance();
-        activity=(Home_Activity)getActivity();
-        current_lang= preferences.getlang(activity);
-        previous=view.findViewById(R.id.previous);
-        next=view.findViewById(R.id.next_shipping);
-        next_img=view.findViewById(R.id.image_next);
-        previous_img=view.findViewById(R.id.image_previous);
-
-        if(current_lang.equals("ar")){
+        preferences = Preferences.getInstance();
+        activity = (Home_Activity) getActivity();
+        current_lang = preferences.getlang(activity);
+        previous = view.findViewById(R.id.previous);
+        next = view.findViewById(R.id.next_shipping);
+        next_img = view.findViewById(R.id.image_next);
+        previous_img = view.findViewById(R.id.image_previous);
+        roundedImageView1 = view.findViewById(R.id.image_load1);
+        roundedImageView2 = view.findViewById(R.id.image_load2);
+        roundedImageView1.setPadding(50, 50, 50, 50);
+        roundedImageView2.setPadding(50, 50, 50, 50);
+        roundedImageView1.setAlpha((float) .6);
+        roundedImageView2.setAlpha((float) .6);
+        if (current_lang.equals("ar")) {
 
             previous_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_right_previous));
             next_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_left_arrow_previous));
