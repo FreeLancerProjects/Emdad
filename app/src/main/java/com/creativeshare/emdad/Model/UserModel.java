@@ -7,7 +7,6 @@ public class UserModel implements Serializable {
     private String name;
     private String user_name;
     private String email;
-    private String password;
     private String phone_code;
     private String phone;
     private String image;
@@ -36,10 +35,6 @@ public class UserModel implements Serializable {
 
     public String getEmail() {
         return email;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public String getPhone_code() {

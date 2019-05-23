@@ -4,17 +4,16 @@ package com.creativeshare.emdad.services;
 import com.creativeshare.emdad.Model.Bank_Model;
 import com.creativeshare.emdad.Model.Contact_us_model;
 import com.creativeshare.emdad.Model.Information_Model;
+import com.creativeshare.emdad.Model.Shipping_wide_Model;
 import com.creativeshare.emdad.Model.Slider_Model;
 import com.creativeshare.emdad.Model.UserModel;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 
 
 public interface Services {
@@ -66,4 +65,9 @@ public interface Services {
     Call<ResponseBody> logout(
             @Field("user_id") int user_id
     );
+
+    @GET("api/shipp")
+    Call<Shipping_wide_Model> get_shipp();
+    @GET("api/wide")
+    Call<Shipping_wide_Model> get_Wide();
 }
