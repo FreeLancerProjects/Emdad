@@ -75,6 +75,12 @@ public class Fragment_main extends Fragment {
                 activity.DisplayFragmentWater();
             }
         });
+        equipment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.DisplayFragmentEquipment();
+            }
+        });
     }
     private void get_slider() {
         Api.getService().get_slider().enqueue(new Callback<Slider_Model>() {

@@ -17,6 +17,7 @@ import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Profile;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_First_shipping_Transportation;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Home;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Main_Shipping_Transportation;
+import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Rental_Of_Equipment;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Terms_Condition;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Third_shipping_Transportation;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_main;
@@ -39,6 +40,7 @@ public class Home_Activity extends AppCompatActivity {
     private Fragment_Contact_US fragment_contact_us;
     private Fragment_Connecting_Water fragment_connecting_water;
     private Fragment_Main_Shipping_Transportation fragment_main_shipping_transportation;
+    private Fragment_Rental_Of_Equipment fragment_rental_of_equipment;
     private Fragment_First_shipping_Transportation fragment_first_shipping_transportation;
     private Fragment_seconed_shipping_Transportation fragment_seconed_shipping_transportation;
     private Fragment_Third_shipping_Transportation fragment_third_shipping_transportation;
@@ -266,7 +268,19 @@ public class Home_Activity extends AppCompatActivity {
         }
 
     }
+    public void DisplayFragmentEquipment() {
+        fragment_count += 1;
 
+        fragment_rental_of_equipment = Fragment_Rental_Of_Equipment.newInstance();
+
+
+        if (fragment_rental_of_equipment.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_rental_of_equipment).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_rental_of_equipment, "fragment_rental_of_equipment").addToBackStack("fragment_rental_of_equipment").commit();
+
+        }
+    }
     public void DisplayFragmentshipping_First() {
         fragment_count += 1;
 

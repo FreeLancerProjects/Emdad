@@ -86,4 +86,17 @@
     <string name="size_of_wit">Size Of Wit</string>
 
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="choose_size">Choose Size</string>
+    <string name="user_type">User Type</string>
+    <string name="country_prompt">Choose a country</string>
+    <string-array name="registerarray">
+        <item><font color='gray'>Choose</font></item>
+        <item>User</item>
+        <item>Company</item>
+
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="equipment">Equipment</string>
+    <!-- TODO: Remove or change this placeholder text -->
 </resources>

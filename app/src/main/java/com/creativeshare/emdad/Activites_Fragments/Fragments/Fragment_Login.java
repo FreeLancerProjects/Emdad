@@ -75,8 +75,7 @@ public class Fragment_Login extends Fragment {
         newuser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login_activity.DisplaysignupFragment();
-            }
+Common.Createsignup_chooser(login_activity);            }
         });
     }
 

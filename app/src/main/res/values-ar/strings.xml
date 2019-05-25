@@ -68,5 +68,15 @@
     <string name="date_of_load">تاريخ التحميل</string>
     <string name="time_date_download">وقت التحميل</string>
     <string name="size_of_wit">حجم الوايت</string>
+    <string name="choose_size">Choose Size</string>
+    <string name="user_type">User Type</string>
+    <string name="country_prompt">Choose a country</string>
+    <string name="equipment">Equipment</string>
+    <string-array name="registerarray">
+        <item><font color='gray'>اختر</font></item>
 
+        <item>مستخدم</item>
+        <item>شركه</item>
+
+    </string-array>
 </resources>
