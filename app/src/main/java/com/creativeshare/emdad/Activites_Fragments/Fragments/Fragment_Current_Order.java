@@ -1,7 +1,6 @@
 package com.creativeshare.emdad.Activites_Fragments.Fragments;
 
-import android.content.Context;
-import android.net.Uri;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -27,5 +26,4 @@ public class Fragment_Current_Order extends Fragment {
         View view= inflater.inflate(R.layout.fragment_current_order, container, false);
         return view;
     }
-
 }
