@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.multidex.MultiDex;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -29,6 +30,7 @@ public class Login_Activity extends AppCompatActivity {
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(Language.updateResources(newBase, Language.getLanguage(newBase)));
+        MultiDex.install(this);
 
     }
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.multidex.MultiDex;
 
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_About_App;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Connecting_Water;
@@ -49,6 +50,7 @@ public class Home_Activity extends AppCompatActivity {
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(Language.updateResources(newBase, Language.getLanguage(newBase)));
+        MultiDex.install(this);
 
     }
 
