@@ -3,7 +3,7 @@ package com.creativeshare.emdad.Tags;
 import java.util.Locale;
 
 public class Tags {
-   public static String pref_lang= Locale.getDefault().getLanguage();
+   public static String pref_lang= "ar";
    public static String base_url = "http://127.0.0.1:8000/";
    //public static final String IMAGE_URL = base_url+"uploads/categories/";
    public static final String session_login = "login";
