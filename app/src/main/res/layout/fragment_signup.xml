@@ -34,37 +34,6 @@
             android:background="@drawable/login2">
 
 
-            <LinearLayout
-
-                android:id="@+id/lin_name"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:background="@drawable/linear_shape"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:backgroundTint="#fff"
-                    android:padding="5dp"
-                    android:src="@drawable/ic_user"
-
-                    />
-
-                <EditText
-                    android:id="@+id/name_signup"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@color/white"
-                    android:hint="@string/name"
-                    android:singleLine="true" />
-
-
-            </LinearLayout>
 
 
             <LinearLayout
@@ -73,11 +42,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="25dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginRight="25dp"
                 android:background="@drawable/linear_shape"
                 android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@id/lin_name">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:layout_width="35dp"

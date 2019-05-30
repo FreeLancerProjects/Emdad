@@ -101,5 +101,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title">Title</string>
+    <string name="information">Information</string>
+    <string name="upgrade_to_company">Upgrade To Company</string>
+    <string name="time">Time</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

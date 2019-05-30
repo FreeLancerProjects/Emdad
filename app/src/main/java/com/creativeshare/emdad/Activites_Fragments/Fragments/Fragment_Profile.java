@@ -14,10 +14,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
+import com.creativeshare.emdad.Activites_Fragments.Activites.Home_Activity;
 import com.creativeshare.emdad.R;
 import com.google.android.material.appbar.AppBarLayout;
 
@@ -26,9 +28,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Fragment_Profile extends Fragment {
     private CircleImageView circleImageView;
+    private ImageView upgrade;
     private LinearLayout linearLayout;
     private RatingBar ratingBar;
-    AppBarLayout appBarLayout;
+    private AppBarLayout appBarLayout;
+    private Home_Activity activity;
 
     public static Fragment_Profile newInstance() {
 
@@ -46,6 +50,8 @@ public class Fragment_Profile extends Fragment {
     }
 
     private void intitview(View view) {
+        activity=(Home_Activity)getActivity();
+        upgrade = view.findViewById(R.id.cart);
         circleImageView = view.findViewById(R.id.accout_img);
         circleImageView.setImageResource(R.drawable.ic_photo_camera);
         linearLayout = view.findViewById(R.id.lin);
@@ -66,6 +72,12 @@ public class Fragment_Profile extends Fragment {
                     linearLayout.setVisibility(View.VISIBLE);
                     ratingBar.setVisibility(View.VISIBLE);
                 }
+            }
+        });
+        upgrade.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+activity.DisplayFragmentUpgrade();
             }
         });
     }

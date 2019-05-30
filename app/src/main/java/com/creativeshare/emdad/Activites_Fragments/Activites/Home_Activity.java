@@ -21,6 +21,7 @@ import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Main_Shipp
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Rental_Of_Equipment;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Terms_Condition;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Third_shipping_Transportation;
+import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Upgrade_To_Company;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_main;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_more;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_seconed_shipping_Transportation;
@@ -35,6 +36,7 @@ public class Home_Activity extends AppCompatActivity {
     private Fragment_main fragment_main;
     private Fragment_Orders fragment_orders;
     private Fragment_Profile fragment_profile;
+    private Fragment_Upgrade_To_Company fragment_upgrade_to_company;
     private Fragment_more fragment_more;
     private Fragment_Terms_Condition fragment_terms_condition;
     private Fragment_About_App fragment_about_app;
@@ -359,7 +361,19 @@ public class Home_Activity extends AppCompatActivity {
 
         }
     }
+    public void DisplayFragmentUpgrade() {
+        fragment_count += 1;
 
+        fragment_upgrade_to_company = Fragment_Upgrade_To_Company.newInstance();
+
+
+        if (fragment_upgrade_to_company.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_upgrade_to_company).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_upgrade_to_company, "fragment_upgrade_to_company").addToBackStack("fragment_upgrade_to_company").commit();
+
+        }
+    }
     @Override
     public void onBackPressed() {
         Back();
