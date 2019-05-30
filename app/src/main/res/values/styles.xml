@@ -27,4 +27,7 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:background">@drawable/spinner</item>
     </style>
+    <style name="Check">
+        <item name="colorAccent">@color/yellow1</item>
+    </style>
 </resources>

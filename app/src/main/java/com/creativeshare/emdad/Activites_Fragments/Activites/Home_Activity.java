@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.multidex.MultiDex;
 
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_About_App;
+import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Company_Data_Upgrade;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Connecting_Water;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Contact_US;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Fifth_shipping_Transportation;
@@ -37,6 +38,7 @@ public class Home_Activity extends AppCompatActivity {
     private Fragment_Orders fragment_orders;
     private Fragment_Profile fragment_profile;
     private Fragment_Upgrade_To_Company fragment_upgrade_to_company;
+    private Fragment_Company_Data_Upgrade fragment_company_data_upgrade;
     private Fragment_more fragment_more;
     private Fragment_Terms_Condition fragment_terms_condition;
     private Fragment_About_App fragment_about_app;
@@ -374,6 +376,20 @@ public class Home_Activity extends AppCompatActivity {
 
         }
     }
+
+    public void DisplayFragmentDataUpgrade() {
+        fragment_count += 1;
+
+        fragment_company_data_upgrade = Fragment_Company_Data_Upgrade.newInstance();
+
+
+        if (fragment_company_data_upgrade.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_company_data_upgrade).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_main_upgrade_child, fragment_company_data_upgrade, "fragment_company_data_upgrade").addToBackStack("fragment_company_data_upgrade").commit();
+
+        }
+    }
     @Override
     public void onBackPressed() {
         Back();
@@ -392,7 +408,19 @@ public class Home_Activity extends AppCompatActivity {
                     super.onBackPressed();
 
                 }
-            } else {
+            }
+            else if(fragment_upgrade_to_company!=null&&fragment_upgrade_to_company.isVisible()){
+                if(fragment_count>3){
+                    fragment_count-=1;
+                    super.onBackPressed();
+                }
+                else{
+                    fragment_count -= 2;
+                    super.onBackPressed();
+                    super.onBackPressed();
+                }
+            }
+            else {
                 fragment_count -= 1;
                 super.onBackPressed();
             }
@@ -421,7 +449,6 @@ public class Home_Activity extends AppCompatActivity {
         finish();
 
     }
-
 
 
 }

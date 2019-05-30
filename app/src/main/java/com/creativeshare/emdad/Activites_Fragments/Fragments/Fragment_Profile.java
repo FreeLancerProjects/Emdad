@@ -78,6 +78,7 @@ public class Fragment_Profile extends Fragment {
             @Override
             public void onClick(View v) {
 activity.DisplayFragmentUpgrade();
+activity.DisplayFragmentDataUpgrade();
             }
         });
     }
