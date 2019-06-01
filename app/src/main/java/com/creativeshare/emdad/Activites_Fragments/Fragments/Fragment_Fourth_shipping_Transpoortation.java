@@ -19,7 +19,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 public class Fragment_Fourth_shipping_Transpoortation extends Fragment {
     private Button previous, next;
     private ImageView next_img, previous_img;
-    private RoundedImageView roundedImageView1, roundedImageView2;
+    private RoundedImageView loadimage1, loadiamge2;
     private Home_Activity activity;
     private Preferences preferences;
     private String current_lang;
@@ -46,12 +46,12 @@ public class Fragment_Fourth_shipping_Transpoortation extends Fragment {
         next = view.findViewById(R.id.next_shipping);
         next_img = view.findViewById(R.id.image_next);
         previous_img = view.findViewById(R.id.image_previous);
-        roundedImageView1 = view.findViewById(R.id.image_load1);
-        roundedImageView2 = view.findViewById(R.id.image_load2);
-        roundedImageView1.setPadding(50, 50, 50, 50);
-        roundedImageView2.setPadding(50, 50, 50, 50);
-        roundedImageView1.setAlpha((float) .6);
-        roundedImageView2.setAlpha((float) .6);
+        loadimage1 = view.findViewById(R.id.image_load1);
+        loadiamge2 = view.findViewById(R.id.image_load2);
+        loadimage1.setPadding(50, 50, 50, 50);
+        loadiamge2.setPadding(50, 50, 50, 50);
+        loadimage1.setAlpha((float) .6);
+        loadiamge2.setAlpha((float) .6);
         if (current_lang.equals("ar")) {
 
             previous_img.setImageDrawable(getResources().getDrawable(R.drawable.ic_right_previous));

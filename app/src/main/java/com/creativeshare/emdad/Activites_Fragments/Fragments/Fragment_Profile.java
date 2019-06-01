@@ -20,7 +20,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class Fragment_Profile extends Fragment {
-    private CircleImageView circleImageView;
+    private CircleImageView logo;
     private ImageView upgrade;
     private LinearLayout linearLayout;
     private RatingBar ratingBar;
@@ -45,8 +45,8 @@ public class Fragment_Profile extends Fragment {
     private void intitview(View view) {
         activity=(Home_Activity)getActivity();
         upgrade = view.findViewById(R.id.upgrade_company_toolbar_image);
-        circleImageView = view.findViewById(R.id.accout_img);
-        circleImageView.setImageResource(R.drawable.ic_photo_camera);
+        logo = view.findViewById(R.id.accout_img);
+        logo.setImageResource(R.drawable.ic_photo_camera);
         linearLayout = view.findViewById(R.id.lin);
         ratingBar = view.findViewById(R.id.myrating);
         appBarLayout = view.findViewById(R.id.app_bar);
@@ -57,11 +57,11 @@ public class Fragment_Profile extends Fragment {
                 //  Vertical offset == 0 indicates appBar is fully expanded.
                 if (Math.abs(verticalOffset) > 50) {
 
-                    circleImageView.setVisibility(View.GONE);
+                    logo.setVisibility(View.GONE);
                     linearLayout.setVisibility(View.GONE);
                     ratingBar.setVisibility(View.GONE);
                 } else {
-                    circleImageView.setVisibility(View.VISIBLE);
+                    logo.setVisibility(View.VISIBLE);
                     linearLayout.setVisibility(View.VISIBLE);
                     ratingBar.setVisibility(View.VISIBLE);
                 }

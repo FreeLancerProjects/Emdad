@@ -58,8 +58,8 @@ public class Fragment_main extends Fragment {
         shipping_and_transportation = view.findViewById(R.id.card_shipping_and_transportation);
         equipment = view.findViewById(R.id.card_equipment);
         otherservices = view.findViewById(R.id.card_other_services);
-        mPager = view.findViewById(R.id.view1);
-        indicator = view.findViewById(R.id.tab1);
+        mPager = view.findViewById(R.id.view);
+        indicator = view.findViewById(R.id.tab);
         progBar = view.findViewById(R.id.progBarAds);
         progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         shipping_and_transportation.setOnClickListener(new View.OnClickListener() {

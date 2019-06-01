@@ -22,7 +22,7 @@ public class Fragment_Orders extends Fragment {
     private TabLayout tabLayout;
     private Home_Activity activity;
     private ViewPager viewPager;
-    private User_Orders_Page_Adapter adapter;
+    private User_Orders_Page_Adapter user_orders_page_adapter;
 
 
     public static Fragment_Orders newInstance() {
@@ -46,8 +46,8 @@ public class Fragment_Orders extends Fragment {
         activity = (Home_Activity) getActivity();
         tabLayout = view.findViewById(R.id.tab_orders);
         viewPager = view.findViewById(R.id.pager);
-        adapter = new User_Orders_Page_Adapter(activity.getSupportFragmentManager(), tabLayout.getTabCount());
-        viewPager.setAdapter(adapter);
+        user_orders_page_adapter = new User_Orders_Page_Adapter(activity.getSupportFragmentManager(), tabLayout.getTabCount());
+        viewPager.setAdapter(user_orders_page_adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
             @Override
