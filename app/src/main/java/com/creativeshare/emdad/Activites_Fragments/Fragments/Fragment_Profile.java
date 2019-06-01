@@ -1,23 +1,16 @@
 package com.creativeshare.emdad.Activites_Fragments.Fragments;
 
-import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
-import android.widget.Toast;
 
 import com.creativeshare.emdad.Activites_Fragments.Activites.Home_Activity;
 import com.creativeshare.emdad.R;
@@ -51,7 +44,7 @@ public class Fragment_Profile extends Fragment {
 
     private void intitview(View view) {
         activity=(Home_Activity)getActivity();
-        upgrade = view.findViewById(R.id.cart);
+        upgrade = view.findViewById(R.id.upgrade_company_toolbar_image);
         circleImageView = view.findViewById(R.id.accout_img);
         circleImageView.setImageResource(R.drawable.ic_photo_camera);
         linearLayout = view.findViewById(R.id.lin);

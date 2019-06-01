@@ -54,7 +54,7 @@
             >
 
             <TextView
-                android:id="@+id/contaact_us_txt1"
+                android:id="@+id/contaact_us_txt_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -75,10 +75,10 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:background="@drawable/linear_shape"
-                app:layout_constraintTop_toBottomOf="@+id/contaact_us_txt1" />
+                app:layout_constraintTop_toBottomOf="@+id/contaact_us_txt_name" />
 
             <TextView
-                android:id="@+id/contact_us_txt2"
+                android:id="@+id/contact_us_txt_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -100,10 +100,10 @@
                 android:background="@drawable/linear_shape"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/yellow1"
-                app:layout_constraintTop_toBottomOf="@+id/contact_us_txt2" />
+                app:layout_constraintTop_toBottomOf="@+id/contact_us_txt_email" />
 
             <TextView
-                android:id="@+id/contact_us_txt3"
+                android:id="@+id/contact_us_txt_msg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -128,7 +128,7 @@
                 android:paddingRight="5dp"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                app:layout_constraintTop_toBottomOf="@+id/contact_us_txt3" />
+                app:layout_constraintTop_toBottomOf="@+id/contact_us_txt_msg" />
 
             <Button
                 android:id="@+id/send"

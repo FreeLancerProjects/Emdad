@@ -50,7 +50,7 @@ public class Login_Activity extends AppCompatActivity {
     private void intitview() {
         preferences = Preferences.getInstance();
         current_lang = preferences.getlang(this);
-        sign_login = findViewById(R.id.login_sign_arrow);
+        sign_login = findViewById(R.id.back);
         if (current_lang.equals("en")) {
             sign_login.setRotation(180);
         }
@@ -82,7 +82,7 @@ public class Login_Activity extends AppCompatActivity {
         if (fragmentLogin.isAdded()) {
             fragmentManager.beginTransaction().show(fragmentLogin).commit();
         } else {
-            fragmentManager.beginTransaction().add(R.id.fragment_login_register, fragmentLogin, "fragmentLogin").addToBackStack("fragmentLogin").commit();
+            fragmentManager.beginTransaction().add(R.id.fragment_app_sign, fragmentLogin, "fragmentLogin").addToBackStack("fragmentLogin").commit();
         }
     }
 
@@ -96,7 +96,7 @@ public class Login_Activity extends AppCompatActivity {
         if (fragmentsignup.isAdded()) {
             fragmentManager.beginTransaction().show(fragmentsignup).commit();
         } else {
-            fragmentManager.beginTransaction().add(R.id.fragment_login_register, fragmentsignup, "fragmentsignup").addToBackStack("fragmentsignup").commit();
+            fragmentManager.beginTransaction().add(R.id.fragment_app_sign, fragmentsignup, "fragmentsignup").addToBackStack("fragmentsignup").commit();
         }
     }
 

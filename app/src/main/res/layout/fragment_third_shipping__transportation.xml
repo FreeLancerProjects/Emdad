@@ -16,7 +16,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/txt_charge_info"
+            android:id="@+id/charge_info_txtview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -29,17 +29,17 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-            android:id="@+id/lin_num_phone_charge"
+            android:id="@+id/num_phone_charge_lin"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="8dp"
             android:layout_marginRight="15dp"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/txt_charge_info">
+            app:layout_constraintTop_toBottomOf="@+id/charge_info_txtview">
 
             <com.hbb20.CountryCodePicker
-                android:id="@+id/txt_phone_num_code"
+                android:id="@+id/phone_num_code_chooser"
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
                 android:background="@drawable/text_left_shape"
@@ -52,7 +52,7 @@
                 app:ccp_textSize="13.5sp" />
 
             <EditText
-                android:id="@+id/txt_phone_num"
+                android:id="@+id/phone_num_edittxt"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -67,7 +67,7 @@
 
         <LinearLayout
 
-            android:id="@+id/lin_company_name"
+            android:id="@+id/company_name_lin"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_marginLeft="15dp"
@@ -75,7 +75,7 @@
             android:layout_marginRight="15dp"
             android:background="@drawable/linear_shape"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/lin_num_phone_charge">
+            app:layout_constraintTop_toBottomOf="@+id/num_phone_charge_lin">
 
             <ImageView
                 android:layout_width="30dp"
@@ -84,7 +84,6 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:alpha=".6"
-                android:backgroundTint="#fff"
                 android:padding="5dp"
                 android:src="@drawable/ic_company_name"
 
@@ -92,6 +91,7 @@
                 />
 
             <EditText
+                android:id="@+id/company_name_edittxt"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -107,7 +107,7 @@
 
         <LinearLayout
 
-            android:id="@+id/lin_responsible_person"
+            android:id="@+id/responsible_person_lin"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_marginLeft="15dp"
@@ -115,7 +115,7 @@
             android:layout_marginRight="15dp"
             android:background="@drawable/linear_shape"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/lin_company_name">
+            app:layout_constraintTop_toBottomOf="@+id/company_name_lin">
 
             <ImageView
                 android:layout_width="30dp"
@@ -130,6 +130,7 @@
                 />
 
             <EditText
+                android:id="@+id/responsible_person_edittxt"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -145,7 +146,7 @@
 
         <LinearLayout
 
-            android:id="@+id/lin_email_charge"
+            android:id="@+id/email_charge_lin"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_marginLeft="15dp"
@@ -153,7 +154,7 @@
             android:layout_marginRight="15dp"
             android:background="@drawable/linear_shape"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/lin_responsible_person">
+            app:layout_constraintTop_toBottomOf="@+id/responsible_person_lin">
 
             <ImageView
                 android:layout_width="30dp"
@@ -167,6 +168,7 @@
                 android:tint="@color/black" />
 
             <EditText
+                android:id="@+id/email_charge_edittxt"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -190,7 +192,7 @@
             android:layout_marginRight="15dp"
             android:background="@drawable/linear_shape"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/lin_email_charge">
+            app:layout_constraintTop_toBottomOf="@+id/email_charge_lin">
 
             <ImageView
                 android:layout_width="30dp"

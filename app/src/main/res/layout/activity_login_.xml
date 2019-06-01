@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".Activites_Fragments.Activites.Login_Activity">
 <androidx.appcompat.widget.Toolbar
-    android:id="@+id/too_login"
+    android:id="@+id/login_toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:layout_constraintTop_toTopOf="parent"
@@ -27,7 +27,7 @@
 
         />
     <ImageView
-        android:id="@+id/login_sign_arrow"
+        android:id="@+id/back"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:padding="10dp"
@@ -37,17 +37,16 @@
         />
 </androidx.appcompat.widget.Toolbar>
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardhome"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/too_login"
+        app:layout_constraintTop_toBottomOf="@+id/login_toolbar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="0"
         >
 
 
         <FrameLayout
-            android:id="@+id/fragment_login_register"
+            android:id="@+id/fragment_app_sign"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
             />

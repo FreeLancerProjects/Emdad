@@ -5,7 +5,9 @@
         <layer-list>
 
             <item>
-                <bitmap android:gravity="end" android:src="@drawable/downarrow"/> // you can place your dropdown image
+                <bitmap android:gravity="end"
+
+                    android:src="@drawable/downarrow"/> // you can place your dropdown image
             </item>
         </layer-list>
     </item>

@@ -10,6 +10,7 @@ import androidx.multidex.MultiDex;
 
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_About_App;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Business_Register_Upgrade;
+import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Company_Address_Upgrade;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Company_Data_Upgrade;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Connecting_Water;
 import com.creativeshare.emdad.Activites_Fragments.Fragments.Fragment_Contact_US;
@@ -41,6 +42,7 @@ public class Home_Activity extends AppCompatActivity {
     private Fragment_Upgrade_To_Company fragment_upgrade_to_company;
     private Fragment_Company_Data_Upgrade fragment_company_data_upgrade;
     private Fragment_Business_Register_Upgrade fragment_business_register_upgrade;
+    private Fragment_Company_Address_Upgrade fragment_company_address_upgrade;
     private Fragment_more fragment_more;
     private Fragment_Terms_Condition fragment_terms_condition;
     private Fragment_About_App fragment_about_app;
@@ -403,6 +405,19 @@ public class Home_Activity extends AppCompatActivity {
             fragmentManager.beginTransaction().show(fragment_business_register_upgrade).commit();
         } else {
             fragmentManager.beginTransaction().add(R.id.fragment_main_upgrade_child, fragment_business_register_upgrade, "fragment_business_register_upgrade").addToBackStack("fragment_business_register_upgrade").commit();
+
+        }
+    }
+    public void DisplayFragmentAddressUpgrade() {
+        fragment_count += 1;
+
+        fragment_company_address_upgrade = Fragment_Company_Address_Upgrade.newInstance();
+
+
+        if (fragment_company_address_upgrade.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_company_address_upgrade).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_main_upgrade_child, fragment_company_address_upgrade, "fragment_company_address_upgrade").addToBackStack("fragment_company_address_upgrade").commit();
 
         }
     }

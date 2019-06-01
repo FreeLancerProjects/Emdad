@@ -1,7 +1,5 @@
 package com.creativeshare.emdad.Activites_Fragments.Fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
@@ -18,8 +16,6 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.creativeshare.emdad.Activites_Fragments.Activites.Home_Activity;
 import com.creativeshare.emdad.R;
 import com.creativeshare.emdad.preferences.Preferences;
-
-import java.util.Locale;
 
 
 public class Fragment_Home extends Fragment {
@@ -47,8 +43,8 @@ public class Fragment_Home extends Fragment {
         preferences=Preferences.getInstance();
         activity = (Home_Activity) getActivity();
         current_lang = preferences.getlang(activity);
-        tv_title = view.findViewById(R.id.tv_title);
-        back=view.findViewById(R.id.back_home);
+        tv_title = view.findViewById(R.id.upgrade_company_tv_title);
+        back=view.findViewById(R.id.back);
         bottomNavigationView = view.findViewById(R.id.bottom_navigation);
         if (current_lang.equals("en")) {
             back.setRotation(180);

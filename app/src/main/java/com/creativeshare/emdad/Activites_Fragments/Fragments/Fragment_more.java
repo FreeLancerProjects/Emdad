@@ -37,7 +37,7 @@ public class Fragment_more extends Fragment {
     }
 
     private void intitview(View view) {
-        contact_us =  view.findViewById(R.id.call);
+        contact_us =  view.findViewById(R.id.contact_us);
         terms = view.findViewById(R.id.term);
         bank_img =  view.findViewById(R.id.bank_img);
         logout_img =  view.findViewById(R.id.logout_img);

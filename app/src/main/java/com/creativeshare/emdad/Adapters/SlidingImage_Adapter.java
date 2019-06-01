@@ -48,7 +48,7 @@ public class SlidingImage_Adapter extends PagerAdapter {
 
         assert imageLayout != null;
         final RoundedImageView imageView =  imageLayout
-                .findViewById(R.id.image);
+                .findViewById(R.id.map);
 
         Picasso.with(context).load(IMAGES.get(position)).fit().into(imageView);
         view.addView(imageLayout, 0);

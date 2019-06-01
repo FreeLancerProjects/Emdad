@@ -15,16 +15,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.creativeshare.emdad.Activites_Fragments.Activites.Home_Activity;
 import com.creativeshare.emdad.R;
-import com.creativeshare.emdad.Share.Common;
 import com.hbb20.CountryCodePicker;
 
-import java.sql.Time;
-import java.sql.Timestamp;
-import java.util.Calendar;
 import java.util.Locale;
 
 
@@ -59,8 +54,8 @@ public class Fragment_seconed_shipping_Transportation extends Fragment {
         previous = view.findViewById(R.id.previous);
         next_img = view.findViewById(R.id.image_next);
         previous_img = view.findViewById(R.id.image_previous);
-        phonecode = view.findViewById(R.id.txt_phone_num_code);
-        txt_phone = view.findViewById(R.id.txt_phone_num);
+        phonecode = view.findViewById(R.id.phone_num_code_chooser);
+        txt_phone = view.findViewById(R.id.phone_num_edittxt);
         txtdate = view.findViewById(R.id.txt_date);
         txtclock = view.findViewById(R.id.txt_clock);
         date = view.findViewById(R.id.date);

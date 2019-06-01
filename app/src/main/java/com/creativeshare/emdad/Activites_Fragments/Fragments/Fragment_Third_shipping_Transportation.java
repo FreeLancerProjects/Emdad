@@ -2,13 +2,10 @@ package com.creativeshare.emdad.Activites_Fragments.Fragments;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,16 +13,12 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.creativeshare.emdad.Activites_Fragments.Activites.Home_Activity;
 import com.creativeshare.emdad.R;
 import com.creativeshare.emdad.preferences.Preferences;
 import com.hbb20.CountryCodePicker;
-
-import java.util.Locale;
 
 
 public class Fragment_Third_shipping_Transportation extends Fragment {
@@ -63,8 +56,8 @@ public class Fragment_Third_shipping_Transportation extends Fragment {
         next_img=view.findViewById(R.id.image_next);
         previous_img=view.findViewById(R.id.image_previous);
         date_clock=view.findViewById(R.id.date_clock);
-        phonecode = view.findViewById(R.id.txt_phone_num_code);
-        txt_phone = view.findViewById(R.id.txt_phone_num);
+        phonecode = view.findViewById(R.id.phone_num_code_chooser);
+        txt_phone = view.findViewById(R.id.phone_num_edittxt);
 
         if(current_lang.equals("ar")){
             phonecode.setBackground(getResources().getDrawable(R.drawable.text_right_shape));

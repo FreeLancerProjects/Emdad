@@ -42,13 +42,13 @@
                     android:layout_height="match_parent">
 
                     <androidx.viewpager.widget.ViewPager
-                        android:id="@+id/view1"
+                        android:id="@+id/view"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
 
 
                     <com.google.android.material.tabs.TabLayout
-                        android:id="@+id/tab1"
+                        android:id="@+id/tab"
                         android:layout_width="match_parent"
                         android:layout_height="7dp"
                         android:layout_gravity="bottom"
