@@ -67,32 +67,7 @@ public class Common {
         dialog.setView(view);
         dialog.show();
     }
-    public static void Createsignup_chooser(Context context)
-    {
-        final AlertDialog dialog = new AlertDialog.Builder(context)
-                .setCancelable(true)
-                .create();
 
-        View view = LayoutInflater.from(context).inflate(R.layout.dialoge_choose_user_type,null);
-        Button doneBtn = view.findViewById(R.id.doneBtn);
-       final Spinner tv_msg = view.findViewById(R.id.tv_msg);
-        final Login_Activity activity=(Login_Activity) context;
-        doneBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                if(tv_msg.getSelectedItemPosition()==1){
-                    activity.DisplaysignupFragment();
-                }
-            }
-        });
-
-        // dialog.getWindow().getAttributes().windowAnimations=R.style.dialog_congratulation_animation;
-        dialog.setCanceledOnTouchOutside(false);
-        // dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_window_bg);
-        dialog.setView(view);
-        dialog.show();
-    }
     /*public static void CreateUserNotSignInAlertDialog(final Context context)
    {
 
