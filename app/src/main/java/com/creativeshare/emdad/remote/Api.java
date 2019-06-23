@@ -2,7 +2,6 @@ package com.creativeshare.emdad.remote;
 
 
 
-import com.creativeshare.emdad.Tags.Tags;
 import com.creativeshare.emdad.services.Services;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -39,9 +38,9 @@ public class Api {
 
             OkHttpClient client=new OkHttpClient.Builder()
                     .addInterceptor(interceptor)
-                    .connectTimeout(30,TimeUnit.SECONDS)
-                    .readTimeout(30,TimeUnit.SECONDS)
-                    .writeTimeout(30,TimeUnit.SECONDS)
+                    .connectTimeout(60,TimeUnit.SECONDS)
+                    .readTimeout(60,TimeUnit.SECONDS)
+                    .writeTimeout(60,TimeUnit.SECONDS)
                     .retryOnConnectionFailure(true)
                     .build();
 
@@ -60,11 +59,6 @@ public class Api {
         return retrofit;
     }
 
-
-    public static Services getService()
-    {
-        return getRetrofit(Tags.base_url).create(Services.class);
-    }
     public static Services getService(String base_url)
     {
         return getRetrofit(base_url).create(Services.class);

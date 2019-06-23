@@ -30,4 +30,10 @@
     <style name="Check">
         <item name="colorAccent">@color/yellow1</item>
     </style>
+
+    <style name="dialog_congratulation_animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_congratulation_enter</item>
+        <item name="android:windowExitAnimation">@anim/dialog_congratulation_exit</item>
+    </style>
+
 </resources>
