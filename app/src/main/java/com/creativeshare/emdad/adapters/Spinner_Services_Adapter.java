@@ -55,7 +55,7 @@ public class Spinner_Services_Adapter extends BaseAdapter {
         TextView tv_name = convertView.findViewById(R.id.tv_name);
 
         ServicesModel servicesModel = servicesModelList.get(position);
-        if (current_language.equals("ar")) {
+        if (current_language.equals("ar")||current_language.equals("ur")) {
             tv_name.setText(servicesModel.getAr_title());
         } else {
             tv_name.setText(servicesModel.getEn_title());

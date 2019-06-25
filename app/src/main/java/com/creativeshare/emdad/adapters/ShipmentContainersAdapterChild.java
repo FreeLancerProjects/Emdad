@@ -32,15 +32,20 @@ public class ShipmentContainersAdapterChild extends RecyclerView.Adapter<Shipmen
     private String current_language;
     private Fragment_Shipment_Container_Type fragment;
     private SparseBooleanArray sparseBooleanArray;
+    private ShipmentContainersAdapterParent shipmentContainersAdapterParent;
+    private int parent_pos;
 
 
-    public ShipmentContainersAdapterChild(List<ContainersModel.Trans> containerModelList, Context context, Fragment_Shipment_Container_Type fragment) {
+    public ShipmentContainersAdapterChild(List<ContainersModel.Trans> containerModelList, Context context, Fragment_Shipment_Container_Type fragment, ShipmentContainersAdapterParent shipmentContainersAdapterParent, int pos) {
         this.containerModelList = containerModelList;
         this.context = context;
         this.fragment = fragment;
         Paper.init(context);
         current_language = Paper.book().read("lang", Locale.getDefault().getLanguage());
         sparseBooleanArray = new SparseBooleanArray();
+        this.shipmentContainersAdapterParent = shipmentContainersAdapterParent;
+        this.parent_pos = pos;
+
     }
 
     @NonNull
@@ -52,6 +57,7 @@ public class ShipmentContainersAdapterChild extends RecyclerView.Adapter<Shipmen
 
     @Override
     public void onBindViewHolder(@NonNull final MyHolder holder, final int position) {
+
 
         if (sparseBooleanArray.get(position))
         {
@@ -70,12 +76,10 @@ public class ShipmentContainersAdapterChild extends RecyclerView.Adapter<Shipmen
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ContainersModel.Trans  trans = containerModelList.get(position);
 
-                sparseBooleanArray.clear();
-                sparseBooleanArray.put(holder.getAdapterPosition(),true);
-                fragment.setItemData(trans);
-                notifyDataSetChanged();
+                ContainersModel.Trans  trans = containerModelList.get(position);
+                fragment.setItemData(trans,holder.getAdapterPosition(),parent_pos);
+                shipmentContainersAdapterParent.setSelectedPos(parent_pos,holder.getAdapterPosition());
             }
         });
 
@@ -109,7 +113,7 @@ public class ShipmentContainersAdapterChild extends RecyclerView.Adapter<Shipmen
         public void BindData(ContainersModel.Trans trans)
         {
 
-            if (current_language.equals("ar"))
+            if (current_language.equals("ar")||current_language.equals("ur"))
             {
                 tv_name.setText(trans.getAr_title());
             }else
@@ -120,4 +124,14 @@ public class ShipmentContainersAdapterChild extends RecyclerView.Adapter<Shipmen
             Picasso.with(context).load(Uri.parse(Tags.IMAGE_CONTAINER_URL+trans.getTrans_image())).fit().into(image);
         }
     }
+
+    public void setSelectedPos(int pos)
+    {
+
+        sparseBooleanArray.clear();
+        sparseBooleanArray.put(pos,true);
+        notifyDataSetChanged();
+    }
+
+
 }

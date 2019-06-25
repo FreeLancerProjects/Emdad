@@ -151,7 +151,7 @@ public class Fragment_Water_Delivery extends Fragment implements OnMapReadyCallb
         current_language = Paper.book().read("lang", Locale.getDefault().getLanguage());
 
         arrow = view.findViewById(R.id.arrow);
-        if (current_language.equals("ar"))
+        if (current_language.equals("ar")||current_language.equals("ur"))
         {
             arrow.setRotation(180.0f);
         }

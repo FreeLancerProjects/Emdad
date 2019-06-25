@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.creativeshare.emdad.R;
-import com.creativeshare.emdad.models.ContainerSizeModel;
 import com.creativeshare.emdad.models.OtherServiceContainerSizeModel;
 
 import java.util.List;
@@ -56,7 +55,7 @@ public class Spinner_Other_Container_Size_Adapter extends BaseAdapter {
         TextView tv_name = convertView.findViewById(R.id.tv_name);
 
         OtherServiceContainerSizeModel.Size containerSizeModel = containerSizeModelList.get(position);
-        if (current_language.equals("ar")) {
+        if (current_language.equals("ar")||current_language.equals("ur")) {
             tv_name.setText(containerSizeModel.getAr_size());
         } else {
             tv_name.setText(containerSizeModel.getEn_size());

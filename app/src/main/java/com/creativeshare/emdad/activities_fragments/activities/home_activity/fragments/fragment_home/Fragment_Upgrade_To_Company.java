@@ -119,7 +119,7 @@ public class Fragment_Upgrade_To_Company extends Fragment {
         back = view.findViewById(R.id.back);
         image_map_arrow = view.findViewById(R.id.image_map_arrow);
 
-        if (current_language.equals("ar")) {
+        if (current_language.equals("ar")||current_language.equals("ur")) {
             back.setRotation(180.0f);
             image_map_arrow.setRotation(180.0f);
 

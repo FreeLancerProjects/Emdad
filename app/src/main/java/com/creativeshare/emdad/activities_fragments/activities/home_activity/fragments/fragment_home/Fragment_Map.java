@@ -118,7 +118,7 @@ public class Fragment_Map extends Fragment implements OnMapReadyCallback, Google
 
         arrow = view.findViewById(R.id.arrow);
 
-        if (current_language.equals("ar")) {
+        if (current_language.equals("ar")||current_language.equals("ur")) {
             arrow.setRotation(180.0f);
         }
         image_pin = view.findViewById(R.id.image_pin);

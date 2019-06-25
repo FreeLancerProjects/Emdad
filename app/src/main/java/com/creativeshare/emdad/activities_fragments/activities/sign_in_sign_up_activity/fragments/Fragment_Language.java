@@ -17,7 +17,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import io.paperdb.Paper;
 
 public class Fragment_Language extends Fragment {
-    private RadioButton rb_en,rb_ar;
+    private RadioButton rb_en,rb_ar,rb_ur;
     private FloatingActionButton fab;
     private String selected_language = "ar";
     private Login_Activity activity;
@@ -44,6 +44,7 @@ public class Fragment_Language extends Fragment {
 
         rb_ar = view.findViewById(R.id.rb_ar);
         rb_en = view.findViewById(R.id.rb_en);
+        rb_ur = view.findViewById(R.id.rb_ur);
         fab = view.findViewById(R.id.fab);
 
         rb_ar.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +61,16 @@ public class Fragment_Language extends Fragment {
             public void onClick(View v) {
 
                 selected_language = "en";
+
+
+
+            }
+        });
+        rb_ur.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                selected_language = "ur";
 
 
 

@@ -67,9 +67,9 @@ public class Fragment_More extends Fragment {
         arrow6 = view.findViewById(R.id.arrow6);
 
 
-        language_array = new String[]{"English","العربية"};
+        language_array = new String[]{"English","Urdu","العربية"};
 
-        if (current_language.equals("ar"))
+        if (current_language.equals("ar")||current_language.equals("ur"))
         {
 
             arrow1.setRotation(180.0f);
@@ -250,13 +250,16 @@ public class Fragment_More extends Fragment {
         numberPicker.setWrapSelectorWheel(false);
         if (current_language.equals("ar"))
         {
-            numberPicker.setValue(1);
+            numberPicker.setValue(2);
 
-        }else
+        }else if (current_language.equals("en"))
         {
             numberPicker.setValue(0);
 
-        }
+        }else
+            {
+                numberPicker.setValue(1);
+            }
         btn_select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -265,7 +268,12 @@ public class Fragment_More extends Fragment {
                 if (pos == 0)
                 {
                     activity.RefreshActivity("en");
-                }else
+                }else if (pos ==1)
+                {
+                    activity.RefreshActivity("ur");
+
+                }
+                else
                 {
                     activity.RefreshActivity("ar");
 

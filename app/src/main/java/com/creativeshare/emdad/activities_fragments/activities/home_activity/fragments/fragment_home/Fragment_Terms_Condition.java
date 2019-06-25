@@ -163,7 +163,7 @@ public class Fragment_Terms_Condition extends Fragment {
                         progBar.setVisibility(View.GONE);
                         if (response.isSuccessful()&&response.body()!=null)
                         {
-                            if (current_language.equals("ar"))
+                            if (current_language.equals("ar")||current_language.equals("ur"))
                             {
                                 tv_content.setText(response.body().getAr_content());
                             }else

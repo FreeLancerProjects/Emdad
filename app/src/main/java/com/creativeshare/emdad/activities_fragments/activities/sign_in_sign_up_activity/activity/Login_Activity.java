@@ -3,6 +3,7 @@ package com.creativeshare.emdad.activities_fragments.activities.sign_in_sign_up_
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -146,6 +147,7 @@ public class Login_Activity extends AppCompatActivity {
 
 
     public void RefreshActivity(String selected_language) {
+        Log.e("lang",selected_language);
         Paper.book().write("lang",selected_language);
         preferences.setIsLanguageSelected(this);
         Language_Helper.setNewLocale(this,selected_language);

@@ -45,7 +45,7 @@ public class Fragment_main_Other_services extends Fragment {
         current_language = Paper.book().read("lang", Locale.getDefault().getLanguage());
         ll_back=view.findViewById(R.id.ll_back);
         arrow = view.findViewById(R.id.arrow);
-        if (current_language.equals("ar"))
+        if (current_language.equals("ar")||current_language.equals("ur"))
         {
             arrow.setRotation(180.0f);
         }

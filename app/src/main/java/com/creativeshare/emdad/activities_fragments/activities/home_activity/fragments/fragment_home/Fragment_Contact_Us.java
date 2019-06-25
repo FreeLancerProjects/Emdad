@@ -66,7 +66,7 @@ public class Fragment_Contact_Us  extends Fragment {
         current_language = Paper.book().read("lang", Locale.getDefault().getLanguage());
         image_back = view.findViewById(R.id.image_back);
 
-        if (current_language.equals("ar"))
+        if (current_language.equals("ar")||current_language.equals("ur"))
         {
            image_back.setRotation(180.0f);
         }

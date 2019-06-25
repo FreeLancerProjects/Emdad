@@ -98,7 +98,7 @@ public class ShipmentActivity extends AppCompatActivity {
         seekBar = findViewById(R.id.seekBar);
 
 
-        if (current_language.equals("ar"))
+        if (current_language.equals("ar")||current_language.equals("ur"))
         {
             arrow.setRotation(180.0f);
             arrow_next.setRotation(180.0f);

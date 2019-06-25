@@ -153,8 +153,8 @@
 
     <string name="container">container</string>
     <string name="provide_us_with_info">please provide us with deliver information</string>
-    <string name="container_size">container size<font color='red'>*</font></string>
-    <string name="container_type">container Type<font color='red'>*</font></string>
+    <string name="container_size">Container size<font color='red'>*</font></string>
+    <string name="container_type">Container Type<font color='red'>*</font></string>
     <string name="engineering_consultances">Engineering consultances</string>
     <string name="provide_us_with_info2">please provide us with this information</string>
     <string name="property_type">Property Type<font color='red'>*</font></string>
@@ -177,4 +177,9 @@
     <string name="sel_cus_img">Select Customs card</string>
     <string name="the_type_of_shipment_required_from_abroad">The type of shipment required from abroad</string>
     <string name="size_of_truck">Size of truck</string>
+    <string name="type_of_load3">Type of shipment</string>
+    <string name="number_of_truck2">Number of truck</string>
+    <string name="no_load_to_display">There is no shipment type to display</string>
+    <string name="no_sizes">There are no sizes to display</string>
+    <string name="number_of_truck">Number of Truck</string>
 </resources>

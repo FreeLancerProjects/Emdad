@@ -443,7 +443,7 @@ public class Fragment_Rental_Of_Equipment extends Fragment implements OnMapReady
                     //  Common.setCities_models(response.body());
                     equipment_model = response.body();
                     for (int i = 0; i < response.body().getAll_equipment_sizes().size(); i++) {
-                        if (current_language.equals("ar")) {
+                        if (current_language.equals("ar")||current_language.equals("ur")) {
                             equipmentsize.add(response.body().getAll_equipment_sizes().get(i).getAr_title());
                         } else {
                             equipmentsize.add(response.body().getAll_equipment_sizes().get(i).getEn_title());
@@ -501,7 +501,7 @@ public class Fragment_Rental_Of_Equipment extends Fragment implements OnMapReady
         this.years = year;
         this.months = monthOfYear + 1;
         this.days = dayOfMonth;
-        if (current_language.equals("ar")) {
+        if (current_language.equals("ar")||current_language.equals("ur")) {
             txtdate.setText(year + "/" + months + "/" + dayOfMonth);
 
         } else {

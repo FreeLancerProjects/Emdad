@@ -55,7 +55,7 @@ public class Spinner_Other_Container_Type_Adapter extends BaseAdapter {
         TextView tv_name = convertView.findViewById(R.id.tv_name);
 
         ContainerTypeModel containerTypeModel = containerTypeModelList.get(position);
-        if (current_language.equals("ar")) {
+        if (current_language.equals("ar")||current_language.equals("ur")) {
             tv_name.setText(containerTypeModel.getAr_type());
         } else {
             tv_name.setText(containerTypeModel.getEn_type());

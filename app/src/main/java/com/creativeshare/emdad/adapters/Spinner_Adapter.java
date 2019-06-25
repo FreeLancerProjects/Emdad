@@ -55,7 +55,7 @@ public class Spinner_Adapter extends BaseAdapter {
         TextView tv_name = convertView.findViewById(R.id.tv_name);
 
         CityModel cityModel = cityModelList.get(position);
-        if (current_language.equals("ar")) {
+        if (current_language.equals("ar")||current_language.equals("ur")) {
             tv_name.setText(cityModel.getAr_city_title());
         } else {
             tv_name.setText(cityModel.getEn_city_title());

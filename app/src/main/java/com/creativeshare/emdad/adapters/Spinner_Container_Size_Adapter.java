@@ -55,7 +55,7 @@ public class Spinner_Container_Size_Adapter extends BaseAdapter {
         TextView tv_name = convertView.findViewById(R.id.tv_name);
 
         ContainerSizeModel containerSizeModel = containerSizeModelList.get(position);
-        if (current_language.equals("ar")) {
+        if (current_language.equals("ar")||current_language.equals("ur")) {
             tv_name.setText(containerSizeModel.getAr_title());
         } else {
             tv_name.setText(containerSizeModel.getEn_title());

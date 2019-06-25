@@ -133,7 +133,7 @@ public class Fragment_Shipment_Delivery_Information extends Fragment implements 
         current_language = Paper.book().read("lang", Locale.getDefault().getLanguage());
         image_phone_code = view.findViewById(R.id.image_phone_code);
 
-        if (current_language.equals("ar"))
+        if (current_language.equals("ar")||current_language.equals("ur"))
         {
             image_phone_code.setRotation(180.0f);
         }

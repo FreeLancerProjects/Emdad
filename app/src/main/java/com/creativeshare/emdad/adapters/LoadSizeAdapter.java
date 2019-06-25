@@ -4,31 +4,30 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.creativeshare.emdad.R;
-import com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_home.Fragment_Upgrade_To_Company;
-import com.creativeshare.emdad.models.ServicesModel;
+import com.creativeshare.emdad.activities_fragments.activities.activity_shipment_transportation.fragments.Fragment_Shipment_Container_Type;
+import com.creativeshare.emdad.models.ContainersModel;
 
 import java.util.List;
 import java.util.Locale;
 
 import io.paperdb.Paper;
 
-public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.MyHolder> {
+public class LoadSizeAdapter extends RecyclerView.Adapter<LoadSizeAdapter.MyHolder> {
 
-    private List<ServicesModel> servicesModelList;
+    private List<ContainersModel.Sizes> sizesList;
     private Context context;
     private String current_language;
-    private Fragment_Upgrade_To_Company fragment;
+    private Fragment_Shipment_Container_Type fragment;
 
 
-    public ServicesAdapter(List<ServicesModel> servicesModelList, Context context, Fragment_Upgrade_To_Company fragment) {
-        this.servicesModelList = servicesModelList;
+    public LoadSizeAdapter(List<ContainersModel.Sizes> sizesList, Context context, Fragment_Shipment_Container_Type fragment) {
+        this.sizesList = sizesList;
         this.context = context;
         this.fragment = fragment;
         Paper.init(context);
@@ -39,21 +38,22 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.MyHold
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.service_row,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.dialog_row,parent,false);
         return new MyHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final MyHolder holder, final int position) {
 
-        ServicesModel  servicesModel = servicesModelList.get(position);
-        holder.BindData(servicesModel);
+        ContainersModel.Sizes sizes = sizesList.get(position);
+        holder.BindData(sizes);
 
-        holder.image_delete.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ContainersModel.Sizes sizes = sizesList.get(holder.getAdapterPosition());
 
-                fragment.setItemForDelete(position);
+                fragment.setItemOfLoadSize(sizes);
             }
         });
 
@@ -61,33 +61,31 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.MyHold
 
     @Override
     public int getItemCount() {
-        return servicesModelList.size();
+        return sizesList.size();
     }
 
     public class MyHolder extends RecyclerView.ViewHolder {
 
         private TextView tv_title;
-        private ImageView  image_delete;
 
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
 
             tv_title = itemView.findViewById(R.id.tv_title);
-            image_delete = itemView.findViewById(R.id.image_delete);
 
 
         }
 
 
-        public void BindData(ServicesModel servicesModel)
+        public void BindData(ContainersModel.Sizes sizes)
         {
             if (current_language.equals("ar")||current_language.equals("ur"))
             {
-                tv_title.setText(servicesModel.getAr_title());
+                tv_title.setText(sizes.getAr_title_size());
             }else
                 {
-                    tv_title.setText(servicesModel.getEn_title());
+                    tv_title.setText(sizes.getEn_title_size());
 
                 }
         }

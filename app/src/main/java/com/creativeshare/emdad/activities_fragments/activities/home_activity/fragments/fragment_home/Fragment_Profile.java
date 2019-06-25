@@ -62,7 +62,7 @@ public class Fragment_Profile extends Fragment {
         arrow_company = view.findViewById(R.id.arrow_company);
         arrow_logout = view.findViewById(R.id.arrow_logout);
 
-        if (current_language.equals("ar"))
+        if (current_language.equals("ar")||current_language.equals("ur"))
         {
             arrow_city.setRotation(180.0f);
             arrow_company.setRotation(180.0f);
