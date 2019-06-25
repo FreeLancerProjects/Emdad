@@ -404,6 +404,18 @@
     <string name="no_load_to_display">ظاہر کرنے کے لئے کوئی شپمنٹ کی قسم نہیں ہے</string>
     <string name="no_sizes">ظاہر کرنے کے لئے کوئی سائز نہیں ہیں</string>
     <string name="number_of_truck">ٹرک کی تعداد</string>
+    <string name="ch_trc_number">ٹرکوں کی تعداد منتخب کریں</string>
+
+    <string name="order_number">آرڈر نمبر</string>
+    <string name="order_state">آرڈر کی حیثیت</string>
+    <string name="add_rate">درجہ بندی شامل کریں</string>
+    <string name="just_now">اب</string>
+    <string name="a_minute_ago">ایک منٹ قبل</string>
+    <string name="min">منٹ</string>
+    <string name="an_hour_ago">1 گھنٹہ قبل</string>
+    <string name="hs">ایچ</string>
+    <string name="yesterday">کل</string>
+    <string name="day">دن</string>
 
 
 </resources>

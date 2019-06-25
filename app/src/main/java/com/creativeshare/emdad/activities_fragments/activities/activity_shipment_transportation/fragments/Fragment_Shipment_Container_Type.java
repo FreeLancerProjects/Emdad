@@ -33,7 +33,9 @@ import com.creativeshare.emdad.tags.Tags;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
+import io.paperdb.Paper;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,11 +49,12 @@ public class Fragment_Shipment_Container_Type extends Fragment {
     private ProgressBar progBar;
     private List<ContainersModel> containerModelList;
     private ShipmentActivity activity;
-    private int container_id = -1, selected_pos = -1, parent_pos = -1, load_pos = -1,truck_number=0;
-    private String truck_number_id = "", truck_size_id = "", truck_type_id = "";
+    private int container_id = -1, selected_pos = -1, parent_pos = -1, load_pos = -1, truck_number = 0;
+    private String  truck_size_id = "", truck_type_id = "";
     private List<ContainersModel.Sizes> sizesList;
     private List<Integer> truck_number_list;
     private AlertDialog dialog_type, dialog_size, dialog_number;
+    private String current_language;
 
 
     public static Fragment_Shipment_Container_Type newInstance() {
@@ -67,11 +70,15 @@ public class Fragment_Shipment_Container_Type extends Fragment {
     }
 
     private void initView(View view) {
+        activity = (ShipmentActivity) getActivity();
+        Paper.init(activity);
+        current_language = Paper.book().read("lang", Locale.getDefault().getLanguage());
+
+
         containerModelList = new ArrayList<>();
         sizesList = new ArrayList<>();
         truck_number_list = new ArrayList<>();
         addNumbers();
-        activity = (ShipmentActivity) getActivity();
         tv_type = view.findViewById(R.id.tv_type);
         tv_truck_number = view.findViewById(R.id.tv_truck_number);
         tv_truck_size = view.findViewById(R.id.tv_truck_size);
@@ -166,16 +173,16 @@ public class Fragment_Shipment_Container_Type extends Fragment {
     public boolean isDataOk() {
 
         if (!TextUtils.isEmpty(truck_type_id) &&
-                !TextUtils.isEmpty(truck_number_id) &&
                 !TextUtils.isEmpty(truck_size_id) &&
-                container_id != -1
+                container_id != -1 && truck_number != 0
+
 
         ) {
             tv_type.setError(null);
             tv_truck_number.setError(null);
             tv_truck_size.setError(null);
 
-            activity.saveContainerData(container_id, truck_type_id, truck_number_id, truck_size_id);
+            //activity.saveContainerData(container_id, truck_type_id, truck_number_id, truck_size_id);
             return true;
         } else {
 
@@ -187,12 +194,6 @@ public class Fragment_Shipment_Container_Type extends Fragment {
 
             }
 
-            if (TextUtils.isEmpty(truck_number_id)) {
-                tv_truck_number.setError(getString(R.string.field_req));
-            } else {
-                tv_truck_number.setError(null);
-
-            }
             if (TextUtils.isEmpty(truck_size_id)) {
                 tv_truck_size.setError(getString(R.string.field_req));
             } else {
@@ -203,6 +204,13 @@ public class Fragment_Shipment_Container_Type extends Fragment {
             if (container_id == -1) {
                 Toast.makeText(activity, getString(R.string.ch_truck), Toast.LENGTH_SHORT).show();
             }
+            if (truck_number == 0) {
+                tv_truck_number.setText(getString(R.string.field_req));
+            }else
+                {
+                    tv_truck_number.setError(null);
+
+                }
             return false;
         }
     }
@@ -338,14 +346,32 @@ public class Fragment_Shipment_Container_Type extends Fragment {
         this.load_pos = adapterPosition;
         truck_type_id = loads.getId();
 
+        if (current_language.equals("ar")||current_language.equals("ur"))
+        {
+            tv_type.setText(loads.getAr_title_load());
+        }else
+            {
+                tv_type.setText(loads.getEn_title_load());
+
+            }
+
         if (dialog_type != null) {
             dialog_type.dismiss();
         }
+
         CreateLoadSizeAlertDialog(loads.getSizes());
     }
 
     public void setItemOfLoadSize(ContainersModel.Sizes sizes) {
         truck_size_id = sizes.getId();
+        if (current_language.equals("ar")||current_language.equals("ur"))
+        {
+            tv_truck_size.setText(sizes.getAr_title_size());
+        }else
+        {
+            tv_truck_size.setText(sizes.getEn_title_size());
+
+        }
         CreateTruckNumberAlertDialog();
         if (dialog_size != null) {
             dialog_size.dismiss();
@@ -354,8 +380,10 @@ public class Fragment_Shipment_Container_Type extends Fragment {
 
     public void setItemOfTruckNumber(int number, int adapterPosition) {
         this.truck_number = number;
-        if (dialog_number!=null)
-        {
+        Log.e("nu",number+"_");
+        tv_truck_number.setText(String.valueOf(number));
+
+        if (dialog_number != null) {
             dialog_number.dismiss();
         }
 

@@ -148,8 +148,8 @@
                     android:layout_height="35dp"
                     android:background="@drawable/linear_shape"
                     android:gravity="center_vertical"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
                     android:textColor="@color/black"
                     android:textSize="14sp"
 
@@ -182,8 +182,8 @@
                     android:layout_height="35dp"
                     android:background="@drawable/linear_shape"
                     android:gravity="center_vertical"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
                     android:textColor="@color/black"
                     android:textSize="14sp"
 

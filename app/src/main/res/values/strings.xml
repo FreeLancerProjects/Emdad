@@ -182,4 +182,17 @@
     <string name="no_load_to_display">There is no shipment type to display</string>
     <string name="no_sizes">There are no sizes to display</string>
     <string name="number_of_truck">Number of Truck</string>
+    <string name="ch_trc_number">Choose number of truck</string>
+    <string name="order_number">Order number</string>
+    <string name="order_state">Order state</string>
+    <string name="add_rate">Add rate</string>
+
+    <string name="just_now">just now</string>
+    <string name="a_minute_ago">a minute ago</string>
+    <string name="min">MIN</string>
+    <string name="an_hour_ago">an hour ago</string>
+    <string name="hs">Hs</string>
+    <string name="yesterday">yesterday</string>
+    <string name="day">D</string>
+
 </resources>

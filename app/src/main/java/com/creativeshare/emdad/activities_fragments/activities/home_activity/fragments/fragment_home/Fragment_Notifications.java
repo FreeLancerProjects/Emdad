@@ -17,9 +17,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.creativeshare.emdad.R;
 import com.creativeshare.emdad.activities_fragments.activities.home_activity.activity.Home_Activity;
+import com.creativeshare.emdad.adapters.NotificationsAdapter;
+import com.creativeshare.emdad.models.NotificationDataModel;
 import com.creativeshare.emdad.models.UserModel;
 import com.creativeshare.emdad.preferences.Preferences;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import io.paperdb.Paper;
@@ -33,6 +37,8 @@ public class Fragment_Notifications extends Fragment {
     private LinearLayout ll_not;
     private UserModel userModel;
     private Preferences preferences;
+    private NotificationsAdapter adapter;
+    private List<NotificationDataModel.NotificationModel> notificationModelList;
     private boolean isLoading = false;
     private int current_page = 1;
     private boolean isFirstTime = true;
@@ -43,9 +49,9 @@ public class Fragment_Notifications extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        /*if (!isFirstTime && adapter != null) {
+        if (!isFirstTime && adapter != null) {
             adapter.notifyDataSetChanged();
-        }*/
+        }
     }
 
     @Nullable
@@ -63,6 +69,7 @@ public class Fragment_Notifications extends Fragment {
 
     private void initView(View view) {
 
+        notificationModelList = new ArrayList<>();
         activity = (Home_Activity) getActivity();
         Paper.init(activity);
         current_language = Paper.book().read("lang",Locale.getDefault().getLanguage());
@@ -81,6 +88,9 @@ public class Fragment_Notifications extends Fragment {
 
         manager = new LinearLayoutManager(activity);
         recView.setLayoutManager(manager);
+
+        adapter = new NotificationsAdapter(notificationModelList,activity,this);
+        recView.setAdapter(adapter);
         recView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -89,13 +99,13 @@ public class Fragment_Notifications extends Fragment {
                     int lastVisibleItem = ((LinearLayoutManager) manager).findLastCompletelyVisibleItemPosition();
                     int totalItems = manager.getItemCount();
 
-                    /*if (lastVisibleItem >= (totalItems - 5) && !isLoading) {
+                    if (lastVisibleItem >= (totalItems - 5) && !isLoading) {
                         isLoading = true;
                         notificationModelList.add(null);
                         adapter.notifyItemInserted(notificationModelList.size() - 1);
                         int next_page = current_page + 1;
-                        loadMore(next_page);
-                    }*/
+                        //loadMore(next_page);
+                    }
                 }
             }
         });
@@ -236,7 +246,7 @@ public class Fragment_Notifications extends Fragment {
 
     }
 
-    public void setItemData(NotificationModel notificationModel, int pos)
+    public void setItemData(NotificationDataModel notificationModel, int pos)
     {
         if (userModel.getData().getUser_type().equals(Tags.TYPE_CLIENT) && Integer.parseInt(notificationModel.getOrder_status())<Tags.STATE_CLIENT_ACCEPT_OFFER) {
 
@@ -281,9 +291,9 @@ public class Fragment_Notifications extends Fragment {
 
 
     }*/
-    /*private void CreateAlertDialogForDrivers(final NotificationModel notificationModel)
+    /*private void CreateAlertDialogForDrivers(final NotificationDataModel notificationModel)
     {
-        final NotificationModel.Drivers drivers = notificationModel.getDriver_list().get(0);
+        final NotificationDataModel.Drivers drivers = notificationModel.getDriver_list().get(0);
 
         final AlertDialog dialog = new AlertDialog.Builder(activity)
                 .setCancelable(true)

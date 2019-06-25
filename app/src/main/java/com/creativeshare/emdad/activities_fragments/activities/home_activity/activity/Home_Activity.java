@@ -636,6 +636,7 @@ public class Home_Activity extends AppCompatActivity {
 
 
     public void Logout() {
+        this.userModel = null;
         preferences.create_update_userdata(this,null);
         preferences.create_update_session(this, Tags.session_logout);
         NavigateToSignInActivity(true);
