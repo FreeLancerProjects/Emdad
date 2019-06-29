@@ -5,7 +5,9 @@ import com.creativeshare.emdad.models.CityModel;
 import com.creativeshare.emdad.models.ContainerSizeModel;
 import com.creativeshare.emdad.models.ContainerTypeModel;
 import com.creativeshare.emdad.models.ContainersModel;
+import com.creativeshare.emdad.models.Engineering_Type_Model;
 import com.creativeshare.emdad.models.Equipment_Model;
+import com.creativeshare.emdad.models.NotificationDataModel;
 import com.creativeshare.emdad.models.OrderIdModel;
 import com.creativeshare.emdad.models.OtherServiceContainerSizeModel;
 import com.creativeshare.emdad.models.PlaceGeocodeData;
@@ -132,6 +134,7 @@ public interface Services {
                                          @Part("transportation_id") RequestBody transportation_id,
                                          @Part("delivery_number") RequestBody delivery_number,
                                          @Part("num_of_tran") RequestBody num_of_tran,
+                                         @Part("trans_size") RequestBody trans_size_id,
                                          @Part("load_type") RequestBody load_type,
                                          @Part("phone_code_from") RequestBody phone_code_from,
                                          @Part("phone_from") RequestBody phone_from,
@@ -224,11 +227,22 @@ public interface Services {
     @POST("api/order/customs_clearances")
     Call<OrderIdModel> sendCustomerOrder(
             @Part("user_id") RequestBody user_id_part,
-            @Part("order_type")RequestBody order_type_part,
+            @Part("order_type") RequestBody order_type_part,
             @Part("description") RequestBody description_part,
             @Part MultipartBody.Part image1_part,
             @Part MultipartBody.Part image2_part,
             @Part MultipartBody.Part image3_part,
             @Part MultipartBody.Part image4_part,
             @Part MultipartBody.Part image5_part);
+
+
+    @GET("api/all-notifications")
+    Call<NotificationDataModel> getNotifications(@Query("user_type") String user_type,
+                                                 @Query("user_id") String user_id,
+                                                 @Query("company_id") String company_id,
+                                                 @Query("page") int page
+    );
+
+    @GET("api/engineeringType")
+    Call<List<Engineering_Type_Model>> getEngineeringType();
 }

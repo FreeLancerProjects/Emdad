@@ -2,11 +2,13 @@ package com.creativeshare.emdad.activities_fragments.activities.home_activity.fr
 
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,12 +23,18 @@ import com.creativeshare.emdad.adapters.NotificationsAdapter;
 import com.creativeshare.emdad.models.NotificationDataModel;
 import com.creativeshare.emdad.models.UserModel;
 import com.creativeshare.emdad.preferences.Preferences;
+import com.creativeshare.emdad.remote.Api;
+import com.creativeshare.emdad.tags.Tags;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import io.paperdb.Paper;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Fragment_Notifications extends Fragment {
 
@@ -42,7 +50,6 @@ public class Fragment_Notifications extends Fragment {
     private boolean isLoading = false;
     private int current_page = 1;
     private boolean isFirstTime = true;
-    private int lastSelectedItem = -1;
     private String current_language;
 
 
@@ -104,7 +111,7 @@ public class Fragment_Notifications extends Fragment {
                         notificationModelList.add(null);
                         adapter.notifyItemInserted(notificationModelList.size() - 1);
                         int next_page = current_page + 1;
-                        //loadMore(next_page);
+                        loadMore(next_page);
                     }
                 }
             }
@@ -113,37 +120,32 @@ public class Fragment_Notifications extends Fragment {
 
     }
 
-    public void getNotification() {
+    private void getNotification() {
 
-        if (userModel==null)
-        {
+        if (userModel == null) {
             preferences = Preferences.getInstance();
             userModel = preferences.getUserData(activity);
         }
 
-       /* if (userModel.getData().getUser_type().equals(Tags.TYPE_CLIENT)) {
-            call = Api.getService(Tags.base_url).getNotification(userModel.getData().getUser_id(), "client", 1);
-            if (lastSelectedItem!=-1)
+        String user_type;
+        String company_id;
+        String user_id;
+        if (userModel.getUser().getCompany_information()==null)
+        {
+            user_type = Tags.TYPE_USER;
+            user_id = String.valueOf(userModel.getUser().getId());
+            company_id ="0";
+        }else
             {
-                if (notificationModelList.size()>0)
-                {
-                    notificationModelList.remove(lastSelectedItem);
-                    adapter.notifyItemRemoved(lastSelectedItem);
-                    lastSelectedItem = -1;
-
-
-                }
+                user_type = Tags.TYPE_COMPANY;
+                user_id = String.valueOf(userModel.getUser().getId());
+                company_id =String.valueOf(userModel.getUser().getCompany_information().getId());
             }
-        } else if (userModel.getData().getUser_type().equals(Tags.TYPE_DELEGATE)) {
-            call = Api.getService(Tags.base_url).getNotification(userModel.getData().getUser_id(), "driver", 1);
-
-        }else if (userModel.getData().getUser_type().equals(Tags.TYPE_FAMILY)) {
-            call = Api.getService(Tags.base_url).getNotification(userModel.getData().getUser_id(), "driver", 1);
-
-        }
 
 
-        call.enqueue(new Callback<NotificationDataModel>() {
+        Api.getService(Tags.base_url)
+                .getNotifications(user_type,user_id,company_id,1)
+                .enqueue(new Callback<NotificationDataModel>() {
             @Override
             public void onResponse(Call<NotificationDataModel> call, Response<NotificationDataModel> response) {
                 progBar.setVisibility(View.GONE);
@@ -182,198 +184,71 @@ public class Fragment_Notifications extends Fragment {
                 } catch (Exception e) {
                 }
             }
-        });*/
-
-
-    }
-
-    /*private void loadMore(int page_index) {
-
-        if (userModel.getData().getUser_type().equals(Tags.TYPE_CLIENT)) {
-            call = Api.getService(Tags.base_url).getNotification(userModel.getData().getUser_id(), "client", page_index);
-        } else if (userModel.getData().getUser_type().equals(Tags.TYPE_DELEGATE)) {
-            call = Api.getService(Tags.base_url).getNotification(userModel.getData().getUser_id(), "driver", page_index);
-
-        }else if (userModel.getData().getUser_type().equals(Tags.TYPE_FAMILY)) {
-            call = Api.getService(Tags.base_url).getNotification(userModel.getData().getUser_id(), "driver", 1);
-
-        }
-
-
-        call.enqueue(new Callback<NotificationDataModel>() {
-            @Override
-            public void onResponse(Call<NotificationDataModel> call, Response<NotificationDataModel> response) {
-                notificationModelList.remove(notificationModelList.size() - 1);
-                adapter.notifyDataSetChanged();
-                isLoading = false;
-
-                if (response.isSuccessful()) {
-
-                    if (response.body() != null && response.body().getData().size() > 0) {
-                        notificationModelList.addAll(response.body().getData());
-                        adapter.notifyDataSetChanged();
-                        current_page = response.body().getMeta().getCurrent_page();
-
-
-                    }
-                } else {
-
-
-                    Toast.makeText(activity, R.string.failed, Toast.LENGTH_SHORT).show();
-                    try {
-                        Log.e("Error_code", response.code() + "_" + response.errorBody().string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<NotificationDataModel> call, Throwable t) {
-                try {
-                    isLoading = false;
-                    if (notificationModelList.get(notificationModelList.size() - 1) == null) {
-                        notificationModelList.remove(notificationModelList.size() - 1);
-                        adapter.notifyDataSetChanged();
-                    }
-                    progBar.setVisibility(View.GONE);
-                    Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
-                    Log.e("Error", t.getMessage());
-                } catch (Exception e) {
-                }
-            }
         });
 
     }
-
-    public void setItemData(NotificationDataModel notificationModel, int pos)
+    private void loadMore(int page_index)
     {
-        if (userModel.getData().getUser_type().equals(Tags.TYPE_CLIENT) && Integer.parseInt(notificationModel.getOrder_status())<Tags.STATE_CLIENT_ACCEPT_OFFER) {
-
-            CreateAlertDialogForDrivers(notificationModel);
-            lastSelectedItem = pos;
-        }else if (userModel.getData().getUser_type().equals(Tags.TYPE_CLIENT) && Integer.parseInt(notificationModel.getOrder_status())==Tags.STATE_DELEGATE_DELIVERED_ORDER) {
-            if (notificationModel.getOrder_type().equals("1")||notificationModel.getOrder_type().equals("2")||notificationModel.getOrder_type().equals("3"))
-            {
-                if (notificationModel.getClient_rate().equals("0"))
-                {
-                    activity.CreateAddRateAlertDialog(notificationModel,1);
-
-                }
-
-            }
-
+        if (userModel == null) {
+            preferences = Preferences.getInstance();
+            userModel = preferences.getUserData(activity);
         }
 
-        else if (userModel.getData().getUser_type().equals(Tags.TYPE_CLIENT)&&notificationModel.getOrder_type().equals("4")) {
-
-
-            if (notificationModel.getDriver_id().equals("0")&&notificationModel.getOrder_status().equals("3"))
-            {
-
-                if (notificationModel.getClient_family_rate().equals("0"))
-                {
-                    activity.CreateAddRateAlertDialog(notificationModel,2);
-
-                }
-
-            }else if (!notificationModel.getDriver_id().equals("0")&&notificationModel.getOrder_status().equals("8"))
-            {
-
-                if (notificationModel.getClient_rate().equals("0"))
-                {
-                    activity.CreateAddRateAlertDialog(notificationModel,1);
-
-                }
-
-            }
-        }
-
-
-    }*/
-    /*private void CreateAlertDialogForDrivers(final NotificationDataModel notificationModel)
-    {
-        final NotificationDataModel.Drivers drivers = notificationModel.getDriver_list().get(0);
-
-        final AlertDialog dialog = new AlertDialog.Builder(activity)
-                .setCancelable(true)
-                .create();
-
-        Currency currency = Currency.getInstance(new Locale(current_language,userModel.getData().getUser_country()));
-
-        View view = LayoutInflater.from(activity).inflate(R.layout.drivers_dialog,null);
-        CircleImageView image = view.findViewById(R.id.image);
-        ImageView image_certified = view.findViewById(R.id.image_certified);
-        SimpleRatingBar rateBar = view.findViewById(R.id.rateBar);
-        TextView tv_name = view.findViewById(R.id.tv_name);
-        TextView tv_rate = view.findViewById(R.id.tv_rate);
-        TextView tv_delivery_cost = view.findViewById(R.id.tv_delivery_cost);
-        TextView tv_distance = view.findViewById(R.id.tv_distance);
-        TextView tv_offers_count = view.findViewById(R.id.tv_offers_count);
-        TextView tv_certified = view.findViewById(R.id.tv_certified);
-
-        CardView cardView = view.findViewById(R.id.cardView);
-        Button btn_accept = view.findViewById(R.id.btn_accept);
-        Button btn_refuse = view.findViewById(R.id.btn_refuse);
-
-        Picasso.with(activity).load(Uri.parse(Tags.IMAGE_URL+notificationModel.getDriver_list().get(0).getUser_image())).placeholder(R.drawable.logo_only).into(image);
-        tv_name.setText(drivers.getUser_full_name());
-        tv_rate.setText("("+drivers.getRate()+")");
-        rateBar.setRating((float) drivers.getRate());
-        tv_delivery_cost.setText(drivers.getDriver_offer()+" "+currency.getSymbol());
-        tv_distance.setText(drivers.getDistance()+" "+getString(R.string.km));
-        tv_offers_count.setText("("+notificationModel.getDriver_list().size()+")");
-
-        if (drivers.isCertified())
+        String user_type;
+        String company_id;
+        String user_id;
+        if (userModel.getUser().getCompany_information()==null)
         {
-            image_certified.setImageResource(R.drawable.ic_checked_circle);
-            image_certified.setColorFilter(ContextCompat.getColor(activity,R.color.active));
-            tv_certified.setText(getString(R.string.certified_account));
-            tv_certified.setTextColor(ContextCompat.getColor(activity,R.color.active));
-
+            user_type = Tags.TYPE_USER;
+            user_id = String.valueOf(userModel.getUser().getId());
+            company_id ="0";
         }else
-            {
-                image_certified.setImageResource(R.drawable.checked_not_certified);
-                tv_certified.setText(getString(R.string.not_certified));
-                tv_certified.setTextColor(ContextCompat.getColor(activity,R.color.rating));
+        {
+            user_type = Tags.TYPE_COMPANY;
+            user_id = String.valueOf(userModel.getUser().getId());
+            company_id =String.valueOf(userModel.getUser().getCompany_information().getId());
+        }
 
-            }
+        Api.getService(Tags.base_url)
+                .getNotifications(user_type,user_id,company_id,page_index)
+                .enqueue(new Callback<NotificationDataModel>() {
+                    @Override
+                    public void onResponse(Call<NotificationDataModel> call, Response<NotificationDataModel> response) {
+                        progBar.setVisibility(View.GONE);
+                        isLoading = true;
+                        notificationModelList.remove(notificationModelList.size()-1);
+                        adapter.notifyItemRemoved(notificationModelList.size()-1);
 
-        cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                        if (response.isSuccessful()) {
 
-                dialog.dismiss();
-                if (notificationModel.getDriver_list().size()>0)
-                {
-                    activity.DisplayFragmentDelegatesResult(notificationModel);
-                }
+                            if (response.body() != null && response.body().getData().size() > 0) {
+                                notificationModelList.addAll(response.body().getData());
+                                adapter.notifyDataSetChanged();
+                                current_page = response.body().getMeta().getCurrent_page();
+                            }
+                        } else {
 
-            }
-        });
+                            Toast.makeText(activity, R.string.failed, Toast.LENGTH_SHORT).show();
+                            try {
+                                Log.e("Error_code", response.code() + "_" + response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
 
-        btn_accept.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                activity.clientAcceptOffer(drivers.getDriver_id(),userModel.getData().getUser_id(),notificationModel.getOrder_id(),"accept",notificationModel.getDriver_offer(),"dialog");
-            }
-        });
-
-        btn_refuse.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                activity.clientRefuseOffer(drivers.getId_notification());
-
-            }
-        });
-
-
-        dialog.getWindow().getAttributes().windowAnimations=R.style.dialog_congratulation_animation;
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_window_bg);
-        dialog.setView(view);
-        dialog.show();
-    }*/
+                    @Override
+                    public void onFailure(Call<NotificationDataModel> call, Throwable t) {
+                        try {
+                            notificationModelList.remove(notificationModelList.size()-1);
+                            adapter.notifyItemRemoved(notificationModelList.size()-1);
+                            isLoading = true;
+                            progBar.setVisibility(View.GONE);
+                            Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                            Log.e("Error", t.getMessage());
+                        } catch (Exception e) {
+                        }
+                    }
+                });
+    }
 }

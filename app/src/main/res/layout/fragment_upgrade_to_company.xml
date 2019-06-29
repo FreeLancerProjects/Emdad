@@ -128,7 +128,9 @@
                 android:paddingRight="8dp"
                 android:singleLine="true"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:inputType="textEmailAddress"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"

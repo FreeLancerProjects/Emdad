@@ -16,6 +16,7 @@ import com.creativeshare.emdad.R;
 import com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_home.Fragment_Notifications;
 import com.creativeshare.emdad.models.NotificationDataModel;
 import com.creativeshare.emdad.share.TimeAgo;
+import com.creativeshare.emdad.tags.Tags;
 
 import java.util.List;
 
@@ -24,17 +25,17 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final int ITEM_DATA = 1;
     private final int ITEM_LOAD = 2;
+    private final int ITEM_DATA_NOT_OTHER= 3;
+
     private List<NotificationDataModel.NotificationModel> notificationModelList;
     private Context context;
     private Fragment_Notifications fragment;
-    private String user_type;
 
     public NotificationsAdapter(List<NotificationDataModel.NotificationModel> notificationModelList, Context context, Fragment_Notifications fragment) {
 
         this.notificationModelList = notificationModelList;
         this.context = context;
         this.fragment = fragment;
-        //this.user_type = user_type;
     }
 
     @NonNull
@@ -72,7 +73,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     public class MyHolder extends RecyclerView.ViewHolder {
         private CircleImageView image;
-        private TextView tv_name, tv_order_num, tv_notification_date, tv_order_state,tv_add_rate;
+        private TextView tv_name, tv_order_num, tv_notification_date,tv_add_rate,tv_order_type;
 
         public MyHolder(View itemView) {
             super(itemView);
@@ -80,8 +81,8 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
             image = itemView.findViewById(R.id.image);
             tv_notification_date = itemView.findViewById(R.id.tv_notification_date);
             tv_order_num = itemView.findViewById(R.id.tv_order_num);
-            tv_order_state = itemView.findViewById(R.id.tv_order_state);
             tv_name = itemView.findViewById(R.id.tv_name);
+            tv_order_type = itemView.findViewById(R.id.tv_order_type);
             tv_add_rate = itemView.findViewById(R.id.tv_add_rate);
 
 
@@ -92,6 +93,40 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
 
             tv_notification_date.setText(TimeAgo.getTimeAgo(Long.parseLong(notificationModel.getNot_date()) * 1000, context));
             tv_name.setText(notificationModel.getFrom_name());
+
+            if (notificationModel.getOrder_type().equals(Tags.WATER_ORDER))
+            {
+                tv_order_type.setText(context.getString(R.string.wd));
+            }else if (notificationModel.getOrder_type().equals(Tags.RENTAL_ORDER))
+            {
+                tv_order_type.setText(context.getString(R.string.re));
+            }
+            else if (notificationModel.getOrder_type().equals(Tags.SHIPPING_ORDER))
+            {
+                tv_order_type.setText(context.getString(R.string.st));
+            }
+            else if (notificationModel.getOrder_type().equals(Tags.CONTAINERS_ORDER))
+            {
+                tv_order_type.setText(context.getString(R.string.con));
+            }
+            else if (notificationModel.getOrder_type().equals(Tags.CLEARANCE_ORDER))
+            {
+                tv_order_type.setText(context.getString(R.string.cc));
+            }
+
+            else if (notificationModel.getOrder_type().equals(Tags.ENGINEERING_ORDER))
+            {
+                tv_order_type.setText(context.getString(R.string.ec));
+            }
+
+            if (notificationModel.getAction_type().equals(Tags.ACTION_RATE))
+            {
+                tv_add_rate.setVisibility(View.VISIBLE);
+            }else
+                {
+                    tv_add_rate.setVisibility(View.GONE);
+
+                }
 
         }
     }
@@ -112,8 +147,17 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
         if (notificationModel == null) {
             return ITEM_LOAD;
         } else {
-            return ITEM_DATA;
+            if (notificationModel.getNotfication_type().equals(Tags.NOTIFICATION_TYPE_OTHER))
+            {
+                return ITEM_DATA_NOT_OTHER;
+            }else
+                {
+                    return ITEM_DATA;
+
+                }
         }
+
+
 
     }
 }

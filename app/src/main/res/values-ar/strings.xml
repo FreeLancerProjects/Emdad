@@ -185,8 +185,13 @@
     <string name="hs">ساعة</string>
     <string name="yesterday">امس</string>
     <string name="day">يوم</string>
-
-
+    <string name="wd">توصيل مياة</string>
+    <string name="re">تأجير معدات</string>
+    <string name="st">شحن ونقل</string>
+    <string name="con">حاويات</string>
+    <string name="cc">تخليص جمركي</string>
+    <string name="ec">إستشارات هندسية</string>
+    <string name="ch_prop_type">إختر نوع العقار</string>
 
 
 </resources>

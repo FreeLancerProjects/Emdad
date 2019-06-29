@@ -69,7 +69,7 @@ public class Fragment_Upgrade_To_Company extends Fragment {
     private ImageView back, image, image_icon_upload, image_map_arrow;
     private TextView tv_address;
     private EditText edt_name, edt_email, edt_info;
-    private Spinner spinner_city,spinner_services;
+    private Spinner spinner_city, spinner_services;
     private FrameLayout fl_select_location;
     private Button btn_send;
     private RecyclerView recView;
@@ -86,8 +86,8 @@ public class Fragment_Upgrade_To_Company extends Fragment {
     private List<CityModel> cityModelList;
     private Spinner_Adapter city_adapter;
     private Spinner_Services_Adapter spinner_services_adapter;
-    private String city_id="";
-    private List<ServicesModel> servicesModelList,selected_servicesModelList;
+    private String city_id = "";
+    private List<ServicesModel> servicesModelList, selected_servicesModelList;
     private List<Integer> selected_ids_list;
 
 
@@ -103,8 +103,7 @@ public class Fragment_Upgrade_To_Company extends Fragment {
         return view;
     }
 
-    private void initView(View view)
-    {
+    private void initView(View view) {
         selected_servicesModelList = new ArrayList<>();
         servicesModelList = new ArrayList<>();
         selected_ids_list = new ArrayList<>();
@@ -119,7 +118,7 @@ public class Fragment_Upgrade_To_Company extends Fragment {
         back = view.findViewById(R.id.back);
         image_map_arrow = view.findViewById(R.id.image_map_arrow);
 
-        if (current_language.equals("ar")||current_language.equals("ur")) {
+        if (current_language.equals("ar") || current_language.equals("ur")) {
             back.setRotation(180.0f);
             image_map_arrow.setRotation(180.0f);
 
@@ -137,30 +136,27 @@ public class Fragment_Upgrade_To_Company extends Fragment {
         btn_send = view.findViewById(R.id.btn_send);
 
         recView = view.findViewById(R.id.recView);
-        manager = new LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false);
+        manager = new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false);
         recView.setLayoutManager(manager);
-        adapter = new ServicesAdapter(selected_servicesModelList,activity,this);
+        adapter = new ServicesAdapter(selected_servicesModelList, activity, this);
         recView.setAdapter(adapter);
 
         spinner_services = view.findViewById(R.id.spinner_services);
-        spinner_services_adapter = new Spinner_Services_Adapter(activity,servicesModelList);
+        spinner_services_adapter = new Spinner_Services_Adapter(activity, servicesModelList);
         spinner_services.setAdapter(spinner_services_adapter);
 
 
-
-        city_adapter = new Spinner_Adapter(activity,cityModelList);
+        city_adapter = new Spinner_Adapter(activity, cityModelList);
         spinner_city.setAdapter(city_adapter);
 
         spinner_city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position ==0)
-                {
-                    city_id ="";
-                }else
-                    {
-                        city_id = cityModelList.get(position).getId_city();
-                    }
+                if (position == 0) {
+                    city_id = "";
+                } else {
+                    city_id = cityModelList.get(position).getId_city();
+                }
             }
 
             @Override
@@ -173,11 +169,9 @@ public class Fragment_Upgrade_To_Company extends Fragment {
         spinner_services.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position >0)
-                {
+                if (position > 0) {
                     ServicesModel servicesModel = servicesModelList.get(position);
-                    if (!isSelectedServiceIdHas_ServiceId(servicesModel))
-                    {
+                    if (!isSelectedServiceIdHas_ServiceId(servicesModel)) {
                         selected_ids_list.add(servicesModel.getId());
                         selected_servicesModelList.add(servicesModel);
                         adapter.notifyDataSetChanged();
@@ -226,10 +220,9 @@ public class Fragment_Upgrade_To_Company extends Fragment {
     }
 
 
-    private void getCities()
-    {
+    private void getCities() {
 
-        final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
+        final ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
 
@@ -240,17 +233,14 @@ public class Fragment_Upgrade_To_Company extends Fragment {
                     public void onResponse(Call<List<CityModel>> call, Response<List<CityModel>> response) {
                         dialog.dismiss();
 
-                        if (response.isSuccessful())
-                        {
-                            if (response.body()!=null)
-                            {
+                        if (response.isSuccessful()) {
+                            if (response.body() != null) {
                                 cityModelList.clear();
-                                cityModelList.add(new CityModel("إختر","Choose"));
+                                cityModelList.add(new CityModel("إختر", "Choose"));
                                 cityModelList.addAll(response.body());
                                 city_adapter.notifyDataSetChanged();
                             }
-                        }else
-                        {
+                        } else {
                             try {
                                 Toast.makeText(activity, R.string.failed, Toast.LENGTH_SHORT).show();
                                 Log.e("Error_code", response.code() + "" + response.errorBody().string());
@@ -273,10 +263,10 @@ public class Fragment_Upgrade_To_Company extends Fragment {
                 });
 
     }
-    private void getServices()
-    {
 
-        final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
+    private void getServices() {
+
+        final ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
 
@@ -287,17 +277,14 @@ public class Fragment_Upgrade_To_Company extends Fragment {
                     public void onResponse(Call<List<ServicesModel>> call, Response<List<ServicesModel>> response) {
                         dialog.dismiss();
 
-                        if (response.isSuccessful())
-                        {
-                            if (response.body()!=null)
-                            {
+                        if (response.isSuccessful()) {
+                            if (response.body() != null) {
                                 servicesModelList.clear();
-                                servicesModelList.add(new ServicesModel("إختر","Choose"));
+                                servicesModelList.add(new ServicesModel("إختر", "Choose"));
                                 servicesModelList.addAll(response.body());
                                 spinner_services_adapter.notifyDataSetChanged();
                             }
-                        }else
-                        {
+                        } else {
                             try {
                                 Toast.makeText(activity, R.string.failed, Toast.LENGTH_SHORT).show();
                                 Log.e("Error_code", response.code() + "" + response.errorBody().string());
@@ -320,20 +307,18 @@ public class Fragment_Upgrade_To_Company extends Fragment {
                 });
 
     }
+
     private boolean isSelectedServiceIdHas_ServiceId(ServicesModel servicesModel) {
         boolean isHas = false;
-        for (int i = 0; i<selected_ids_list.size();i++)
-        {
-            if (servicesModel.getId() == selected_ids_list.get(i))
-            {
+        for (int i = 0; i < selected_ids_list.size(); i++) {
+            if (servicesModel.getId() == selected_ids_list.get(i)) {
                 isHas = true;
             }
         }
         return isHas;
     }
 
-    private void checkData()
-    {
+    private void checkData() {
 
         String m_name = edt_name.getText().toString().trim();
         String m_email = edt_email.getText().toString().trim();
@@ -345,9 +330,9 @@ public class Fragment_Upgrade_To_Company extends Fragment {
                 Patterns.EMAIL_ADDRESS.matcher(m_email).matches() &&
                 !TextUtils.isEmpty(m_info) &&
                 selectedLocation != null &&
-                uri != null&&
-                TextUtils.isEmpty(city_id)&&
-                selected_ids_list.size()>0
+                uri != null &&
+                !TextUtils.isEmpty(city_id) &&
+                selected_ids_list.size() > 0
         ) {
             edt_name.setError(null);
             edt_email.setError(null);
@@ -382,7 +367,7 @@ public class Fragment_Upgrade_To_Company extends Fragment {
             }
 
             if (uri == null) {
-                Toast.makeText(activity,getString(R.string.ch_comp_image), Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, getString(R.string.ch_comp_image), Toast.LENGTH_SHORT).show();
 
             }
 
@@ -390,7 +375,7 @@ public class Fragment_Upgrade_To_Company extends Fragment {
                 Toast.makeText(activity, getString(R.string.ch_city), Toast.LENGTH_SHORT).show();
             }
 
-            if (selected_ids_list.size()==0) {
+            if (selected_ids_list.size() == 0) {
                 Toast.makeText(activity, getString(R.string.ch_service), Toast.LENGTH_SHORT).show();
             }
         }
@@ -399,7 +384,7 @@ public class Fragment_Upgrade_To_Company extends Fragment {
 
     private void Send(String m_name, String m_email, String m_info, Uri uri, SelectedLocation selectedLocation) {
 
-        final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
+        final ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));
         dialog.show();
         RequestBody user_id_part = Common.getRequestBodyText(String.valueOf(userModel.getUser().getId()));
         RequestBody lat_part = Common.getRequestBodyText(String.valueOf(selectedLocation.getLat()));
@@ -413,29 +398,25 @@ public class Fragment_Upgrade_To_Company extends Fragment {
         RequestBody city_id_part = Common.getRequestBodyText(city_id);
         List<RequestBody> requestBodyList_Ids = getRequestBodyList(selected_ids_list);
 
-        MultipartBody.Part image_part = Common.getMultiPart(activity,uri,"commercial_register_image");
-
+        MultipartBody.Part image_part = Common.getMultiPart(activity, uri, "commercial_register_image");
 
 
         Api.getService(Tags.base_url)
-                .upgradeToCompany(email_part,name_part,info_part,lat_part,lng_part,city_id_part,address_part,user_id_part,requestBodyList_Ids,image_part)
+                .upgradeToCompany(email_part, name_part, info_part, lat_part, lng_part, city_id_part, address_part, user_id_part, requestBodyList_Ids, image_part)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         dialog.dismiss();
-                        if (response.isSuccessful())
-                        {
-                            activity.Back();
-                            Common.CreateSignAlertDialog(activity,getString(R.string.req_sent_admin_reply));
-                        }else
-                        {
-                            if (response.code() == 401) {
-                            Common.CreateSignAlertDialog(activity,getString(R.string.req_pend));
-                            }else
-                                {
-                                    Toast.makeText(activity, R.string.failed, Toast.LENGTH_SHORT).show();
+                        if (response.isSuccessful()) {
+                            CreateSuccessAlertDialog(getString(R.string.req_sent_admin_reply));
 
-                                }
+                        } else {
+                            if (response.code() == 401) {
+                                Common.CreateSignAlertDialog(activity, getString(R.string.req_pend));
+                            } else {
+                                Toast.makeText(activity, R.string.failed, Toast.LENGTH_SHORT).show();
+
+                            }
                             try {
                                 Log.e("Error_code", response.code() + "" + response.errorBody().string());
                             } catch (IOException e) {
@@ -457,11 +438,34 @@ public class Fragment_Upgrade_To_Company extends Fragment {
                 });
     }
 
-    private List<RequestBody> getRequestBodyList(List<Integer> selected_ids_list)
-    {
+
+    private void CreateSuccessAlertDialog(String msg) {
+        final AlertDialog dialog = new AlertDialog.Builder(activity)
+                .setCancelable(true)
+                .create();
+
+        View view = LayoutInflater.from(activity).inflate(R.layout.dialog_sign, null);
+        Button doneBtn = view.findViewById(R.id.doneBtn);
+        TextView tv_msg = view.findViewById(R.id.tv_msg);
+        tv_msg.setText(msg);
+        doneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                activity.Back();
+            }
+        });
+
+        dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_window_bg);
+        dialog.setView(view);
+        dialog.show();
+    }
+
+    private List<RequestBody> getRequestBodyList(List<Integer> selected_ids_list) {
         List<RequestBody> requestBodyList = new ArrayList<>();
-        for (int id:selected_ids_list)
-        {
+        for (int id : selected_ids_list) {
             RequestBody requestBody = Common.getRequestBodyText(String.valueOf(id));
             requestBodyList.add(requestBody);
         }
@@ -648,14 +652,13 @@ public class Fragment_Upgrade_To_Company extends Fragment {
         return null;
     }
 
-    public void setItemForDelete( int position) {
+    public void setItemForDelete(int position) {
 
         selected_ids_list.remove(position);
         selected_servicesModelList.remove(position);
         adapter.notifyDataSetChanged();
 
-        if (selected_servicesModelList.size()==0)
-        {
+        if (selected_servicesModelList.size() == 0) {
             recView.setVisibility(View.GONE);
         }
 

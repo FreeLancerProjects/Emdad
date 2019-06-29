@@ -337,6 +337,7 @@ public class ShipmentActivity extends AppCompatActivity {
 
             RequestBody truck_number_part = Common.getRequestBodyText(shipmentUploadModel.getContainer_number());
             RequestBody ship_number_from_part = Common.getRequestBodyText(shipmentUploadModel.getLoad_number());
+            RequestBody truck_size_id_part = Common.getRequestBodyText(shipmentUploadModel.getContainer_number());
 
 
             MultipartBody.Part image1_part = Common.getMultiPart(this,Uri.parse(shipmentUploadModel.getUri_1()),"image1");
@@ -345,7 +346,7 @@ public class ShipmentActivity extends AppCompatActivity {
 
 
             Api.getService(Tags.base_url)
-                    .sendShippingOrder(user_id_part,order_type_part,description_part,transportation_id_part,ship_number_from_part,truck_number_part,load_type_part,phone_code_from_part,phone_from_part,company_name_from_part,responsible_name_from_part,company_email_from_part,city_id_from_part,address_from_part,lat_from_part,lng_from_part,date_from_part,phone_to_part,phone_code_to_part,company_name_to_part,responsible_name_to_part,city_id_to_part,address_to_part,company_email_to_part,lat_to_part,lng_to_part,value_to_part,weight_to_part,payment_to_part,date_to_part,image1_part,image2_part)
+                    .sendShippingOrder(user_id_part,order_type_part,description_part,transportation_id_part,ship_number_from_part,truck_number_part,truck_size_id_part,load_type_part,phone_code_from_part,phone_from_part,company_name_from_part,responsible_name_from_part,company_email_from_part,city_id_from_part,address_from_part,lat_from_part,lng_from_part,date_from_part,phone_to_part,phone_code_to_part,company_name_to_part,responsible_name_to_part,city_id_to_part,address_to_part,company_email_to_part,lat_to_part,lng_to_part,value_to_part,weight_to_part,payment_to_part,date_to_part,image1_part,image2_part)
                     .enqueue(new Callback<OrderIdModel>() {
                         @Override
                         public void onResponse(Call<OrderIdModel> call, Response<OrderIdModel> response) {

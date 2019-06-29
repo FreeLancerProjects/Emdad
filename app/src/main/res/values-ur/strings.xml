@@ -337,7 +337,7 @@
 
 </string>
 
-    <string name="details_of_the_reference">ریفرنس کی تفصیلات</string>
+    <string name="details_of_the_reference">تفصیلات</string>
 
     <string name="customs_clearance">کسٹم کلیئرنس</string>
 
@@ -416,6 +416,13 @@
     <string name="hs">ایچ</string>
     <string name="yesterday">کل</string>
     <string name="day">دن</string>
+    <string name="wd">پانی کی فراہمی</string>
+    <string name="re">کرایہ کا سامان</string>
+    <string name="st">شپنگ اور نقل و حمل</string>
+    <string name="con">کنٹینرز</string>
+    <string name="cc">کسٹم کلیئرنس</string>
+    <string name="ec">انجنیئر کنسلٹنٹس</string>
+    <string name="ch_prop_type">جائداد کی نوعیت</string>
 
 
 </resources>

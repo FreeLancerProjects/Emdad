@@ -20,16 +20,18 @@ public class NotificationDataModel implements Serializable {
     {
         private int id;
         private String order_id;
+        private String offer_id;
         private String user_id;
         private String company_id;
         private String order_type;
         private String order_status;
-        private String offer_id;
         private String offer_status;
+        private String notfication_type;
+        private String action_type;
         private String not_date;
         private String not_status;
         private String from_name;
-        private int offer_price;
+        private String offer_price;
 
 
         public int getId() {
@@ -76,8 +78,16 @@ public class NotificationDataModel implements Serializable {
             return from_name;
         }
 
-        public int getOffer_price() {
+        public String getOffer_price() {
             return offer_price;
+        }
+
+        public String getNotfication_type() {
+            return notfication_type;
+        }
+
+        public String getAction_type() {
+            return action_type;
         }
     }
     public class Meta implements Serializable

@@ -1,10 +1,14 @@
 package com.creativeshare.emdad.activities_fragments.activities.activity_other_services;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.creativeshare.emdad.R;
@@ -14,6 +18,8 @@ import com.creativeshare.emdad.activities_fragments.activities.activity_other_se
 import com.creativeshare.emdad.activities_fragments.activities.activity_other_services.fragments.Fragment_main_Other_services;
 import com.creativeshare.emdad.language.Language_Helper;
 import com.creativeshare.emdad.preferences.Preferences;
+
+import java.util.List;
 
 public class OtherActivity extends AppCompatActivity {
     private int fragment_count = 1;
@@ -80,6 +86,27 @@ public class OtherActivity extends AppCompatActivity {
             fragmentManager.beginTransaction().show(fragment_customer_clearance).commit();
         } else {
             fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_customer_clearance, "fragment_customer_clearance").addToBackStack("fragment_customer_clearance").commit();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        List<Fragment> fragmentList = fragmentManager.getFragments();
+        for (Fragment fragment:fragmentList)
+        {
+            fragment.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        List<Fragment> fragmentList = fragmentManager.getFragments();
+        for (Fragment fragment:fragmentList)
+        {
+            fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 

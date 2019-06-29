@@ -160,7 +160,7 @@
     <string name="property_type">Property Type<font color='red'>*</font></string>
     <string name="area">Area</string>
     <string name="property_image">property Image<font color='red'>*</font></string>
-    <string name="details_of_the_reference">Details of the reference</string>
+    <string name="details_of_the_reference">Details</string>
     <string name="customs_clearance">Customs Clearance</string>
     <string name="image_delete">Images that do not contain the required information will be deleted</string>
     <string name="model_four">Model 4 of the bank<font color='red'>*</font></string>
@@ -194,5 +194,12 @@
     <string name="hs">Hs</string>
     <string name="yesterday">yesterday</string>
     <string name="day">D</string>
+    <string name="wd">Water Delivery</string>
+    <string name="re">Rental Equipment</string>
+    <string name="st">Shipping and transportation</string>
+    <string name="con">Containers</string>
+    <string name="cc">Customs Clearance</string>
+    <string name="ec">Engineering Consultances</string>
+    <string name="ch_prop_type">Choose property type</string>
 
 </resources>

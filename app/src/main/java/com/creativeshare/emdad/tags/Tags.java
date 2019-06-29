@@ -11,4 +11,26 @@ public class Tags {
 
    public static final String session_login = "login";
    public static final String session_logout = "logout";
+
+   public static final String TYPE_USER = "1";
+   public static final String TYPE_COMPANY = "2";
+
+   public static final String NOTIFICATION_TYPE_ORDERS = "1";
+   public static final String NOTIFICATION_TYPE_OTHER = "2";
+   public static final String WATER_ORDER="1";
+   public static final String RENTAL_ORDER="2";
+   public static final String SHIPPING_ORDER="3";
+   public static final String CONTAINERS_ORDER="4";
+   public static final String CLEARANCE_ORDER="5";
+   public static final String ENGINEERING_ORDER="6";
+
+   public static final String ACTION_NO="0";
+   public static final String ACTION_COMPANT_ACCEPT_SEND_OFFER="1";
+   public static final String ACTION_CLIENT_ACCEPT_REFUSE_OFFER="2";
+   public static final String ACTION_FINISH="3";
+   public static final String ACTION_RATE="4";
+
+
+
+
 }
