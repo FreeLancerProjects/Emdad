@@ -35,7 +35,7 @@
     <string name="city_load">City Load</string>
     <string name="select_your_location_on_the_map">Select your location on the map</string>
     <string name="history_of_load">History Of Load</string>
-    <string name="time_of_load">Time</string>
+    <string name="time_of_load">Load time</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
@@ -75,7 +75,7 @@
     <string name="send_order">Send Order</string>
     <string name="specify_the_delivery_date">Specify the delivery date</string>
     <string name="download_site">Select delivery location</string>
-    <string name="date_of_load">Date</string>
+    <string name="date_of_load">Load date</string>
     <string name="time_date_download">time_date_download</string>
     <string name="size_of_wit">Size</string>
     <string name="suc">Success !</string>
@@ -153,7 +153,7 @@
 
     <string name="container">container</string>
     <string name="provide_us_with_info">please provide us with deliver information</string>
-    <string name="container_size">Container size<font color='red'>*</font></string>
+    <string name="truck_size">Container size<font color='red'>*</font></string>
     <string name="container_type">Container Type<font color='red'>*</font></string>
     <string name="engineering_consultances">Engineering consultances</string>
     <string name="provide_us_with_info2">please provide us with this information</string>
@@ -201,5 +201,14 @@
     <string name="cc">Customs Clearance</string>
     <string name="ec">Engineering Consultances</string>
     <string name="ch_prop_type">Choose property type</string>
+    <string name="delivery_time">Delivery time</string>
+    <string name="delivery_date">Delivery date</string>
+    <string name="already_company">You are already registered as a company</string>
+    <string name="accept">Accept</string>
+    <string name="refuse">Refuse</string>
+    <string name="order">Order</string>
+    <string name="water_delivery">Water delivery</string>
+    <string name="show_on_map">View location on map</string>
+    <string name="cost">Cost</string>
 
 </resources>

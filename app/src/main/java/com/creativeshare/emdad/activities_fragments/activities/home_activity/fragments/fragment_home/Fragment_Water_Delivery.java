@@ -334,14 +334,16 @@ public class Fragment_Water_Delivery extends Fragment implements OnMapReadyCallb
             final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
             dialog.show();
             String user_id ;
-            if (userModel.getUser().getCompany_information()==null)
+            user_id = String.valueOf(userModel.getUser().getId());
+
+            /*if (userModel.getUser().getCompany_information()==null)
             {
                 user_id = String.valueOf(userModel.getUser().getId());
             }else
             {
                 user_id = String.valueOf(userModel.getUser().getCompany_information().getId());
 
-            }
+            }*/
             Api.getService(Tags.base_url)
                     .sendDeliveryWaterOrder(user_id,"1",(order_time_calender.getTimeInMillis()/1000),lat,lng,city_id,address,String.valueOf(container_size_id))
                     .enqueue(new Callback<OrderIdModel>() {
@@ -376,7 +378,7 @@ public class Fragment_Water_Delivery extends Fragment implements OnMapReadyCallb
                     });
         }else
             {
-                Common.CreateUserNotSignInAlertDialog(activity);
+                Common.CreateSignAlertDialog(activity,getString(R.string.si_su));
             }
 
 

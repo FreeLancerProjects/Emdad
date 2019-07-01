@@ -1,5 +1,6 @@
 package com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_home;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -7,11 +8,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
@@ -25,7 +28,6 @@ import com.creativeshare.emdad.models.SliderDataModel;
 import com.creativeshare.emdad.models.UserModel;
 import com.creativeshare.emdad.preferences.Preferences;
 import com.creativeshare.emdad.remote.Api;
-import com.creativeshare.emdad.share.Common;
 import com.creativeshare.emdad.tags.Tags;
 import com.google.android.material.tabs.TabLayout;
 
@@ -84,7 +86,14 @@ public class Fragment_main extends Fragment {
         ll_water_delivery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.DisplayFragmentWaterDeliveryReserve();
+                if (userModel!=null)
+                {
+                    activity.DisplayFragmentWaterDeliveryReserve();
+
+                }else
+                    {
+                        CreateAlertDialog(activity,1);
+                    }
             }
         });
 
@@ -98,7 +107,7 @@ public class Fragment_main extends Fragment {
                     startActivity(intent);
                 }else
                     {
-                        Common.CreateUserNotSignInAlertDialog(activity);
+                        CreateAlertDialog(activity,2);
                     }
 
             }
@@ -107,7 +116,14 @@ public class Fragment_main extends Fragment {
         ll_rental.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.DisplayFragmentEquipments();
+                if (userModel!=null)
+                {
+                    activity.DisplayFragmentEquipments();
+
+                }else
+                    {
+                        CreateAlertDialog(activity,3);
+                    }
             }
         });
 
@@ -122,7 +138,7 @@ public class Fragment_main extends Fragment {
                     startActivity(intent);
                 }else
                 {
-                    Common.CreateUserNotSignInAlertDialog(activity);
+                    CreateAlertDialog(activity,4);
                 }
 
 
@@ -135,7 +151,8 @@ public class Fragment_main extends Fragment {
         getSlider();
     }
 
-    private void getSlider() {
+    private void getSlider()
+    {
         Api.getService(Tags.base_url)
                 .getSliders()
                 .enqueue(new Callback<SliderDataModel>() {
@@ -169,8 +186,8 @@ public class Fragment_main extends Fragment {
                     }
                 });
     }
-
-    private void updateUI(SliderDataModel sliderDataModel) {
+    private void updateUI(SliderDataModel sliderDataModel)
+    {
 
         if (sliderDataModel.getData().size()>1)
         {
@@ -195,9 +212,51 @@ public class Fragment_main extends Fragment {
                 pager.setAdapter(slider_adapter);
             }
     }
+    private void CreateAlertDialog(Context context, final int type)
+    {
+        final AlertDialog dialog = new AlertDialog.Builder(context)
+                .setCancelable(true)
+                .create();
 
+        View view = LayoutInflater.from(context).inflate(R.layout.dialog_sign,null);
+        Button doneBtn = view.findViewById(R.id.doneBtn);
+        TextView tv_msg = view.findViewById(R.id.tv_msg);
+        tv_msg.setText(getString(R.string.si_su));
+        doneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
 
-    private class MyTimerTask extends TimerTask{
+                if (type ==1)
+                {
+                    activity.DisplayFragmentWaterDeliveryReserve();
+
+                }else if (type ==2)
+                {
+                    Intent intent = new Intent(activity, ShipmentActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }else if (type ==3)
+                {
+                    activity.DisplayFragmentEquipments();
+
+                }else if (type ==4)
+                {
+                    Intent intent = new Intent(activity, OtherActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
+            }
+        });
+
+        dialog.getWindow().getAttributes().windowAnimations=R.style.dialog_congratulation_animation;
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_window_bg);
+        dialog.setView(view);
+        dialog.show();
+    }
+    private class MyTimerTask extends TimerTask
+    {
         @Override
         public void run() {
             activity.runOnUiThread(new Runnable() {

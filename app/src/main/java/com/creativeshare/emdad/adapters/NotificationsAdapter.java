@@ -60,6 +60,15 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
             final MyHolder myHolder = (MyHolder) holder;
             NotificationDataModel.NotificationModel notificationModel = notificationModelList.get(myHolder.getAdapterPosition());
             myHolder.BindData(notificationModel);
+
+            myHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    NotificationDataModel.NotificationModel notificationModel = notificationModelList.get(myHolder.getAdapterPosition());
+                    fragment.setItemData(notificationModel);
+                }
+            });
+
         } else {
             LoadMoreHolder loadMoreHolder = (LoadMoreHolder) holder;
             loadMoreHolder.progBar.setIndeterminate(true);

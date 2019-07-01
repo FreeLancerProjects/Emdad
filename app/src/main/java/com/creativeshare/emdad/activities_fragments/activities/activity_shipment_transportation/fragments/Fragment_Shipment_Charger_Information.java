@@ -815,9 +815,13 @@ public class Fragment_Shipment_Charger_Information extends Fragment implements O
         }
         if (googleApiClient!=null)
         {
-            LocationServices.getFusedLocationProviderClient(activity).removeLocationUpdates(locationCallback);
-            googleApiClient.disconnect();
-            googleApiClient = null;
+            if (locationCallback!=null)
+            {
+                LocationServices.getFusedLocationProviderClient(activity).removeLocationUpdates(locationCallback);
+                googleApiClient.disconnect();
+                googleApiClient = null;
+            }
+
         }
     }
 

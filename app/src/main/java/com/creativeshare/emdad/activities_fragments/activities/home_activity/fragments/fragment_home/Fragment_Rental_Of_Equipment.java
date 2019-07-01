@@ -326,65 +326,76 @@ public class Fragment_Rental_Of_Equipment extends Fragment implements OnMapReady
                 timeneeds.setError("");
             }
         } else {
-            final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
-            dialog.show();
 
-            Calendar calendar = Calendar.getInstance();
-            calendar.set(Calendar.YEAR,years);
-            calendar.set(Calendar.MONTH,months);
-            calendar.set(Calendar.DAY_OF_MONTH,days);
-            calendar.set(Calendar.HOUR_OF_DAY,hour);
-            calendar.set(Calendar.MINUTE,minute);
-            calendar.set(Calendar.SECOND,second);
-
-            int user_id;
-
-            if (userModel.getUser().getCompany_information()==null)
+            if (userModel!=null)
             {
+                final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
+                dialog.show();
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(Calendar.YEAR,years);
+                calendar.set(Calendar.MONTH,months);
+                calendar.set(Calendar.DAY_OF_MONTH,days);
+                calendar.set(Calendar.HOUR_OF_DAY,hour);
+                calendar.set(Calendar.MINUTE,minute);
+                calendar.set(Calendar.SECOND,second);
+
+                int user_id;
                 user_id = userModel.getUser().getId();
-            }else
+
+                /*if (userModel.getUser().getCompany_information()==null)
+                {
+                    user_id = userModel.getUser().getId();
+                }else
                 {
                     user_id = userModel.getUser().getCompany_information().getId();
 
-                }
-            int sizeid = equipment_model.getAll_equipment_sizes().get(equipmentsizesp.getSelectedItemPosition()).getId();
-            // Log.e("err", lat + " " + lng + " " + city_id + " " + wide_id + " " + time / 1000 + " " + (int) (time / 1000));
-            Api.getService(Tags.base_url).equipmentorder(2, user_id, id, sizeid, lat, lng, city_id, formatedaddress,  (calendar.getTimeInMillis() / 1000), timeneed, Integer.parseInt(numofequipment)).enqueue(new Callback<Rental_equipment_Model>() {
-                @Override
-                public void onResponse(Call<Rental_equipment_Model> call, Response<Rental_equipment_Model> response) {
-                    dialog.dismiss();
-                    if (response.isSuccessful()) {
-                        Toast.makeText(activity, getString(R.string.suc), Toast.LENGTH_LONG).show();
-                        activity.Back();
-                    } else {
+                }*/
+                int sizeid = equipment_model.getAll_equipment_sizes().get(equipmentsizesp.getSelectedItemPosition()).getId();
+                // Log.e("err", lat + " " + lng + " " + city_id + " " + wide_id + " " + time / 1000 + " " + (int) (time / 1000));
+                Api.getService(Tags.base_url).equipmentorder(2, user_id, id, sizeid, lat, lng, city_id, formatedaddress,  (calendar.getTimeInMillis() / 1000), timeneed, Integer.parseInt(numofequipment)).enqueue(new Callback<Rental_equipment_Model>() {
+                    @Override
+                    public void onResponse(Call<Rental_equipment_Model> call, Response<Rental_equipment_Model> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful()) {
+                            Toast.makeText(activity, getString(R.string.suc), Toast.LENGTH_LONG).show();
+                            activity.Back();
+                        } else {
+                            dialog.dismiss();
+
+                            Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_LONG).show();
+
+                            try {
+                                Log.e("error", response.code() + "" + response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Rental_equipment_Model> call, Throwable t) {
                         dialog.dismiss();
 
-                        Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_LONG).show();
-
                         try {
-                            Log.e("error", response.code() + "" + response.errorBody().string());
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                            Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_LONG).show();
+
+                            Log.e("suss", t.getMessage() + "");
+                        }catch (Exception e)
+                        {
+
                         }
 
                     }
-                }
-
-                @Override
-                public void onFailure(Call<Rental_equipment_Model> call, Throwable t) {
-                    dialog.dismiss();
-
-                    try {
-                        Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_LONG).show();
-
-                        Log.e("suss", t.getMessage() + "");
-                    }catch (Exception e)
-                    {
-
-                    }
+                });
+            }else
+                {
+                    Common.CreateSignAlertDialog(activity,getString(R.string.si_su));
 
                 }
-            });
+
+
         }
     }
 

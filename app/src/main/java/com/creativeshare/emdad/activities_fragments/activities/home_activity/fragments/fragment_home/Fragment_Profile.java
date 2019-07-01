@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
@@ -27,7 +29,7 @@ import io.paperdb.Paper;
 
 
 public class Fragment_Profile extends Fragment {
-    private ImageView image,arrow_city,arrow_company,arrow_logout;
+    private ImageView image,arrow_company,arrow_logout;
     private TextView tv_name,tv_email,tv_phone,tv_address,tv_city;
     private SimpleRatingBar rateBar;
     private ConstraintLayout cons_city,cons_logout;
@@ -58,13 +60,11 @@ public class Fragment_Profile extends Fragment {
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
 
-        arrow_city = view.findViewById(R.id.arrow_city);
         arrow_company = view.findViewById(R.id.arrow_company);
         arrow_logout = view.findViewById(R.id.arrow_logout);
 
         if (current_language.equals("ar")||current_language.equals("ur"))
         {
-            arrow_city.setRotation(180.0f);
             arrow_company.setRotation(180.0f);
             arrow_logout.setRotation(180.0f);
 
@@ -86,12 +86,18 @@ public class Fragment_Profile extends Fragment {
         ll_register_company = view.findViewById(R.id.ll_register_company);
 
 
-        updateUi(userModel);
 
         ll_register_company.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.DisplayFragmentUpgradeToCompany();
+                if (userModel.getUser().getCompany_information()==null)
+                {
+                    activity.DisplayFragmentUpgradeToCompany();
+
+                }else
+                    {
+                        CreateAlertDialog();
+                    }
             }
         });
 
@@ -126,6 +132,33 @@ public class Fragment_Profile extends Fragment {
             }
         });
 
+        updateUi(userModel);
+
+
+    }
+
+    private void CreateAlertDialog()
+    {
+        final AlertDialog dialog = new AlertDialog.Builder(activity)
+                .setCancelable(true)
+                .create();
+
+        View view = LayoutInflater.from(activity).inflate(R.layout.dialog_sign,null);
+        Button doneBtn = view.findViewById(R.id.doneBtn);
+        TextView tv_msg = view.findViewById(R.id.tv_msg);
+        tv_msg.setText(getString(R.string.already_company));
+        doneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.getWindow().getAttributes().windowAnimations=R.style.dialog_congratulation_animation;
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_window_bg);
+        dialog.setView(view);
+        dialog.show();
     }
 
     private void updateUi(UserModel userModel) {
@@ -150,7 +183,7 @@ public class Fragment_Profile extends Fragment {
                     Picasso.with(activity).load(Uri.parse(Tags.IMAGE_COMPANY_URL+userModel.getUser().getCompany_information().getCompany_logo())).placeholder(R.drawable.logo_512).fit().into(image);
                     tv_name.setText(userModel.getUser().getCompany_information().getTitle());
                     tv_email.setText(userModel.getUser().getCompany_information().getCompany_email());
-                    tv_phone.setText(String.format("%s %s",userModel.getUser().getPhone_code(),userModel.getUser().getPhone()));
+                    tv_phone.setText(String.format("%s %s",userModel.getUser().getPhone_code().replaceFirst("00","+"),userModel.getUser().getPhone()));
                     tv_city.setText(userModel.getUser().getCompany_information().getCity());
                     tv_address.setText(userModel.getUser().getCompany_information().getAddress());
 

@@ -226,64 +226,74 @@ public class Fragment_Customer_Clearance extends Fragment {
 
     private void send(String m_details) {
 
-        final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
-        dialog.show();
-        int user_id;
-        if (userModel.getUser().getCompany_information()==null)
+        if (userModel!=null)
         {
+            final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
+            dialog.show();
+            int user_id;
             user_id = userModel.getUser().getId();
-        }else
+
+            /*if (userModel.getUser().getCompany_information()==null)
+            {
+                user_id = userModel.getUser().getId();
+            }else
             {
                 user_id = userModel.getUser().getCompany_information().getId();
 
-            }
-        RequestBody user_id_part =Common.getRequestBodyText(String.valueOf(user_id));
-        RequestBody order_type_part =Common.getRequestBodyText("5");
-        RequestBody description_part =Common.getRequestBodyText(m_details);
+            }*/
+            RequestBody user_id_part =Common.getRequestBodyText(String.valueOf(user_id));
+            RequestBody order_type_part =Common.getRequestBodyText("5");
+            RequestBody description_part =Common.getRequestBodyText(m_details);
 
-        MultipartBody.Part image1_part = Common.getMultiPart(activity,imgUri1,"modelFour");
-        MultipartBody.Part image2_part = Common.getMultiPart(activity,imgUri2,"commercialRegister");
+            MultipartBody.Part image1_part = Common.getMultiPart(activity,imgUri1,"modelFour");
+            MultipartBody.Part image2_part = Common.getMultiPart(activity,imgUri2,"commercialRegister");
 
-        MultipartBody.Part image3_part = Common.getMultiPart(activity,imgUri3,"multiplicationCard");
-        MultipartBody.Part image4_part = Common.getMultiPart(activity,imgUri4,"importCard");
+            MultipartBody.Part image3_part = Common.getMultiPart(activity,imgUri3,"multiplicationCard");
+            MultipartBody.Part image4_part = Common.getMultiPart(activity,imgUri4,"importCard");
 
-        MultipartBody.Part image5_part = Common.getMultiPart(activity,imgUri5,"soshibalCard");
-
-
-        Api.getService(Tags.base_url)
-                .sendCustomerOrder(user_id_part,order_type_part,description_part,image1_part,image2_part,image3_part,image4_part,image5_part)
-                .enqueue(new Callback<OrderIdModel>() {
-                    @Override
-                    public void onResponse(Call<OrderIdModel> call, final Response<OrderIdModel> response) {
-                        dialog.dismiss();
-                        if (response.isSuccessful()&&response.body()!=null)
-                        {
-                            CreateAlertDialog(response.body().getOrder_details().getId()+"");
-
-                        }else
-                        {
+            MultipartBody.Part image5_part = Common.getMultiPart(activity,imgUri5,"soshibalCard");
 
 
-                            Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+            Api.getService(Tags.base_url)
+                    .sendCustomerOrder(user_id_part,order_type_part,description_part,image1_part,image2_part,image3_part,image4_part,image5_part)
+                    .enqueue(new Callback<OrderIdModel>() {
+                        @Override
+                        public void onResponse(Call<OrderIdModel> call, final Response<OrderIdModel> response) {
+                            dialog.dismiss();
+                            if (response.isSuccessful()&&response.body()!=null)
+                            {
+                                CreateAlertDialog(response.body().getOrder_details().getId()+"");
+
+                            }else
+                            {
 
 
-                            try {
-                                Log.e("Error_code",response.code()+""+response.errorBody().string());
-                            } catch (IOException e) {
-                                e.printStackTrace();
+                                Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+
+
+                                try {
+                                    Log.e("Error_code",response.code()+""+response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<OrderIdModel> call, Throwable t) {
-                        try {
-                            dialog.dismiss();
-                            Toast.makeText(activity, R.string.something, Toast.LENGTH_SHORT).show();
-                            Log.e("Error",t.getMessage());
-                        }catch (Exception e){}
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<OrderIdModel> call, Throwable t) {
+                            try {
+                                dialog.dismiss();
+                                Toast.makeText(activity, R.string.something, Toast.LENGTH_SHORT).show();
+                                Log.e("Error",t.getMessage());
+                            }catch (Exception e){}
+                        }
+                    });
+        }else
+            {
+                Common.CreateSignAlertDialog(activity,getString(R.string.si_su));
+
+            }
+
 
     }
 

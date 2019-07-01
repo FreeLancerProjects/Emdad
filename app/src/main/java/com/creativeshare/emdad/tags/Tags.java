@@ -17,6 +17,7 @@ public class Tags {
 
    public static final String NOTIFICATION_TYPE_ORDERS = "1";
    public static final String NOTIFICATION_TYPE_OTHER = "2";
+
    public static final String WATER_ORDER="1";
    public static final String RENTAL_ORDER="2";
    public static final String SHIPPING_ORDER="3";

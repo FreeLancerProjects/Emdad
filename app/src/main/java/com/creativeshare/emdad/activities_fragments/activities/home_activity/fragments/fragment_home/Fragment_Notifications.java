@@ -130,11 +130,14 @@ public class Fragment_Notifications extends Fragment {
         String user_type;
         String company_id;
         String user_id;
+
+
         if (userModel.getUser().getCompany_information()==null)
         {
             user_type = Tags.TYPE_USER;
             user_id = String.valueOf(userModel.getUser().getId());
             company_id ="0";
+
         }else
             {
                 user_type = Tags.TYPE_COMPANY;
@@ -142,6 +145,7 @@ public class Fragment_Notifications extends Fragment {
                 company_id =String.valueOf(userModel.getUser().getCompany_information().getId());
             }
 
+        Log.e("us",user_type+"_"+user_id+"_"+company_id);
 
         Api.getService(Tags.base_url)
                 .getNotifications(user_type,user_id,company_id,1)
@@ -250,5 +254,9 @@ public class Fragment_Notifications extends Fragment {
                         }
                     }
                 });
+    }
+
+    public void setItemData(NotificationDataModel.NotificationModel notificationModel) {
+        Log.e("action",notificationModel.getAction_type());
     }
 }

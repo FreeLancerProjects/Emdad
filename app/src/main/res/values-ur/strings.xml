@@ -301,7 +301,7 @@
 
 
     -
-    <string name="container_size">
+    <string name="truck_size">
 کنٹینر کا سائز
 <font color="red">*</font>
 
@@ -423,6 +423,15 @@
     <string name="cc">کسٹم کلیئرنس</string>
     <string name="ec">انجنیئر کنسلٹنٹس</string>
     <string name="ch_prop_type">جائداد کی نوعیت</string>
+    <string name="delivery_time">ڈلیوری وقت</string>
+    <string name="delivery_date">ترسیل کی تاریخ</string>
+    <string name="already_company">آپ پہلے ہی کمپنی کے طور پر رجسٹرڈ ہیں</string>
+    <string name="accept">Accept</string>
+    <string name="refuse">Refuse</string>
+    <string name="order">Order</string>
+    <string name="water_delivery">Water delivery</string>
+    <string name="show_on_map">View location on map</string>
+    <string name="cost">Cost</string>
 
 
 </resources>

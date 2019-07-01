@@ -3,7 +3,6 @@ package com.creativeshare.emdad.adapters;
 
 import android.content.Context;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +50,6 @@ public class Slider_Adapter extends PagerAdapter {
 
         SliderDataModel.SliderModel  sliderModel = sliderModelList.get(position);
         final ImageView image = view.findViewById(R.id.image);
-        Log.e("slider_image",Tags.IMAGE_SLIDER_URL+sliderModel.getUrl());
         Picasso.with(context).load(Uri.parse(Tags.IMAGE_SLIDER_URL+sliderModel.getUrl())).fit().placeholder(R.drawable.logo_512).into(image);
 
         container.addView(view);

@@ -128,14 +128,14 @@ public interface Services {
 
     @Multipart
     @POST("/api/order/shipping")
-    Call<OrderIdModel> sendShippingOrder(@Part("user_id") RequestBody user_id,
-                                         @Part("order_type") RequestBody order_type,
-                                         @Part("description") RequestBody description,
-                                         @Part("transportation_id") RequestBody transportation_id,
-                                         @Part("delivery_number") RequestBody delivery_number,
-                                         @Part("num_of_tran") RequestBody num_of_tran,
-                                         @Part("trans_size") RequestBody trans_size_id,
-                                         @Part("load_type") RequestBody load_type,
+    Call<OrderIdModel> sendShippingOrder(@Part("order_type") RequestBody order_type,
+                                         @Part("user_id") RequestBody user_id,
+                                         @Part("shipment_description") RequestBody description,
+                                         @Part("container_id") RequestBody container_id,
+                                         @Part("shipment_type_id") RequestBody shipment_type_id,
+                                         @Part("shipment_amount") RequestBody shipment_amount,
+                                         @Part("shipment_number") RequestBody shipment_number,
+                                         @Part("shipment_size_id") RequestBody shipment_size_id,
                                          @Part("phone_code_from") RequestBody phone_code_from,
                                          @Part("phone_from") RequestBody phone_from,
                                          @Part("company_name_from") RequestBody company_name_from,
@@ -145,9 +145,9 @@ public interface Services {
                                          @Part("address_from") RequestBody address_from,
                                          @Part("lat_from") RequestBody lat_from,
                                          @Part("long_from") RequestBody long_from,
-                                         @Part("load_date_from") RequestBody load_date_from,
-                                         @Part("phone_to") RequestBody phone_to,
+                                         @Part("date_from") RequestBody load_date_from,
                                          @Part("phone_code_to") RequestBody phone_code_to,
+                                         @Part("phone_to") RequestBody phone_to,
                                          @Part("company_name_to") RequestBody company_name_to,
                                          @Part("responsible_to") RequestBody responsible_to,
                                          @Part("city_to") RequestBody city_to,
@@ -155,13 +155,27 @@ public interface Services {
                                          @Part("email_to") RequestBody email_to,
                                          @Part("lat_to") RequestBody lat_to,
                                          @Part("long_to") RequestBody long_to,
-                                         @Part("value") RequestBody value,
-                                         @Part("Weight") RequestBody Weight,
-                                         @Part("payment_method") RequestBody payment_method,
-                                         @Part("arrival_time") RequestBody arrival_time,
-
+                                         @Part("shipment_value") RequestBody shipment_value,
+                                         @Part("shipment_weight") RequestBody Weight,
+                                         @Part("payment") RequestBody payment_method,
+                                         @Part("date_to") RequestBody date_to,
                                          @Part MultipartBody.Part image1,
                                          @Part MultipartBody.Part image2
+
+
+    );
+
+    @Multipart
+    @POST("/api/order/engConsultances")
+    Call<OrderIdModel> sendEngineeringOrder(@Part("order_type") RequestBody order_type,
+                                            @Part("user_id") RequestBody user_id,
+                                            @Part("type_id") RequestBody type_id,
+                                            @Part("propertyArea") RequestBody propertyArea,
+                                            @Part("description") RequestBody description,
+                                            @Part("address") RequestBody address,
+                                            @Part("latitude") RequestBody latitude,
+                                            @Part("longitude") RequestBody longitude,
+                                            @Part MultipartBody.Part propertyImage
 
 
     );
@@ -185,16 +199,13 @@ public interface Services {
             @Field("user_id") int user_id,
             @Field("equ_type") int equ_type,
             @Field("equ_size") int equ_size,
-            @Field(value = "latitude") double latitude,
-            @Field(value = "longitude") double longitude,
-            @Field(value = "city") String city,
-
-            @Field(value = "address") String address,
-
-            @Field(value = "start_time") long start_time,
-
-            @Field(value = "used_time") String used_time,
-            @Field(value = "num_of_equ") int num_of_equ
+            @Field("latitude") double latitude,
+            @Field("longitude") double longitude,
+            @Field("city") String city,
+            @Field("address") String address,
+            @Field("start_time") long start_time,
+            @Field("used_time") String used_time,
+            @Field("num_of_equ") int num_of_equ
 
 
     );

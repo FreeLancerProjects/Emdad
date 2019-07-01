@@ -3,10 +3,10 @@ package com.creativeshare.emdad.models;
 import java.io.Serializable;
 
 public class ShipmentUploadModel implements Serializable {
-    private int container_id;
-    private String load_type;
-    private String container_number;
-    private String container_size;
+    private int truck_id;
+    private String shipment_type;
+    private int truck_amount;
+    private String truck_size;
 
     private String from_company_phone_code;
     private String from_company_phone;
@@ -15,7 +15,7 @@ public class ShipmentUploadModel implements Serializable {
     private String from_responsible_name;
     private String from_address;
     private String from_city_id;
-    private String load_number;
+    private String shipment_number;
     private double from_lat;
     private double from_lng;
     private long from_date;
@@ -39,28 +39,36 @@ public class ShipmentUploadModel implements Serializable {
     private int payment_method;
 
 
-    public int getContainer_id() {
-        return container_id;
+    public int getTruck_id() {
+        return truck_id;
     }
 
-    public void setContainer_id(int container_id) {
-        this.container_id = container_id;
+    public void setTruck_id(int truck_id) {
+        this.truck_id = truck_id;
     }
 
-    public String getLoad_type() {
-        return load_type;
+    public String getShipment_type() {
+        return shipment_type;
     }
 
-    public void setLoad_type(String load_type) {
-        this.load_type = load_type;
+    public void setShipment_type(String shipment_type) {
+        this.shipment_type = shipment_type;
     }
 
-    public String getContainer_number() {
-        return container_number;
+    public int getTruck_amount() {
+        return truck_amount;
     }
 
-    public void setContainer_number(String container_number) {
-        this.container_number = container_number;
+    public void setTruck_amount(int truck_amount) {
+        this.truck_amount = truck_amount;
+    }
+
+    public String getTruck_size() {
+        return truck_size;
+    }
+
+    public void setTruck_size(String truck_size) {
+        this.truck_size = truck_size;
     }
 
     public String getFrom_company_phone_code() {
@@ -119,12 +127,12 @@ public class ShipmentUploadModel implements Serializable {
         this.from_city_id = from_city_id;
     }
 
-    public String getLoad_number() {
-        return load_number;
+    public String getShipment_number() {
+        return shipment_number;
     }
 
-    public void setLoad_number(String load_number) {
-        this.load_number = load_number;
+    public void setShipment_number(String shipment_number) {
+        this.shipment_number = shipment_number;
     }
 
     public double getFrom_lat() {
@@ -277,14 +285,5 @@ public class ShipmentUploadModel implements Serializable {
 
     public void setPayment_method(int payment_method) {
         this.payment_method = payment_method;
-
-    }
-
-    public String getContainer_size() {
-        return container_size;
-    }
-
-    public void setContainer_size(String container_size) {
-        this.container_size = container_size;
     }
 }

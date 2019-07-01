@@ -98,6 +98,7 @@ public class Fragment_Shipment_Load_Description extends Fragment {
         if (!TextUtils.isEmpty(m_description)&&
                 !TextUtils.isEmpty(m_value)&&
                 !TextUtils.isEmpty(m_weight)&&
+                Integer.parseInt(m_weight)<=35&&
                 imgUri1!=null&&
                 imgUri2!=null
         )
@@ -143,6 +144,10 @@ public class Fragment_Shipment_Load_Description extends Fragment {
                 if (imgUri1==null)
                 {
                     Toast.makeText(activity,getString(R.string.ch_img), Toast.LENGTH_SHORT).show();
+                }
+                if (Integer.parseInt(m_weight)>35)
+                {
+                    Common.CreateSignAlertDialog(activity,getString(R.string.weight_of_load));
                 }
 
                 return false;

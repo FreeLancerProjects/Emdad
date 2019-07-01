@@ -363,49 +363,59 @@ public class Fragment_Container extends Fragment implements OnMapReadyCallback,G
 
     private void SendOrder(int container_size_id, int container_type_id, String address) {
 
-        final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
-        dialog.show();
-        String user_id ;
-        if (userModel.getUser().getCompany_information()==null)
+        if (userModel!=null)
         {
+            final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
+            dialog.show();
+            String user_id ;
             user_id = String.valueOf(userModel.getUser().getId());
-        }else
-        {
-            user_id = String.valueOf(userModel.getUser().getCompany_information().getId());
 
-        }
-        Api.getService(Tags.base_url)
-                .sendContainerOrder(user_id,"4",lat,lng,address,container_type_id,container_size_id)
-                .enqueue(new Callback<OrderIdModel>() {
-                    @Override
-                    public void onResponse(Call<OrderIdModel> call, Response<OrderIdModel> response) {
-                        dialog.dismiss();
-                        if (response.isSuccessful()&&response.body()!=null&&response.body().getOrder_details()!=null)
-                        {
-                            CreateAlertDialog(response.body().getOrder_details().getId()+"");
-                        }else
-                        {
-                            Toast.makeText(activity, R.string.failed, Toast.LENGTH_SHORT).show();
+            /*if (userModel.getUser().getCompany_information()==null)
+            {
+                user_id = String.valueOf(userModel.getUser().getId());
+            }else
+            {
+                user_id = String.valueOf(userModel.getUser().getCompany_information().getId());
 
-                            try {
-                                Log.e("Error_code", response.code() + "" + response.errorBody().string());
-                            } catch (IOException e) {
-                                e.printStackTrace();
+            }*/
+            Api.getService(Tags.base_url)
+                    .sendContainerOrder(user_id,"4",lat,lng,address,container_type_id,container_size_id)
+                    .enqueue(new Callback<OrderIdModel>() {
+                        @Override
+                        public void onResponse(Call<OrderIdModel> call, Response<OrderIdModel> response) {
+                            dialog.dismiss();
+                            if (response.isSuccessful()&&response.body()!=null&&response.body().getOrder_details()!=null)
+                            {
+                                CreateAlertDialog(response.body().getOrder_details().getId()+"");
+                            }else
+                            {
+                                Toast.makeText(activity, R.string.failed, Toast.LENGTH_SHORT).show();
+
+                                try {
+                                    Log.e("Error_code", response.code() + "" + response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<OrderIdModel> call, Throwable t) {
-                        try {
-                            dialog.dismiss();
-                            Toast.makeText(activity, R.string.something, Toast.LENGTH_SHORT).show();
-                            Log.e("Error", t.getMessage());
-                        } catch (Exception e) {
+                        @Override
+                        public void onFailure(Call<OrderIdModel> call, Throwable t) {
+                            try {
+                                dialog.dismiss();
+                                Toast.makeText(activity, R.string.something, Toast.LENGTH_SHORT).show();
+                                Log.e("Error", t.getMessage());
+                            } catch (Exception e) {
 
+                            }
                         }
-                    }
-                });
+                    });
+        }else
+            {
+                Common.CreateSignAlertDialog(activity,getString(R.string.si_su));
+
+            }
+
 
     }
 

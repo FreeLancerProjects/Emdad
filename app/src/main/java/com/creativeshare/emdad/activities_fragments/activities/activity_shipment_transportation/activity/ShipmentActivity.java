@@ -233,12 +233,12 @@ public class ShipmentActivity extends AppCompatActivity {
 
     }
 
-    public void saveContainerData(int container_id, String load_type, String truck_number, String truck_size_id)
+    public void saveContainerData(int truck_id, String shipment_type, int truck_amount, String truck_size_id)
     {
-        shipmentUploadModel.setContainer_id(container_id);
-        shipmentUploadModel.setLoad_type(load_type);
-        shipmentUploadModel.setContainer_number(truck_number);
-        shipmentUploadModel.setContainer_size(truck_size_id);
+        shipmentUploadModel.setTruck_id(truck_id);
+        shipmentUploadModel.setShipment_type(shipment_type);
+        shipmentUploadModel.setTruck_amount(truck_amount);
+        shipmentUploadModel.setTruck_size(truck_size_id);
 
 
 
@@ -250,7 +250,7 @@ public class ShipmentActivity extends AppCompatActivity {
         shipmentUploadModel.setFrom_company_name(m_company_name);
         shipmentUploadModel.setFrom_company_email(email);
         shipmentUploadModel.setFrom_responsible_name(m_responsible_name);
-        shipmentUploadModel.setLoad_number(m_shipment_number);
+        shipmentUploadModel.setShipment_number(m_shipment_number);
         shipmentUploadModel.setFrom_address(address);
         shipmentUploadModel.setFrom_city_id(city_id);
         shipmentUploadModel.setFrom_lat(lat);
@@ -291,21 +291,26 @@ public class ShipmentActivity extends AppCompatActivity {
             final ProgressDialog dialog = Common.createProgressDialog(this,getString(R.string.wait));
             dialog.show();
             String user_id;
-            if (userModel.getUser().getCompany_information()==null)
+            user_id = String.valueOf(userModel.getUser().getId());
+
+            /*if (userModel.getUser().getCompany_information()==null)
             {
                 user_id = String.valueOf(userModel.getUser().getId());
             }else
             {
                 user_id = String.valueOf(userModel.getUser().getCompany_information().getId());
 
-            }
-
-            RequestBody user_id_part = Common.getRequestBodyText(user_id);
-            RequestBody transportation_id_part = Common.getRequestBodyText(String.valueOf(shipmentUploadModel.getContainer_id()));
+            }*/
 
             RequestBody order_type_part = Common.getRequestBodyText("3");
+
+            RequestBody user_id_part = Common.getRequestBodyText(user_id);
+            RequestBody truck_id_part = Common.getRequestBodyText(String.valueOf(shipmentUploadModel.getTruck_id()));
+            RequestBody truck_size_id_part = Common.getRequestBodyText(shipmentUploadModel.getTruck_size());
+            RequestBody truck_amount_part = Common.getRequestBodyText(String.valueOf(shipmentUploadModel.getTruck_amount()));
+
             RequestBody description_part = Common.getRequestBodyText(shipmentUploadModel.getLoad_description());
-            RequestBody load_type_part = Common.getRequestBodyText(shipmentUploadModel.getLoad_type());
+            RequestBody shipment_type_part = Common.getRequestBodyText(shipmentUploadModel.getShipment_type());
 
 
             RequestBody phone_code_from_part = Common.getRequestBodyText(shipmentUploadModel.getFrom_company_phone_code());
@@ -318,6 +323,7 @@ public class ShipmentActivity extends AppCompatActivity {
             RequestBody lat_from_part = Common.getRequestBodyText(String.valueOf(shipmentUploadModel.getFrom_lat()));
             RequestBody lng_from_part = Common.getRequestBodyText(String.valueOf(shipmentUploadModel.getFrom_lng()));
             RequestBody date_from_part = Common.getRequestBodyText(String.valueOf((shipmentUploadModel.getFrom_date()/1000)));
+            RequestBody shipment_number_part = Common.getRequestBodyText(shipmentUploadModel.getShipment_number());
 
 
             RequestBody phone_code_to_part = Common.getRequestBodyText(shipmentUploadModel.getTo_company_phone_code());
@@ -335,9 +341,6 @@ public class ShipmentActivity extends AppCompatActivity {
             RequestBody weight_to_part = Common.getRequestBodyText(shipmentUploadModel.getLoad_weight());
             RequestBody payment_to_part = Common.getRequestBodyText(String.valueOf(payment_method));
 
-            RequestBody truck_number_part = Common.getRequestBodyText(shipmentUploadModel.getContainer_number());
-            RequestBody ship_number_from_part = Common.getRequestBodyText(shipmentUploadModel.getLoad_number());
-            RequestBody truck_size_id_part = Common.getRequestBodyText(shipmentUploadModel.getContainer_number());
 
 
             MultipartBody.Part image1_part = Common.getMultiPart(this,Uri.parse(shipmentUploadModel.getUri_1()),"image1");
@@ -346,7 +349,7 @@ public class ShipmentActivity extends AppCompatActivity {
 
 
             Api.getService(Tags.base_url)
-                    .sendShippingOrder(user_id_part,order_type_part,description_part,transportation_id_part,ship_number_from_part,truck_number_part,truck_size_id_part,load_type_part,phone_code_from_part,phone_from_part,company_name_from_part,responsible_name_from_part,company_email_from_part,city_id_from_part,address_from_part,lat_from_part,lng_from_part,date_from_part,phone_to_part,phone_code_to_part,company_name_to_part,responsible_name_to_part,city_id_to_part,address_to_part,company_email_to_part,lat_to_part,lng_to_part,value_to_part,weight_to_part,payment_to_part,date_to_part,image1_part,image2_part)
+                    .sendShippingOrder(order_type_part,user_id_part,description_part,truck_id_part,shipment_type_part,truck_amount_part,shipment_number_part,truck_size_id_part,phone_code_from_part,phone_from_part,company_name_from_part,responsible_name_from_part,company_email_from_part,city_id_from_part,address_from_part,lat_from_part,lng_from_part,date_from_part,phone_code_to_part,phone_to_part,company_name_to_part,responsible_name_to_part,city_id_to_part,address_to_part,company_email_to_part,lat_to_part,lng_to_part,value_to_part,weight_to_part,payment_to_part,date_to_part,image1_part,image2_part)
                     .enqueue(new Callback<OrderIdModel>() {
                         @Override
                         public void onResponse(Call<OrderIdModel> call, Response<OrderIdModel> response) {
@@ -379,7 +382,7 @@ public class ShipmentActivity extends AppCompatActivity {
                     });
         }else
             {
-               Common.CreateUserNotSignInAlertDialog(this);
+                Common.CreateSignAlertDialog(this,getString(R.string.si_su));
             }
 
 

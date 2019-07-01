@@ -17,7 +17,7 @@
     <string name="Condition">الشروط والاحكام</string>
     <string name="about">عن التطبيق</string>
     <string name="contact_us">اتصل بنا</string>
-    <string name="language_setting">اعدادات اللغه</string>
+    <string name="language_setting">اعدادات اللغة</string>
     <string name="Log_out">تسجيل الخروج</string>
     <string name="accountِ">حسابى</string>
     <string name="water_arrive">توصيل المياة</string>
@@ -33,7 +33,7 @@
     <string name="city_load">مدينة التحميل</string>
     <string name="select_your_location_on_the_map">حدد موقعك على الخريطة</string>
     <string name="history_of_load">تاريخ التوصيل</string>
-    <string name="time_of_load">وقت التوصيل</string>
+    <string name="time_of_load">وقت التحميل</string>
     <string name="next">التالى</string>
     <string name="previous">السابق</string>
     <string name="please_provide_us_with_the_delivery_information">نرجو تزويدنا بمعلومات التوصيل</string>
@@ -143,7 +143,7 @@
     <string name="container">الحاويات</string>
 
     <string name="provide_us_with_info">نرجو تزويدنا بمعلومات التوصيل</string>
-    <string name="container_size">حجم الحاوية<font color='red'>*</font></string>
+    <string name="truck_size">حجم الحاوية<font color='red'>*</font></string>
     <string name="container_type">نوع الحاوية<font color='red'>*</font></string>
 
     <string name="engineering_consultances">استشارات هندسيه</string>
@@ -174,9 +174,9 @@
     <string name="no_sizes">لا توجد أحجام لعرضها</string>
     <string name="number_of_truck">عدد الشاحنات</string>
     <string name="ch_trc_number">إختر عدد الشاحنات</string>
-    <string name="order_number">Order number</string>
-    <string name="order_state">Order state</string>
-    <string name="add_rate">Add rate</string>
+    <string name="order_number">رقم الطلب</string>
+    <string name="order_state">حالة الطلب</string>
+    <string name="add_rate">إضافة تقييم</string>
 
     <string name="just_now">الان</string>
     <string name="a_minute_ago">منذ دقيقة</string>
@@ -192,6 +192,15 @@
     <string name="cc">تخليص جمركي</string>
     <string name="ec">إستشارات هندسية</string>
     <string name="ch_prop_type">إختر نوع العقار</string>
+    <string name="delivery_time">وقت التوصيل</string>
+    <string name="delivery_date">تاريخ التوصيل</string>
+    <string name="already_company">انت مسجل كشركة بالفعل</string>
+    <string name="accept">الموافقة</string>
+    <string name="refuse">الرفض</string>
+    <string name="order">طلب</string>
+    <string name="water_delivery">توصيل مياة</string>
+    <string name="show_on_map">عرض الموقع على الخريطة</string>
+    <string name="cost">التكلفة</string>
 
 
 </resources>

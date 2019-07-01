@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -37,8 +38,11 @@ import com.creativeshare.emdad.R;
 import com.creativeshare.emdad.activities_fragments.activities.activity_other_services.OtherActivity;
 import com.creativeshare.emdad.adapters.Spinner_Engineering_Type_Adapter;
 import com.creativeshare.emdad.models.Engineering_Type_Model;
+import com.creativeshare.emdad.models.OrderIdModel;
 import com.creativeshare.emdad.models.PlaceGeocodeData;
 import com.creativeshare.emdad.models.PlaceMapDetailsData;
+import com.creativeshare.emdad.models.UserModel;
+import com.creativeshare.emdad.preferences.Preferences;
 import com.creativeshare.emdad.remote.Api;
 import com.creativeshare.emdad.share.Common;
 import com.creativeshare.emdad.tags.Tags;
@@ -76,6 +80,8 @@ import java.util.List;
 import java.util.Locale;
 
 import io.paperdb.Paper;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -108,6 +114,8 @@ public class Fragment_Engineering_Consultances extends Fragment implements OnMap
     private final String camera_permission = Manifest.permission.CAMERA;
     private final int IMG_REQ1 = 1, IMG_REQ2 = 2;
     private Uri imgUri1 = null;
+    private UserModel userModel;
+    private Preferences preferences;
 
 
     public static Fragment_Engineering_Consultances newInstance() {
@@ -125,6 +133,8 @@ public class Fragment_Engineering_Consultances extends Fragment implements OnMap
 
     private void initView(View view) {
         activity = (OtherActivity) getActivity();
+        preferences = Preferences.getInstance();
+        userModel = preferences.getUserData(activity);
         engineering_type_modelList = new ArrayList<>();
         engineering_type_modelList.add(new Engineering_Type_Model("إختر", "Choose"));
 
@@ -258,9 +268,103 @@ public class Fragment_Engineering_Consultances extends Fragment implements OnMap
     }
 
     private void Send(String m_area, String m_details) {
-        
+        if (userModel!=null)
+        {
+            final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
+            dialog.show();
+            String user_id;
+            user_id = String.valueOf(userModel.getUser().getId());
+
+            /*if (userModel.getUser().getCompany_information()==null)
+            {
+                user_id = String.valueOf(userModel.getUser().getId());
+            }else
+            {
+                user_id = String.valueOf(userModel.getUser().getCompany_information().getId());
+
+            }*/
+
+            RequestBody order_type_part = Common.getRequestBodyText("6");
+
+            RequestBody user_id_part = Common.getRequestBodyText(user_id);
+            RequestBody type_id_part = Common.getRequestBodyText(String.valueOf(eng_type_id));
+
+            RequestBody area_part = Common.getRequestBodyText(m_area);
+            RequestBody details_part = Common.getRequestBodyText(m_details);
+
+            RequestBody address_part = Common.getRequestBodyText(address);
+            RequestBody lat_part = Common.getRequestBodyText(String.valueOf(lat));
+            RequestBody lng_part = Common.getRequestBodyText(String.valueOf(lng));
+            MultipartBody.Part image_part = Common.getMultiPart(activity,imgUri1,"propertyImage");
+
+
+            Api.getService(Tags.base_url)
+                    .sendEngineeringOrder(order_type_part,user_id_part,type_id_part,area_part,details_part,address_part,lat_part,lng_part,image_part)
+                    .enqueue(new Callback<OrderIdModel>() {
+                        @Override
+                        public void onResponse(Call<OrderIdModel> call, Response<OrderIdModel> response) {
+                            dialog.dismiss();
+                            if (response.isSuccessful()&&response.body()!=null&&response.body().getOrder_details()!=null)
+                            {
+                                CreateAlertDialog(response.body().getOrder_details().getId()+"");
+                            }else
+                            {
+                                Toast.makeText(activity, R.string.failed, Toast.LENGTH_SHORT).show();
+
+                                try {
+                                    Log.e("Error_code", response.code() + "" + response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<OrderIdModel> call, Throwable t) {
+                            try {
+                                dialog.dismiss();
+                                Toast.makeText(activity, R.string.something, Toast.LENGTH_SHORT).show();
+                                Log.e("Error", t.getMessage());
+                            } catch (Exception e) {
+
+                            }
+                        }
+                    });
+        }else
+        {
+            Common.CreateSignAlertDialog(activity,getString(R.string.si_su));
+        }
     }
 
+    private void CreateAlertDialog(String order_id)
+    {
+
+
+        final android.app.AlertDialog dialog = new android.app.AlertDialog.Builder(activity)
+                .setCancelable(true)
+                .create();
+
+
+        View view = LayoutInflater.from(activity).inflate(R.layout.dialog_order_id,null);
+        Button doneBtn = view.findViewById(R.id.doneBtn);
+
+        TextView tv_msg = view.findViewById(R.id.tv_msg);
+        tv_msg.setText(getString(R.string.order_sent_successfully_order_number_is)+" "+order_id);
+
+
+        doneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                activity.Back();
+            }
+        });
+
+        dialog.getWindow().getAttributes().windowAnimations= R.style.dialog_congratulation_animation;
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setView(view);
+        dialog.show();
+    }
     private void getEngineeringType() {
 
         final ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));

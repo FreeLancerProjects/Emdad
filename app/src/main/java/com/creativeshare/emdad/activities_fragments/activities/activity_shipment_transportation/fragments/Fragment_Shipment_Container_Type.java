@@ -182,7 +182,7 @@ public class Fragment_Shipment_Container_Type extends Fragment {
             tv_truck_number.setError(null);
             tv_truck_size.setError(null);
 
-            //activity.saveContainerData(container_id, truck_type_id, truck_number_id, truck_size_id);
+            activity.saveContainerData(container_id, truck_type_id, truck_number, truck_size_id);
             return true;
         } else {
 
