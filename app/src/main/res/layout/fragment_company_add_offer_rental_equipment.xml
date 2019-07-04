@@ -205,9 +205,56 @@
                         android:layout_height="wrap_content"
                         android:layout_weight=".65"
                         android:textColor="@color/gray5"
-                        android:text="@string/water_delivery"
+                        android:text="@string/rental_equip"
                         />
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    android:weightSum="1"
+                    >
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".35"
+                        android:textSize="15sp"
+                        android:textColor="@color/black"
+                        android:text="@string/amount"
+                        />
+                    <TextView
+                        android:id="@+id/tv_amount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".65"
+                        android:textColor="@color/gray5"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    android:weightSum="1"
+                    >
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".35"
+                        android:textSize="15sp"
+                        android:textColor="@color/black"
+                        android:text="@string/used_time"
+                        />
+                    <TextView
+                        android:id="@+id/tv_used_time"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".65"
+                        android:textColor="@color/gray5"
+                        />
+                </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -364,7 +411,10 @@
                     android:singleLine="true"
                     android:textColor="@color/colorPrimary"
                     android:textColorHint="@color/gray4"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:layout_marginBottom="30dp"
+
+                    />
 
             </LinearLayout>
 

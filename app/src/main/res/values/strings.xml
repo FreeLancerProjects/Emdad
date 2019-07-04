@@ -210,5 +210,31 @@
     <string name="water_delivery">Water delivery</string>
     <string name="show_on_map">View location on map</string>
     <string name="cost">Cost</string>
+    <string name="num_truck">Numbers of trucks</string>
+    <string name="ship_trans">Shipping and transportation</string>
+    <string name="from">From</string>
+    <string name="load_time">Load time</string>
+    <string name="to">To</string>
+    <string name="truck">Truck</string>
+    <string name="ship_number">Shipment number</string>
+    <string name="arrival_time">Arrival time</string>
+    <string name="desc">Description</string>
+    <string name="weight">Weight</string>
+    <string name="value">Value</string>
+    <string name="rental_equip">Rental equipment</string>
+    <string name="amount">Amount</string>
+    <string name="used_time">Used time</string>
+    <string name="cont_order">Containers order</string>
+    <string name="type">Type</string>
+    <string name="eng_cons_order">Engineering consultances order</string>
+    <string name="model_4_image">Model 4 image</string>
+    <string name="tax_card_img">Tax card image</string>
+    <string name="import_image">Import card image</string>
+    <string name="cus_card_img">Customs card image</string>
+    <string name="ship_type">Shipment type</string>
+    <string name="cust_clear_order">Customs clearance order</string>
+    <string name="prop_type">Property type</string>
+    <string name="prop_image">Property image</string>
+    <string name="sar">SAR</string>
 
 </resources>

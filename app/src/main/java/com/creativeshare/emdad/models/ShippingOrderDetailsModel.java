@@ -60,6 +60,34 @@ public class ShippingOrderDetailsModel implements Serializable {
         public String getOrder_status() {
             return order_status;
         }
+
+        public String getFrom_user_id() {
+            return from_user_id;
+        }
+
+        public String getTo_user_id() {
+            return to_user_id;
+        }
+
+        public String getFrom_user_name() {
+            return from_user_name;
+        }
+
+        public String getFrom_user_image() {
+            return from_user_image;
+        }
+
+        public String getTo_user_name() {
+            return to_user_name;
+        }
+
+        public String getTo_user_image() {
+            return to_user_image;
+        }
+
+        public String getOffer_price() {
+            return offer_price;
+        }
     }
 
     public class Order_Details implements Serializable

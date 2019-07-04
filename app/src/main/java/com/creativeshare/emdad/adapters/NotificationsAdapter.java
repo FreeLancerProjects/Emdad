@@ -65,7 +65,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<RecyclerView.View
                 @Override
                 public void onClick(View v) {
                     NotificationDataModel.NotificationModel notificationModel = notificationModelList.get(myHolder.getAdapterPosition());
-                    fragment.setItemData(notificationModel);
+                    fragment.setItemData(notificationModel,holder.getAdapterPosition());
                 }
             });
 

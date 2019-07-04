@@ -126,16 +126,9 @@ public class Fragment_Water_Delivery extends Fragment implements OnMapReadyCallb
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_water_delivery, container, false);
+        initView(view);
 
-        new Handler()
-                .postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        updateUI();
-                        initView(view);
-
-                    }
-                },1000);
+        updateUI();
 
         return view;
     }
@@ -264,17 +257,9 @@ public class Fragment_Water_Delivery extends Fragment implements OnMapReadyCallb
         createDatePickerDialog();
         createTimePickerDialog();
 
-        runnable = new Runnable() {
-            @Override
-            public void run() {
-                CheckPermission();
-                getCities();
-                getContainerSize();
-
-            }
-        };
-        handler = new Handler();
-        handler.postDelayed(runnable,2000);
+        CheckPermission();
+        getCities();
+        getContainerSize();
 
 
 
@@ -470,7 +455,11 @@ public class Fragment_Water_Delivery extends Fragment implements OnMapReadyCallb
     private void updateUI() {
 
         SupportMapFragment fragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-        fragment.getMapAsync(this);
+        if (fragment!=null)
+        {
+            fragment.getMapAsync(this);
+
+        }
 
 
     }
@@ -821,11 +810,11 @@ public class Fragment_Water_Delivery extends Fragment implements OnMapReadyCallb
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (handler!=null&&runnable!=null)
+        /*if (handler!=null&&runnable!=null)
         {
             handler.removeCallbacks(runnable);
 
-        }
+        }*/
         if (googleApiClient!=null)
         {
             LocationServices.getFusedLocationProviderClient(activity).removeLocationUpdates(locationCallback);

@@ -51,6 +51,7 @@ public class Fragment_Notifications extends Fragment {
     private int current_page = 1;
     private boolean isFirstTime = true;
     private String current_language;
+    private int selected_pos = -1;
 
 
     @Override
@@ -219,7 +220,7 @@ public class Fragment_Notifications extends Fragment {
                     @Override
                     public void onResponse(Call<NotificationDataModel> call, Response<NotificationDataModel> response) {
                         progBar.setVisibility(View.GONE);
-                        isLoading = true;
+                        isLoading = false;
                         notificationModelList.remove(notificationModelList.size()-1);
                         adapter.notifyItemRemoved(notificationModelList.size()-1);
 
@@ -246,7 +247,7 @@ public class Fragment_Notifications extends Fragment {
                         try {
                             notificationModelList.remove(notificationModelList.size()-1);
                             adapter.notifyItemRemoved(notificationModelList.size()-1);
-                            isLoading = true;
+                            isLoading = false;
                             progBar.setVisibility(View.GONE);
                             Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
                             Log.e("Error", t.getMessage());
@@ -256,7 +257,69 @@ public class Fragment_Notifications extends Fragment {
                 });
     }
 
-    public void setItemData(NotificationDataModel.NotificationModel notificationModel) {
-        Log.e("action",notificationModel.getAction_type());
+    public void setItemData(NotificationDataModel.NotificationModel notificationModel, int adapterPosition)
+    {
+        this.selected_pos =adapterPosition;
+        if (notificationModel.getAction_type().equals("1")&&notificationModel.getOrder_type().equals(Tags.WATER_ORDER))
+        {
+            activity.DisplayFragmentCompanyAddWaterOffer(Integer.parseInt(notificationModel.getOrder_id()),notificationModel.getId());
+        }else if (notificationModel.getAction_type().equals("1")&&notificationModel.getOrder_type().equals(Tags.SHIPPING_ORDER))
+        {
+            activity.DisplayFragmentCompanyAddShipmentOffer(Integer.parseInt(notificationModel.getOrder_id()),notificationModel.getId());
+        }
+        else if (notificationModel.getAction_type().equals("1")&&notificationModel.getOrder_type().equals(Tags.RENTAL_ORDER))
+        {
+            activity.DisplayFragmentCompanyAddRentalEquipmentOffer(Integer.parseInt(notificationModel.getOrder_id()),notificationModel.getId());
+        }
+        else if (notificationModel.getAction_type().equals("1")&&notificationModel.getOrder_type().equals(Tags.CONTAINERS_ORDER))
+        {
+            activity.DisplayFragmentCompanyAddContainersOffer(Integer.parseInt(notificationModel.getOrder_id()),notificationModel.getId());
+        }
+        else if (notificationModel.getAction_type().equals("1")&&notificationModel.getOrder_type().equals(Tags.CLEARANCE_ORDER))
+        {
+            activity.DisplayFragmentCompanyAddCustomsOffer(Integer.parseInt(notificationModel.getOrder_id()),notificationModel.getId());
+        }
+        else if (notificationModel.getAction_type().equals("1")&&notificationModel.getOrder_type().equals(Tags.ENGINEERING_ORDER))
+        {
+            activity.DisplayFragmentCompanyAddEngineeringOffer(Integer.parseInt(notificationModel.getOrder_id()),notificationModel.getId());
+        }else if (notificationModel.getAction_type().equals("2")&&notificationModel.getOrder_type().equals(Tags.WATER_ORDER))
+        {
+            activity.DisplayFragmentClientWaterOffer(Integer.parseInt(notificationModel.getOrder_id()),notificationModel.getOffer_price());
+        }else if (notificationModel.getAction_type().equals("2")&&notificationModel.getOrder_type().equals(Tags.SHIPPING_ORDER))
+        {
+            activity.DisplayFragmentClientShipmentOffer(Integer.parseInt(notificationModel.getOrder_id()),notificationModel.getOffer_price());
+        }
+        else if (notificationModel.getAction_type().equals("2")&&notificationModel.getOrder_type().equals(Tags.RENTAL_ORDER))
+        {
+            activity.DisplayFragmentClientRentalEquipmentOffer(Integer.parseInt(notificationModel.getOrder_id()),notificationModel.getOffer_price());
+        }
+        else if (notificationModel.getAction_type().equals("2")&&notificationModel.getOrder_type().equals(Tags.CONTAINERS_ORDER))
+        {
+            activity.DisplayFragmentClientContainersOffer(Integer.parseInt(notificationModel.getOrder_id()),notificationModel.getOffer_price());
+        }
+        else if (notificationModel.getAction_type().equals("2")&&notificationModel.getOrder_type().equals(Tags.CLEARANCE_ORDER))
+        {
+            activity.DisplayFragmentClientCustomsOffer(Integer.parseInt(notificationModel.getOrder_id()),notificationModel.getOffer_price());
+        }
+        else if (notificationModel.getAction_type().equals("2")&&notificationModel.getOrder_type().equals(Tags.ENGINEERING_ORDER))
+        {
+            activity.DisplayFragmentClientEngineeringOffer(Integer.parseInt(notificationModel.getOrder_id()),notificationModel.getOffer_price());
+        }
+    }
+
+    public void removeItem()
+    {
+        if (selected_pos!=-1)
+        {
+            notificationModelList.remove(selected_pos);
+            adapter.notifyItemRemoved(selected_pos);
+            selected_pos=-1;
+
+            if (notificationModelList.size()==0)
+            {
+                ll_not.setVisibility(View.VISIBLE);
+            }
+
+        }
     }
 }

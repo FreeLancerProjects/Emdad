@@ -201,6 +201,32 @@
     <string name="water_delivery">توصيل مياة</string>
     <string name="show_on_map">عرض الموقع على الخريطة</string>
     <string name="cost">التكلفة</string>
+    <string name="num_truck">عدد الشاحنات</string>
+    <string name="ship_trans">طلب شحن ونقل</string>
+    <string name="from">من</string>
+    <string name="load_time">وقت التحميل</string>
+    <string name="to">إلى</string>
+    <string name="truck">شاحنة</string>
+    <string name="ship_number">رقم الشحنة</string>
+    <string name="arrival_time">وقت التوصيل</string>
+    <string name="desc">الوصف</string>
+    <string name="weight">الوزن</string>
+    <string name="value">القيمة</string>
+    <string name="rental_equip">تأجير معدات</string>
+    <string name="amount">العدد</string>
+    <string name="used_time">الوقت المستخدم</string>
+    <string name="cont_order">طلب حاويات</string>
+    <string name="type">النوع</string>
+    <string name="eng_cons_order">طلب إستشارات هندسية</string>
+    <string name="model_4_image">صورة نموذج 4</string>
+    <string name="tax_card_img">صورة بطاقة ضريبية</string>
+    <string name="import_image">صورة بطاقة إستيرادية</string>
+    <string name="cus_card_img">صورة بطاقة جمارك</string>
+    <string name="ship_type">نوع الشحنة</string>
+    <string name="cust_clear_order">طلب تخليص جمركي</string>
+    <string name="prop_type">نوع العقار</string>
+    <string name="prop_image">صورة العقار</string>
+    <string name="sar">ر.س</string>
 
 
 </resources>

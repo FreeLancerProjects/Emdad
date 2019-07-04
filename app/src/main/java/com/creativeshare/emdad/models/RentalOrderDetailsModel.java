@@ -99,7 +99,6 @@ public class RentalOrderDetailsModel implements Serializable {
     {
         private int id;
         private String order_id;
-        private String arrival_time;
         private String latitude;
         private String longitude;
         private String address;
@@ -121,9 +120,6 @@ public class RentalOrderDetailsModel implements Serializable {
             return order_id;
         }
 
-        public String getArrival_time() {
-            return arrival_time;
-        }
 
         public String getLatitude() {
             return latitude;

@@ -15,10 +15,23 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.creativeshare.emdad.R;
+import com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_home.Fragment_Client_Offer_Containers;
+import com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_home.Fragment_Client_Offer_Customs;
+import com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_home.Fragment_Client_Offer_Engineering;
+import com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_home.Fragment_Client_Offer_Rental_Equipment;
+import com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_home.Fragment_Client_Offer_Shipping;
+import com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_home.Fragment_Client_Offer_Water_Delivery;
+import com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_home.Fragment_Company_Add_Offer_Containers;
+import com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_home.Fragment_Company_Add_Offer_Customs;
+import com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_home.Fragment_Company_Add_Offer_Engineering;
+import com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_home.Fragment_Company_Add_Offer_Rental_Equipment;
+import com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_home.Fragment_Company_Add_Offer_Shipping;
+import com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_home.Fragment_Company_Add_Offer_Water_Delivery;
 import com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_home.Fragment_Contact_Us;
 import com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_home.Fragment_Equipment;
 import com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_home.Fragment_Home;
 import com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_home.Fragment_Map;
+import com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_home.Fragment_Map_Location_Details;
 import com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_home.Fragment_More;
 import com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_home.Fragment_Notifications;
 import com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_home.Fragment_Profile;
@@ -71,6 +84,19 @@ public class Home_Activity extends AppCompatActivity {
     private Fragment_Rental_Orders fragment_rental_orders;
     private Fragment_Equipment fragment_equipment;
     private Fragment_Rental_Of_Equipment fragment_rental_of_equipment;
+    private Fragment_Company_Add_Offer_Water_Delivery fragment_company_add_offer_water_delivery;
+    private Fragment_Map_Location_Details fragment_map_location_details;
+    private Fragment_Company_Add_Offer_Shipping fragment_company_add_offer_shipping;
+    private Fragment_Company_Add_Offer_Rental_Equipment fragment_company_add_offer_rental_equipment;
+    private Fragment_Company_Add_Offer_Containers fragment_company_add_offer_containers;
+    private Fragment_Company_Add_Offer_Customs fragment_company_add_offer_customs;
+    private Fragment_Company_Add_Offer_Engineering fragment_company_add_offer_engineering;
+    private Fragment_Client_Offer_Containers fragment_client_offer_containers;
+    private Fragment_Client_Offer_Customs  fragment_client_offer_customs;
+    private Fragment_Client_Offer_Engineering fragment_client_offer_engineering;
+    private Fragment_Client_Offer_Rental_Equipment fragment_client_offer_rental_equipment;
+    private Fragment_Client_Offer_Shipping fragment_client_offer_shipping;
+    private Fragment_Client_Offer_Water_Delivery fragment_client_offer_water_delivery;
 
     private UserModel userModel;
     private Preferences preferences;
@@ -387,8 +413,6 @@ public class Home_Activity extends AppCompatActivity {
 
     }
 
-
-
     public void DisplayFragmentWaterDeliveryOrder()
     {
 
@@ -529,6 +553,200 @@ public class Home_Activity extends AppCompatActivity {
 
         }
     }
+
+    public void DisplayFragmentCompanyAddWaterOffer(int order_id, int notification_id)
+    {
+        fragment_count += 1;
+
+        fragment_company_add_offer_water_delivery = Fragment_Company_Add_Offer_Water_Delivery.newInstance(order_id,notification_id);
+
+
+        if (fragment_company_add_offer_water_delivery.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_company_add_offer_water_delivery).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_company_add_offer_water_delivery, "fragment_company_add_offer_water_delivery").addToBackStack("fragment_company_add_offer_water_delivery").commit();
+
+        }
+    }
+    public void DisplayFragmentCompanyAddShipmentOffer(int order_id, int notification_id)
+    {
+        fragment_count += 1;
+
+        fragment_company_add_offer_shipping = Fragment_Company_Add_Offer_Shipping.newInstance(order_id,notification_id);
+
+
+        if (fragment_company_add_offer_shipping.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_company_add_offer_shipping).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_company_add_offer_shipping, "fragment_company_add_offer_shipping").addToBackStack("fragment_company_add_offer_shipping").commit();
+
+        }
+    }
+
+    public void DisplayFragmentCompanyAddRentalEquipmentOffer(int order_id, int notification_id)
+    {
+        fragment_count += 1;
+
+        fragment_company_add_offer_rental_equipment = Fragment_Company_Add_Offer_Rental_Equipment.newInstance(order_id,notification_id);
+
+
+        if (fragment_company_add_offer_rental_equipment.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_company_add_offer_rental_equipment).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_company_add_offer_rental_equipment, "fragment_company_add_offer_rental_equipment").addToBackStack("fragment_company_add_offer_rental_equipment").commit();
+
+        }
+    }
+
+    public void DisplayFragmentCompanyAddContainersOffer(int order_id, int notification_id)
+    {
+        fragment_count += 1;
+
+        fragment_company_add_offer_containers = Fragment_Company_Add_Offer_Containers.newInstance(order_id,notification_id);
+
+
+        if (fragment_company_add_offer_containers.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_company_add_offer_containers).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_company_add_offer_containers, "fragment_company_add_offer_containers").addToBackStack("fragment_company_add_offer_containers").commit();
+
+        }
+    }
+
+    public void DisplayFragmentCompanyAddCustomsOffer(int order_id, int notification_id)
+    {
+        fragment_count += 1;
+
+        fragment_company_add_offer_customs = Fragment_Company_Add_Offer_Customs.newInstance(order_id,notification_id);
+
+
+        if (fragment_company_add_offer_customs.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_company_add_offer_customs).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_company_add_offer_customs, "fragment_company_add_offer_customs").addToBackStack("fragment_company_add_offer_customs").commit();
+
+        }
+    }
+
+    public void DisplayFragmentCompanyAddEngineeringOffer(int order_id, int notification_id)
+    {
+        fragment_count += 1;
+
+        fragment_company_add_offer_engineering = Fragment_Company_Add_Offer_Engineering.newInstance(order_id,notification_id);
+
+
+        if (fragment_company_add_offer_engineering.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_company_add_offer_engineering).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_company_add_offer_engineering, "fragment_company_add_offer_engineering").addToBackStack("fragment_company_add_offer_engineering").commit();
+
+        }
+    }
+
+
+    public void DisplayFragmentClientWaterOffer(int order_id, String price)
+    {
+        fragment_count += 1;
+
+        fragment_client_offer_water_delivery = Fragment_Client_Offer_Water_Delivery.newInstance(order_id,price);
+
+
+        if (fragment_client_offer_water_delivery.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_client_offer_water_delivery).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_client_offer_water_delivery, "fragment_client_offer_water_delivery").addToBackStack("fragment_client_offer_water_delivery").commit();
+
+        }
+    }
+
+    public void DisplayFragmentClientShipmentOffer(int order_id, String price)
+    {
+        fragment_count += 1;
+
+        fragment_client_offer_shipping = Fragment_Client_Offer_Shipping.newInstance(order_id,price);
+
+
+        if (fragment_client_offer_shipping.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_client_offer_shipping).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_client_offer_shipping, "fragment_client_offer_shipping").addToBackStack("fragment_client_offer_shipping").commit();
+
+        }
+    }
+
+    public void DisplayFragmentClientRentalEquipmentOffer(int order_id, String price)
+    {
+        fragment_count += 1;
+
+        fragment_client_offer_rental_equipment = Fragment_Client_Offer_Rental_Equipment.newInstance(order_id,price);
+
+
+        if (fragment_client_offer_rental_equipment.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_client_offer_rental_equipment).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_client_offer_rental_equipment, "fragment_client_offer_rental_equipment").addToBackStack("fragment_client_offer_rental_equipment").commit();
+
+        }
+    }
+
+    public void DisplayFragmentClientContainersOffer(int order_id, String price)
+    {
+        fragment_count += 1;
+
+        fragment_client_offer_containers = Fragment_Client_Offer_Containers.newInstance(order_id,price);
+
+
+        if (fragment_client_offer_containers.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_client_offer_containers).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_client_offer_containers, "fragment_client_offer_containers").addToBackStack("fragment_client_offer_containers").commit();
+
+        }
+    }
+
+    public void DisplayFragmentClientCustomsOffer(int order_id, String price)
+    {
+        fragment_count += 1;
+
+        fragment_client_offer_customs = Fragment_Client_Offer_Customs.newInstance(order_id,price);
+
+
+        if (fragment_client_offer_customs.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_client_offer_customs).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_client_offer_customs, "fragment_client_offer_customs").addToBackStack("fragment_client_offer_customs").commit();
+
+        }
+    }
+
+    public void DisplayFragmentClientEngineeringOffer(int order_id, String price)
+    {
+        fragment_count += 1;
+
+        fragment_client_offer_engineering = Fragment_Client_Offer_Engineering.newInstance(order_id,price);
+
+
+        if (fragment_client_offer_engineering.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_client_offer_engineering).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_client_offer_engineering, "fragment_client_offer_engineering").addToBackStack("fragment_client_offer_engineering").commit();
+
+        }
+    }
+    public void DisplayFragmentMapLocation_Details(double lat , double lng, String address)
+    {
+        fragment_count += 1;
+
+        fragment_map_location_details = Fragment_Map_Location_Details.newInstance(lat,lng,address);
+
+
+        if (fragment_map_location_details.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_map_location_details).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_map_location_details, "fragment_map_location_details").addToBackStack("fragment_map_location_details").commit();
+
+        }
+    }
     public void setLocationDataFromMapFragment(String from, final SelectedLocation selectedLocation)
     {
         if (from.equals("fragment_upgrade_to_company"))
@@ -549,6 +767,20 @@ public class Home_Activity extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    public void updateNotificationData()
+    {
+        if (fragment_notifications!=null&&fragment_notifications.isAdded())
+        {
+            Back();
+            new Handler()
+                    .postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            fragment_notifications.removeItem();
+                        }
+                    },1000);
+        }
+    }
 
 
 

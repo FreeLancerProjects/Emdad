@@ -62,6 +62,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.ui.IconGenerator;
@@ -83,7 +84,7 @@ import retrofit2.Response;
 
 /// Ahmed saad
 
-public class Fragment_Rental_Of_Equipment extends Fragment implements OnMapReadyCallback, TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener , GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks, LocationListener {
+public class Fragment_Rental_Of_Equipment extends Fragment implements OnMapReadyCallback, TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks, LocationListener {
     private ImageView date, clock, back, search;
     private TextView txtdate, txtclock;
     private EditText address, timeneeds, equipnum;
@@ -100,13 +101,13 @@ public class Fragment_Rental_Of_Equipment extends Fragment implements OnMapReady
     private LocationCallback locationCallback;
     private final String fineLocPerm = Manifest.permission.ACCESS_FINE_LOCATION;
     private final int loc_req = 1225;
-    private double lat=0.0,lng=0.0;
+    private double lat = 0.0, lng = 0.0;
     private float zoom = 15.6f;
 
     private Home_Activity activity;
     private Preferences preferences;
     private String current_language, timeclock = "", formatedaddress;
-    private ArrayAdapter<String>  wideadapter;
+    private ArrayAdapter<String> wideadapter;
     private List<String> citiesname, equipmentsize;
     private Spinner cities, equipmentsizesp;
     private Spinner_Adapter city_adapter;
@@ -115,15 +116,11 @@ public class Fragment_Rental_Of_Equipment extends Fragment implements OnMapReady
     private int years, months, days, hour, minute, second;
     private int id;
     private UserModel userModel;
-    private String city_id="";
+    private String city_id = "";
+    private int size_id=-1;
 
 
-
-
-
-
-
-    public static Fragment_Rental_Of_Equipment newInstance( int id) {
+    public static Fragment_Rental_Of_Equipment newInstance(int id) {
         Fragment_Rental_Of_Equipment fragment_rental_of_equipment = new Fragment_Rental_Of_Equipment();
         Bundle bundle = new Bundle();
         bundle.putInt(Tag3, id);
@@ -145,7 +142,7 @@ public class Fragment_Rental_Of_Equipment extends Fragment implements OnMapReady
     private void initView(final View view) {
 
         cities_models = new ArrayList<>();
-        cities_models.add(new CityModel("إختر","Choose"));
+        cities_models.add(new CityModel("إختر", "Choose"));
         activity = (Home_Activity) getActivity();
         preferences = Preferences.getInstance();
         userModel = preferences.getUserData(activity);
@@ -155,7 +152,7 @@ public class Fragment_Rental_Of_Equipment extends Fragment implements OnMapReady
         timeneeds = view.findViewById(R.id.editText_timeneed);
         address = view.findViewById(R.id.editText_address);
         cities = view.findViewById(R.id.sp_city);
-        city_adapter = new Spinner_Adapter(activity,cities_models);
+        city_adapter = new Spinner_Adapter(activity, cities_models);
         cities.setAdapter(city_adapter);
 
 
@@ -173,11 +170,8 @@ public class Fragment_Rental_Of_Equipment extends Fragment implements OnMapReady
         id = getArguments().getInt(Tag3);
         citiesname.add(getResources().getString(R.string.choose));
         equipmentsize.add(getResources().getString(R.string.choose));
-        wideadapter = new ArrayAdapter<String>(activity,
-                android.R.layout.simple_spinner_item, equipmentsize);
-        wideadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        wideadapter = new ArrayAdapter<>(activity,R.layout.spinner_row, equipmentsize);
 
-        // wideadapter.notifyDataSetChanged();
         equipmentsizesp.setAdapter(wideadapter);
         if (current_language.equals("en")) {
             back.setRotation(180f);
@@ -215,11 +209,10 @@ public class Fragment_Rental_Of_Equipment extends Fragment implements OnMapReady
                 Calendar now = Calendar.getInstance();
                 now.set(Calendar.HOUR_OF_DAY, 5);
                 TimePickerDialog dpd = TimePickerDialog.newInstance(Fragment_Rental_Of_Equipment.this, now.get(Calendar.HOUR), now.get(Calendar.MINUTE), false);
-// If you're calling this from a support Fragment;
-                dpd.setAccentColor(getResources().getColor(R.color.yellow1));
+                dpd.setAccentColor(getResources().getColor(R.color.black));
                 dpd.setMaxTime(now.get(Calendar.HOUR_OF_DAY), now.get(Calendar.MINUTE), now.get(Calendar.SECOND));
-                dpd.show(activity.getFragmentManager(), "Timepickerdialog");
                 dpd.setVersion(TimePickerDialog.Version.VERSION_2);
+                dpd.show(activity.getFragmentManager(), "Timepickerdialog");
 
             }
         });
@@ -234,7 +227,7 @@ public class Fragment_Rental_Of_Equipment extends Fragment implements OnMapReady
                         now.get(Calendar.MONTH), // Initial month selection
                         now.get(Calendar.DAY_OF_MONTH) // Inital day selection
                 );
-                dpd.setAccentColor(getResources().getColor(R.color.yellow1));
+                dpd.setAccentColor(getResources().getColor(R.color.black));
                 dpd.setMinDate(now);
                 dpd.setVersion(DatePickerDialog.Version.VERSION_2);
 
@@ -244,14 +237,12 @@ public class Fragment_Rental_Of_Equipment extends Fragment implements OnMapReady
         order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(userModel == null)
-                {
+                if (userModel == null) {
                     Common.CreateUserNotSignInAlertDialog(activity);
-                }else
-                    {
-                        MakewaterOrder();
+                } else {
+                    MakewaterOrder();
 
-                    }
+                }
             }
         });
         back.setOnClickListener(new View.OnClickListener() {
@@ -264,12 +255,26 @@ public class Fragment_Rental_Of_Equipment extends Fragment implements OnMapReady
         cities.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position ==0)
-                {
-                    city_id ="";
-                }else
-                {
+                if (position == 0) {
+                    city_id = "";
+                } else {
                     city_id = cities_models.get(position).getId_city();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        equipmentsizesp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0) {
+                    size_id = -1;
+                } else {
+                    size_id = equipment_model.getAll_equipment_sizes().get(position-1).getId();
                 }
             }
 
@@ -281,15 +286,15 @@ public class Fragment_Rental_Of_Equipment extends Fragment implements OnMapReady
 
     }
 
-    private void CheckPermission()
-    {
-        if (ActivityCompat.checkSelfPermission(activity,fineLocPerm) != PackageManager.PERMISSION_GRANTED) {
+    private void CheckPermission() {
+        if (ActivityCompat.checkSelfPermission(activity, fineLocPerm) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(activity, new String[]{fineLocPerm}, loc_req);
         } else {
 
             initGoogleApi();
         }
     }
+
     private void initGoogleApi() {
         googleApiClient = new GoogleApiClient.Builder(activity)
                 .addApi(LocationServices.API)
@@ -303,12 +308,12 @@ public class Fragment_Rental_Of_Equipment extends Fragment implements OnMapReady
         String numofequipment, timeneed;
         numofequipment = equipnum.getText().toString();
         timeneed = timeneeds.getText().toString();
-        if (cities.getSelectedItemPosition() == 0 || equipmentsizesp.getSelectedItemPosition() == 0 || txtdate.getText().toString().isEmpty() || txtclock.getText().toString().isEmpty() || (lat == 0.0 && lng == 0.0) || timeneed.isEmpty() || numofequipment.isEmpty()) {
+        if (cities.getSelectedItemPosition() == 0 || size_id == -1 || txtdate.getText().toString().isEmpty() || txtclock.getText().toString().isEmpty() || (lat == 0.0 && lng == 0.0) || timeneed.isEmpty() || numofequipment.isEmpty()) {
             if (TextUtils.isEmpty(city_id)) {
                 Toast.makeText(activity, getResources().getString(R.string.ch_city), Toast.LENGTH_LONG).show();
             }
             if (equipmentsizesp.getSelectedItemPosition() == 0) {
-                Toast.makeText(activity,getString(R.string.ch_size), Toast.LENGTH_LONG).show();
+                Toast.makeText(activity, getString(R.string.ch_size), Toast.LENGTH_LONG).show();
             }
             if (txtdate.getText().toString().isEmpty()) {
                 txtdate.setError(getString(R.string.field_req));
@@ -327,18 +332,17 @@ public class Fragment_Rental_Of_Equipment extends Fragment implements OnMapReady
             }
         } else {
 
-            if (userModel!=null)
-            {
-                final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
+            if (userModel != null) {
+                final ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));
                 dialog.show();
 
                 Calendar calendar = Calendar.getInstance();
-                calendar.set(Calendar.YEAR,years);
-                calendar.set(Calendar.MONTH,months);
-                calendar.set(Calendar.DAY_OF_MONTH,days);
-                calendar.set(Calendar.HOUR_OF_DAY,hour);
-                calendar.set(Calendar.MINUTE,minute);
-                calendar.set(Calendar.SECOND,second);
+                calendar.set(Calendar.YEAR, years);
+                calendar.set(Calendar.MONTH, months);
+                calendar.set(Calendar.DAY_OF_MONTH, days);
+                calendar.set(Calendar.HOUR_OF_DAY, hour);
+                calendar.set(Calendar.MINUTE, minute);
+                calendar.set(Calendar.SECOND, second);
 
                 int user_id;
                 user_id = userModel.getUser().getId();
@@ -351,9 +355,8 @@ public class Fragment_Rental_Of_Equipment extends Fragment implements OnMapReady
                     user_id = userModel.getUser().getCompany_information().getId();
 
                 }*/
-                int sizeid = equipment_model.getAll_equipment_sizes().get(equipmentsizesp.getSelectedItemPosition()).getId();
                 // Log.e("err", lat + " " + lng + " " + city_id + " " + wide_id + " " + time / 1000 + " " + (int) (time / 1000));
-                Api.getService(Tags.base_url).equipmentorder(2, user_id, id, sizeid, lat, lng, city_id, formatedaddress,  (calendar.getTimeInMillis() / 1000), timeneed, Integer.parseInt(numofequipment)).enqueue(new Callback<Rental_equipment_Model>() {
+                Api.getService(Tags.base_url).equipmentorder(2, user_id, id, size_id, lat, lng, city_id, formatedaddress, (calendar.getTimeInMillis() / 1000), timeneed, Integer.parseInt(numofequipment)).enqueue(new Callback<Rental_equipment_Model>() {
                     @Override
                     public void onResponse(Call<Rental_equipment_Model> call, Response<Rental_equipment_Model> response) {
                         dialog.dismiss();
@@ -382,27 +385,24 @@ public class Fragment_Rental_Of_Equipment extends Fragment implements OnMapReady
                             Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_LONG).show();
 
                             Log.e("suss", t.getMessage() + "");
-                        }catch (Exception e)
-                        {
+                        } catch (Exception e) {
 
                         }
 
                     }
                 });
-            }else
-                {
-                    Common.CreateSignAlertDialog(activity,getString(R.string.si_su));
+            } else {
+                Common.CreateSignAlertDialog(activity, getString(R.string.si_su));
 
-                }
+            }
 
 
         }
     }
 
-    private void getCities()
-    {
+    private void getCities() {
 
-        final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
+        final ProgressDialog dialog = Common.createProgressDialog(activity, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
 
@@ -413,17 +413,14 @@ public class Fragment_Rental_Of_Equipment extends Fragment implements OnMapReady
                     public void onResponse(Call<List<CityModel>> call, Response<List<CityModel>> response) {
                         dialog.dismiss();
 
-                        if (response.isSuccessful())
-                        {
-                            if (response.body()!=null)
-                            {
+                        if (response.isSuccessful()) {
+                            if (response.body() != null) {
                                 cities_models.clear();
-                                cities_models.add(new CityModel("إختر","Choose"));
+                                cities_models.add(new CityModel("إختر", "Choose"));
                                 cities_models.addAll(response.body());
                                 city_adapter.notifyDataSetChanged();
                             }
-                        }else
-                        {
+                        } else {
                             try {
                                 Toast.makeText(activity, R.string.failed, Toast.LENGTH_SHORT).show();
                                 Log.e("Error_code", response.code() + "" + response.errorBody().string());
@@ -446,6 +443,7 @@ public class Fragment_Rental_Of_Equipment extends Fragment implements OnMapReady
                 });
 
     }
+
     private void getequipmentsize(int id) {
         Api.getService(Tags.base_url).getequipsize(id).enqueue(new Callback<Equipment_Model>() {
             @Override
@@ -454,7 +452,7 @@ public class Fragment_Rental_Of_Equipment extends Fragment implements OnMapReady
                     //  Common.setCities_models(response.body());
                     equipment_model = response.body();
                     for (int i = 0; i < response.body().getAll_equipment_sizes().size(); i++) {
-                        if (current_language.equals("ar")||current_language.equals("ur")) {
+                        if (current_language.equals("ar") || current_language.equals("ur")) {
                             equipmentsize.add(response.body().getAll_equipment_sizes().get(i).getAr_title());
                         } else {
                             equipmentsize.add(response.body().getAll_equipment_sizes().get(i).getEn_title());
@@ -469,7 +467,6 @@ public class Fragment_Rental_Of_Equipment extends Fragment implements OnMapReady
 
             @Override
             public void onFailure(Call<Equipment_Model> call, Throwable t) {
-                Log.e("msg", t.getMessage() + "");
 
             }
         });
@@ -512,7 +509,7 @@ public class Fragment_Rental_Of_Equipment extends Fragment implements OnMapReady
         this.years = year;
         this.months = monthOfYear + 1;
         this.days = dayOfMonth;
-        if (current_language.equals("ar")||current_language.equals("ur")) {
+        if (current_language.equals("ar") || current_language.equals("ur")) {
             txtdate.setText(year + "/" + months + "/" + dayOfMonth);
 
         } else {
@@ -537,7 +534,7 @@ public class Fragment_Rental_Of_Equipment extends Fragment implements OnMapReady
         txtclock.setText(d);
     }
 
-    private void getGeoData(final double lat, double lng) {
+    private void getGeoData(final double lat, final double lng) {
 
         String location = lat + "," + lng;
         Api.getService("https://maps.googleapis.com/maps/api/")
@@ -550,6 +547,8 @@ public class Fragment_Rental_Of_Equipment extends Fragment implements OnMapReady
 
                             if (response.body().getResults().size() > 0) {
                                 formatedaddress = response.body().getResults().get(0).getFormatted_address().replace("Unnamed Road,", "");
+                                address.setText(formatedaddress);
+                                AddMarker(lat, lng);
                                 //place_id = response.body().getCandidates().get(0).getPlace_id();
                             }
                         } else {
@@ -632,34 +631,23 @@ public class Fragment_Rental_Of_Equipment extends Fragment implements OnMapReady
 
         if (googleMap != null) {
             mMap = googleMap;
-            // mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(activity, R.raw.maps));
+            mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(activity, R.raw.maps));
             mMap.setTrafficEnabled(false);
             mMap.setBuildingsEnabled(false);
             mMap.setIndoorEnabled(true);
-            getGeoData(lat, lng);
 
-            AddMarker(lat, lng);
             mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                 @Override
                 public void onMapClick(LatLng latLng) {
                     lat = latLng.latitude;
                     lng = latLng.longitude;
                     getGeoData(lat, lng);
-                    AddMarker(lat, lng);
 
                 }
-            });           /* if(marker!=null){
-             LatLng postition=   marker.getPosition();
-             lat=postition.latitude;
-             lng=postition.longitude;
-             getGeoData(lat,lng);
-
-            }*/
+            });
 
         }
     }
-
-
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         initLocationRequest();
@@ -686,7 +674,7 @@ public class Fragment_Rental_Of_Equipment extends Fragment implements OnMapReady
 
                     case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
                         try {
-                            status.startResolutionForResult(activity,100);
+                            status.startResolutionForResult(activity, 100);
                         } catch (IntentSender.SendIntentException e) {
                             e.printStackTrace();
                         }
@@ -700,8 +688,7 @@ public class Fragment_Rental_Of_Equipment extends Fragment implements OnMapReady
 
     @Override
     public void onConnectionSuspended(int i) {
-        if (googleApiClient!=null)
-        {
+        if (googleApiClient != null) {
             googleApiClient.connect();
         }
     }
@@ -713,33 +700,34 @@ public class Fragment_Rental_Of_Equipment extends Fragment implements OnMapReady
 
 
     @SuppressLint("MissingPermission")
-    private void startLocationUpdate()
-    {
-        locationCallback = new LocationCallback()
-        {
+    private void startLocationUpdate() {
+        locationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(LocationResult locationResult) {
                 onLocationChanged(locationResult.getLastLocation());
             }
         };
         LocationServices.getFusedLocationProviderClient(activity)
-                .requestLocationUpdates(locationRequest,locationCallback, Looper.myLooper());
+                .requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
     }
 
     @Override
     public void onLocationChanged(Location location) {
         lat = location.getLatitude();
         lng = location.getLongitude();
+        getGeoData(lat, lng);
+        if (googleApiClient != null) {
+            googleApiClient.disconnect();
+        }
 
-        Log.e("location",location.getLatitude()+"__");
-        AddMarker(lat,lng);
+        LocationServices.getFusedLocationProviderClient(activity)
+                .removeLocationUpdates(locationCallback);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (googleApiClient!=null)
-        {
+        if (googleApiClient != null) {
             LocationServices.getFusedLocationProviderClient(activity).removeLocationUpdates(locationCallback);
             googleApiClient.disconnect();
             googleApiClient = null;
@@ -749,13 +737,10 @@ public class Fragment_Rental_Of_Equipment extends Fragment implements OnMapReady
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == loc_req)
-        {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
-            {
+        if (requestCode == loc_req) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 initGoogleApi();
-            }else
-            {
+            } else {
                 Toast.makeText(activity, "Permission denied", Toast.LENGTH_SHORT).show();
             }
         }

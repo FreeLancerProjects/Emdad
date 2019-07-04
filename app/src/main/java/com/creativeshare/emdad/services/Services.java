@@ -5,6 +5,9 @@ import com.creativeshare.emdad.models.CityModel;
 import com.creativeshare.emdad.models.ContainerSizeModel;
 import com.creativeshare.emdad.models.ContainerTypeModel;
 import com.creativeshare.emdad.models.ContainersModel;
+import com.creativeshare.emdad.models.ContainersOrderDetailsModel;
+import com.creativeshare.emdad.models.CustomClearanceOrderDetailsModel;
+import com.creativeshare.emdad.models.EngineeringOrderDetailsModel;
 import com.creativeshare.emdad.models.Engineering_Type_Model;
 import com.creativeshare.emdad.models.Equipment_Model;
 import com.creativeshare.emdad.models.NotificationDataModel;
@@ -12,11 +15,14 @@ import com.creativeshare.emdad.models.OrderIdModel;
 import com.creativeshare.emdad.models.OtherServiceContainerSizeModel;
 import com.creativeshare.emdad.models.PlaceGeocodeData;
 import com.creativeshare.emdad.models.PlaceMapDetailsData;
+import com.creativeshare.emdad.models.RentalOrderDetailsModel;
 import com.creativeshare.emdad.models.Rental_equipment_Model;
 import com.creativeshare.emdad.models.ServicesModel;
+import com.creativeshare.emdad.models.ShippingOrderDetailsModel;
 import com.creativeshare.emdad.models.SliderDataModel;
 import com.creativeshare.emdad.models.TermsModel;
 import com.creativeshare.emdad.models.UserModel;
+import com.creativeshare.emdad.models.WaterOrderDetailsModel;
 
 import java.util.List;
 
@@ -256,4 +262,58 @@ public interface Services {
 
     @GET("api/engineeringType")
     Call<List<Engineering_Type_Model>> getEngineeringType();
+
+    @GET("api/order-data")
+    Call<WaterOrderDetailsModel> getWaterOrderDetails(@Query("order_id") int order_id,
+                                                      @Query("order_type") String order_type
+    );
+
+    @GET("api/order-data")
+    Call<ShippingOrderDetailsModel> getShipmentOrderDetails(@Query("order_id") int order_id,
+                                                            @Query("order_type") String order_type
+    );
+
+    @GET("api/order-data")
+    Call<RentalOrderDetailsModel> getRentalOrderDetails(@Query("order_id") int order_id,
+                                                        @Query("order_type") String order_type
+    );
+
+    @GET("api/order-data")
+    Call<ContainersOrderDetailsModel> getContainersOrderDetails(@Query("order_id") int order_id,
+                                                                @Query("order_type") String order_type
+    );
+
+    @GET("api/order-data")
+    Call<CustomClearanceOrderDetailsModel> getCustomClearanceOrderDetails(@Query("order_id") int order_id,
+                                                                          @Query("order_type") String order_type
+    );
+
+    @GET("api/order-data")
+    Call<EngineeringOrderDetailsModel> getEngineeringOrderDetails(@Query("order_id") int order_id,
+                                                                  @Query("order_type") String order_type
+    );
+
+    @FormUrlEncoded
+    @POST("api/offer/make")
+    Call<ResponseBody> companySendOffer(@Field("campany_id") int campany_id,
+                                        @Field("order_id") String order_id,
+                                        @Field("price") String price
+    );
+
+    @FormUrlEncoded
+    @POST("api/offer/refuse-make-offer")
+    Call<ResponseBody> companyRefuseOrder(@Field("notification_id") int notification_id
+    );
+
+
+    @FormUrlEncoded
+    @POST("api/offer/accept")
+    Call<ResponseBody> clientAcceptOffer(@Field("offer_id") String offer_id,
+                                         @Field("user_id") int user_id
+    );
+
+    @FormUrlEncoded
+    @POST("api/refuse_offer")
+    Call<ResponseBody> clientRefuseOffer(@Field("offer_id") String offer_id
+    );
 }

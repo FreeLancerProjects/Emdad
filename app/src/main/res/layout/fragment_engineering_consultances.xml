@@ -167,7 +167,7 @@
                 <EditText
                     android:id="@+id/edt_search"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="37dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:hint="@string/select_location_on_map"
@@ -176,6 +176,7 @@
                     android:background="@color/white"
                     android:singleLine="true"
                     android:imeOptions="actionSearch"
+
 
                     />
                 <ImageView

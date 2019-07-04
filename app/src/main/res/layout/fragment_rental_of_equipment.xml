@@ -155,7 +155,8 @@
                         <EditText
                             android:id="@+id/edittext_equipment_num"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="33dp"
+                            android:layout_gravity="center_vertical"
                             android:background="@color/white"
                             android:inputType="number"
                             android:textColor="@color/black"
@@ -179,31 +180,35 @@
                     android:layout_marginTop="8dp"
                     android:layout_weight="1"
                     android:background="@drawable/linear_shape"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    >
 
 
                     <TextView
                         android:id="@+id/txtview_clock"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
                         android:layout_weight="1"
                         android:background="@color/white"
                         android:hint="@string/time"
                         android:textColor="@color/black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        />
 
 
                     <ImageView
                         android:id="@+id/imageview_clock"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:alpha=".6"
-                        android:padding="5dp"
+                        android:padding="8dp"
                         android:src="@drawable/ic_down_arrow"
                         android:tint="@color/black"
+
+
+
 
                         />
 
@@ -220,19 +225,22 @@
                     android:layout_marginTop="8dp"
                     android:layout_weight="1"
                     android:background="@drawable/linear_shape"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    >
 
 
                     <TextView
                         android:id="@+id/txtview_date"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
                         android:layout_weight="1"
                         android:background="@color/white"
                         android:hint="@string/date_of_load"
                         android:textColor="@color/black"
                         android:textSize="14sp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
 
                         />
 
@@ -240,10 +248,7 @@
                         android:id="@+id/imageview_date"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:alpha=".6"
-                        android:padding="5dp"
+                        android:padding="8dp"
                         android:src="@drawable/ic_down_arrow"
                         android:tint="@color/black" />
                 </LinearLayout>
@@ -285,7 +290,8 @@
                 android:hint="@string/days_numbers"
                 android:textSize="14sp"
                 android:textColor="@color/black"
-                android:padding="10dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
                 />
 
             <LinearLayout
@@ -302,12 +308,12 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
                     android:alpha=".6"
                     android:padding="5dp"
                     android:src="@drawable/ic_placeholder"
-                    android:tint="@color/black" />
+                    android:tint="@color/black"
+                    android:layout_gravity="center"
+                    />
 
                 <EditText
                     android:id="@+id/editText_address"
@@ -326,12 +332,11 @@
                     android:id="@+id/imageview_search"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:alpha=".6"
                     android:padding="5dp"
                     android:src="@drawable/ic_search"
-                    android:tint="@color/black" />
+                    android:tint="@color/black"
+                    android:layout_gravity="center_vertical"
+                    />
             </LinearLayout>
 
             <fragment

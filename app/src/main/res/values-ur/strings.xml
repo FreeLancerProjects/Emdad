@@ -426,12 +426,38 @@
     <string name="delivery_time">ڈلیوری وقت</string>
     <string name="delivery_date">ترسیل کی تاریخ</string>
     <string name="already_company">آپ پہلے ہی کمپنی کے طور پر رجسٹرڈ ہیں</string>
-    <string name="accept">Accept</string>
-    <string name="refuse">Refuse</string>
+    <string name="accept">قبول کریں</string>
+    <string name="refuse">انکار کرو</string>
     <string name="order">Order</string>
-    <string name="water_delivery">Water delivery</string>
-    <string name="show_on_map">View location on map</string>
-    <string name="cost">Cost</string>
+    <string name="water_delivery">آرڈر</string>
+    <string name="show_on_map">نقشے پر مقام دیکھیں</string>
+    <string name="cost">لاگت</string>
+    <string name="num_truck">ٹرک کی تعداد</string>
+    <string name="ship_trans">شپنگ اور نقل و حمل</string>
+    <string name="from">سے</string>
+    <string name="load_time">لوڈ وقت</string>
+    <string name="to">کرنے کے لئے</string>
+    <string name="truck">ٹرک</string>
+    <string name="ship_number">شپمنٹ نمبر</string>
+    <string name="arrival_time">آمد کے وقت</string>
+    <string name="desc">تفصیل</string>
+    <string name="weight">وزن</string>
+    <string name="value">قدر</string>
+    <string name="rental_equip">رینٹل کا سامان</string>
+    <string name="amount">رقم</string>
+    <string name="used_time">استعمال شدہ وقت</string>
+    <string name="cont_order">کنٹینرز کا حکم</string>
+    <string name="type">ٹائپ کریں</string>
+    <string name="eng_cons_order">انجینئرنگ مشاورت کا حکم</string>
+    <string name="model_4_image">ماڈل 4 تصویر</string>
+    <string name="tax_card_img">ٹیکس کارڈ کی تصویر</string>
+    <string name="import_image">درآمد کارڈ کی تصویر</string>
+    <string name="cus_card_img">کسٹم کارڈ کی تصویر</string>
+    <string name="ship_type">شپمنٹ کی قسم</string>
+    <string name="cust_clear_order">کسٹم کلیئرنس آرڈر</string>
+    <string name="prop_type">پراپرٹی کی قسم</string>
+    <string name="prop_image">پراپرٹی کی تصویر</string>
+    <string name="sar">SAR</string>
 
 
 </resources>

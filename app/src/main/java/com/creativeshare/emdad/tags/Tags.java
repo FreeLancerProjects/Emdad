@@ -8,6 +8,13 @@ public class Tags {
    public static final String IMAGE_SLIDER_URL = base_url+"upload/sliders/";
    public static final String IMAGE_CONTAINER_URL = base_url+"upload/tranks/";
    public static final String equipment_url=base_url+"upload/equipment/";
+   public static final String eng_url=base_url+"upload/EngineeringConsultances/";
+   public static final String custom_url=base_url+"upload/customs_clearances/";
+
+
+
+
+
 
    public static final String session_login = "login";
    public static final String session_logout = "logout";
