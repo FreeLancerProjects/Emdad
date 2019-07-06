@@ -40,9 +40,7 @@ import com.creativeshare.emdad.activities_fragments.activities.home_activity.fra
 import com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_home.Fragment_Upgrade_To_Company;
 import com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_home.Fragment_Water_Delivery;
 import com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_home.Fragment_main;
-import com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_rental_order.Fragment_Rental_Orders;
-import com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_shipment_order.Fragment_Shipment_Orders;
-import com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_water_delivery_orders.Fragment_Water_Delivery_Orders;
+import com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_orders.Fragment_Orders;
 import com.creativeshare.emdad.activities_fragments.activities.sign_in_sign_up_activity.activity.Login_Activity;
 import com.creativeshare.emdad.language.Language_Helper;
 import com.creativeshare.emdad.models.SelectedLocation;
@@ -53,7 +51,6 @@ import com.creativeshare.emdad.share.Common;
 import com.creativeshare.emdad.tags.Tags;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
@@ -79,9 +76,7 @@ public class Home_Activity extends AppCompatActivity {
     private Fragment_Map fragment_map;
     private Fragment_Terms_Condition fragment_terms_condition;
     private Fragment_Water_Delivery fragment_water_delivery;
-    private Fragment_Water_Delivery_Orders fragment_water_delivery_orders;
-    private Fragment_Shipment_Orders fragment_shipment_orders;
-    private Fragment_Rental_Orders fragment_rental_orders;
+    private Fragment_Orders fragment_orders;
     private Fragment_Equipment fragment_equipment;
     private Fragment_Rental_Of_Equipment fragment_rental_of_equipment;
     private Fragment_Company_Add_Offer_Water_Delivery fragment_company_add_offer_water_delivery;
@@ -103,7 +98,7 @@ public class Home_Activity extends AppCompatActivity {
     ////////////////////////////sheet//////////
     private View root;
     private Button btn_water_delivery,btn_shipment,btn_rental;
-    private BottomSheetBehavior behavior;
+    //private BottomSheetBehavior behavior;
 
 
 
@@ -131,7 +126,7 @@ public class Home_Activity extends AppCompatActivity {
     }
 
     private void initView() {
-        root = findViewById(R.id.root);
+        /*root = findViewById(R.id.root);
 
         behavior = BottomSheetBehavior.from(root);
 
@@ -164,7 +159,7 @@ public class Home_Activity extends AppCompatActivity {
                 DisplayFragmentRentalOrder();
             }
         });
-
+*/
         updateToken();
 
     }
@@ -226,6 +221,16 @@ public class Home_Activity extends AppCompatActivity {
 
         }
     }
+    public void updateUserData(UserModel userModel)
+    {
+        this.userModel = userModel;
+        preferences.create_update_userdata(this,userModel);
+        if (fragment_profile!=null&&fragment_profile.isAdded())
+        {
+            fragment_profile.UpdateUserData(userModel);
+
+        }
+    }
 
     public void DisplayFragmentHome()
     {
@@ -250,6 +255,10 @@ public class Home_Activity extends AppCompatActivity {
 
         if (fragment_notifications != null && fragment_notifications.isAdded()) {
             fragmentManager.beginTransaction().hide(fragment_notifications).commit();
+        }
+
+        if (fragment_orders != null && fragment_orders.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_orders).commit();
         }
 
         if (fragment_profile != null && fragment_profile.isAdded()) {
@@ -277,7 +286,39 @@ public class Home_Activity extends AppCompatActivity {
     }
     public void DisplayFragmentOrders()
     {
-        behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+
+        if (fragment_more != null && fragment_more.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_more).commit();
+        }
+        if (fragment_profile != null && fragment_profile.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_profile).commit();
+        }
+        if (fragment_main != null && fragment_main.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_main).commit();
+        }
+        if (fragment_notifications != null && fragment_notifications.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_notifications).commit();
+        }
+
+        if (fragment_orders == null) {
+            fragment_orders = Fragment_Orders.newInstance();
+        }
+
+        if (fragment_orders.isAdded()) {
+            fragmentManager.beginTransaction().show(fragment_orders).commit();
+        } else {
+            fragmentManager.beginTransaction().add(R.id.fragment_main_child, fragment_orders, "fragment_orders").addToBackStack("fragment_orders").commit();
+
+        }
+        if (fragment_home != null && fragment_home.isAdded()) {
+            fragment_home.UpdateAHBottomNavigationPosition(1);
+        }
+
+
+
+
+
+
     }
 
     public void DisplayFragmentNotification()
@@ -295,6 +336,9 @@ public class Home_Activity extends AppCompatActivity {
             fragmentManager.beginTransaction().hide(fragment_main).commit();
         }
 
+        if (fragment_orders != null && fragment_orders.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_orders).commit();
+        }
         if (fragment_notifications == null) {
             fragment_notifications = Fragment_Notifications.newInstance();
         }
@@ -315,6 +359,9 @@ public class Home_Activity extends AppCompatActivity {
 
         if (fragment_main != null && fragment_main.isAdded()) {
             fragmentManager.beginTransaction().hide(fragment_main).commit();
+        }
+        if (fragment_orders != null && fragment_orders.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_orders).commit();
         }
         if (fragment_notifications != null && fragment_notifications.isAdded()) {
             fragmentManager.beginTransaction().hide(fragment_notifications).commit();
@@ -356,6 +403,9 @@ public class Home_Activity extends AppCompatActivity {
             fragmentManager.beginTransaction().hide(fragment_main).commit();
         }
 
+        if (fragment_orders != null && fragment_orders.isAdded()) {
+            fragmentManager.beginTransaction().hide(fragment_orders).commit();
+        }
         if (fragment_more == null) {
             fragment_more = Fragment_More.newInstance();
         }
@@ -413,59 +463,6 @@ public class Home_Activity extends AppCompatActivity {
 
     }
 
-    public void DisplayFragmentWaterDeliveryOrder()
-    {
-
-        fragment_count +=1;
-
-        fragment_water_delivery_orders = Fragment_Water_Delivery_Orders.newInstance();
-
-
-        if (fragment_water_delivery_orders.isAdded()) {
-            fragmentManager.beginTransaction().show(fragment_water_delivery_orders).commit();
-        } else {
-            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_water_delivery_orders, "fragment_water_delivery_orders").addToBackStack("fragment_water_delivery_orders").commit();
-
-        }
-
-
-    }
-
-    public void DisplayFragmentShipmentOrder()
-    {
-
-        fragment_count +=1;
-
-        fragment_shipment_orders = Fragment_Shipment_Orders.newInstance();
-
-
-        if (fragment_shipment_orders.isAdded()) {
-            fragmentManager.beginTransaction().show(fragment_shipment_orders).commit();
-        } else {
-            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_shipment_orders, "fragment_shipment_orders").addToBackStack("fragment_shipment_orders").commit();
-
-        }
-
-
-    }
-
-    public void DisplayFragmentRentalOrder()
-    {
-
-        fragment_count +=1;
-
-        fragment_rental_orders = Fragment_Rental_Orders.newInstance();
-
-
-        if (fragment_rental_orders.isAdded()) {
-            fragmentManager.beginTransaction().show(fragment_rental_orders).commit();
-        } else {
-            fragmentManager.beginTransaction().add(R.id.fragment_app_container, fragment_rental_orders, "fragment_rental_orders").addToBackStack("fragment_rental_orders").commit();
-
-        }
-
-
-    }
     public void DisplayFragmentContactUS()
     {
 
@@ -839,30 +836,24 @@ public class Home_Activity extends AppCompatActivity {
     }
 
     public void Back() {
-        if (behavior.getState()==BottomSheetBehavior.STATE_EXPANDED)
-        {
-            behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-        }else
+        if (fragment_count > 1) {
+            super.onBackPressed();
+            fragment_count -= 1;
+        } else {
+            if (fragment_main!=null&&fragment_main.isAdded()&&!fragment_main.isVisible())
             {
-                if (fragment_count > 1) {
-                    super.onBackPressed();
-                    fragment_count -= 1;
-                } else {
-                    if (fragment_main!=null&&fragment_main.isAdded()&&!fragment_main.isVisible())
-                    {
-                        DisplayFragmentMain();
-                    }else
-                    {
-                        if (userModel!=null)
-                        {
-                            finish();
-                        }else
-                        {
-                            NavigateToSignInActivity(true);
-                        }
-                    }
+                DisplayFragmentMain();
+            }else
+            {
+                if (userModel!=null)
+                {
+                    finish();
+                }else
+                {
+                    NavigateToSignInActivity(true);
                 }
             }
+        }
 
     }
 

@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,14 +73,7 @@ public class ShipmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shipment);
 
-        new Handler()
-                .postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        initView();
-
-                    }
-                },115);
+        initView();
     }
 
     private void initView() {

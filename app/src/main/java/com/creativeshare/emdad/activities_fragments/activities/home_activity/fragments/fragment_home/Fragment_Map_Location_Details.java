@@ -2,6 +2,8 @@ package com.creativeshare.emdad.activities_fragments.activities.home_activity.fr
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -299,9 +301,12 @@ public class Fragment_Map_Location_Details extends Fragment implements OnMapRead
         super.onDestroy();
         if (googleApiClient!=null)
         {
-            LocationServices.getFusedLocationProviderClient(activity).removeLocationUpdates(locationCallback);
-            googleApiClient.disconnect();
-            googleApiClient = null;
+            if (locationCallback!=null)
+            {
+                LocationServices.getFusedLocationProviderClient(activity).removeLocationUpdates(locationCallback);
+                googleApiClient.disconnect();
+                googleApiClient = null;
+            }
         }
     }
 
@@ -317,6 +322,16 @@ public class Fragment_Map_Location_Details extends Fragment implements OnMapRead
                 {
                     Toast.makeText(activity, "Permission denied", Toast.LENGTH_SHORT).show();
                 }
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100&&resultCode== Activity.RESULT_OK)
+        {
+
+            startLocationUpdate();
         }
     }
 }

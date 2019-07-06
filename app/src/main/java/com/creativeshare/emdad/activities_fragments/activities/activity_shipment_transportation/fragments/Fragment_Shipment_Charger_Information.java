@@ -2,13 +2,14 @@ package com.creativeshare.emdad.activities_fragments.activities.activity_shipmen
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Looper;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -112,8 +113,6 @@ public class Fragment_Shipment_Charger_Information extends Fragment implements O
     private LocationCallback locationCallback;
     private final String fineLocPerm = Manifest.permission.ACCESS_FINE_LOCATION;
     private final int loc_req = 1225;
-    private Runnable runnable;
-    private Handler handler;
     private Preferences preferences;
     private UserModel userModel;
 
@@ -227,16 +226,8 @@ public class Fragment_Shipment_Charger_Information extends Fragment implements O
         initMap();
         updateUIData();
 
-        runnable = new Runnable() {
-            @Override
-            public void run() {
-                CheckPermission();
-                getCities();
-
-            }
-        };
-        handler = new Handler();
-        handler.postDelayed(runnable,2000);
+        CheckPermission();
+        getCities();
 
     }
 
@@ -808,11 +799,7 @@ public class Fragment_Shipment_Charger_Information extends Fragment implements O
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (handler!=null&&runnable!=null)
-        {
-            handler.removeCallbacks(runnable);
 
-        }
         if (googleApiClient!=null)
         {
             if (locationCallback!=null)
@@ -822,6 +809,16 @@ public class Fragment_Shipment_Charger_Information extends Fragment implements O
                 googleApiClient = null;
             }
 
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100&&resultCode== Activity.RESULT_OK)
+        {
+
+            startLocationUpdate();
         }
     }
 

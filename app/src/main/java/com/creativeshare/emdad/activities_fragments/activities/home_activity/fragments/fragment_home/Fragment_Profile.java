@@ -32,7 +32,7 @@ public class Fragment_Profile extends Fragment {
     private ImageView image,arrow_company,arrow_logout;
     private TextView tv_name,tv_email,tv_phone,tv_address,tv_city;
     private SimpleRatingBar rateBar;
-    private ConstraintLayout cons_city,cons_logout;
+    private ConstraintLayout cons_logout;
     private LinearLayout ll_company_data,ll_register_company;
     private Home_Activity activity;
     private Preferences preferences;
@@ -79,7 +79,6 @@ public class Fragment_Profile extends Fragment {
         tv_address = view.findViewById(R.id.tv_address);
         tv_city = view.findViewById(R.id.tv_city);
         rateBar = view.findViewById(R.id.rateBar);
-        cons_city = view.findViewById(R.id.cons_city);
         cons_logout = view.findViewById(R.id.cons_logout);
         ll_company_data = view.findViewById(R.id.ll_company_data);
 
@@ -182,7 +181,7 @@ public class Fragment_Profile extends Fragment {
                     rateBar.setVisibility(View.VISIBLE);
                     Picasso.with(activity).load(Uri.parse(Tags.IMAGE_COMPANY_URL+userModel.getUser().getCompany_information().getCompany_logo())).placeholder(R.drawable.logo_512).fit().into(image);
                     tv_name.setText(userModel.getUser().getCompany_information().getTitle());
-                    tv_email.setText(userModel.getUser().getCompany_information().getCompany_email());
+                    tv_email.setText(userModel.getUser().getEmail());
                     tv_phone.setText(String.format("%s %s",userModel.getUser().getPhone_code().replaceFirst("00","+"),userModel.getUser().getPhone()));
                     tv_city.setText(userModel.getUser().getCompany_information().getCity());
                     tv_address.setText(userModel.getUser().getCompany_information().getAddress());
@@ -191,4 +190,8 @@ public class Fragment_Profile extends Fragment {
         }
     }
 
+    public void UpdateUserData(UserModel userModel) {
+        this.userModel = userModel;
+        updateUi(userModel);
+    }
 }

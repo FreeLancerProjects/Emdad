@@ -1,12 +1,9 @@
-package com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_water_delivery_orders;
+package com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_orders;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
@@ -23,11 +20,8 @@ import java.util.Locale;
 import io.paperdb.Paper;
 
 
-public class Fragment_Water_Delivery_Orders extends Fragment {
+public class Fragment_Orders extends Fragment {
 
-    private LinearLayout ll_back;
-    private ImageView image_back;
-    private TextView tv_title;
     private TabLayout tab;
     private Home_Activity activity;
     private ViewPager pager;
@@ -38,8 +32,8 @@ public class Fragment_Water_Delivery_Orders extends Fragment {
 
 
 
-    public static Fragment_Water_Delivery_Orders newInstance() {
-        return new Fragment_Water_Delivery_Orders();
+    public static Fragment_Orders newInstance() {
+        return new Fragment_Orders();
     }
 
 
@@ -62,25 +56,16 @@ public class Fragment_Water_Delivery_Orders extends Fragment {
         Paper.init(activity);
         current_language = Paper.book().read("lang", Locale.getDefault().getLanguage());
 
-        image_back = view.findViewById(R.id.image_back);
-        ll_back = view.findViewById(R.id.ll_back);
 
-        if (current_language.equals("ar"))
-        {
-            image_back.setRotation(180.0f);
-        }
 
 
         tab = view.findViewById(R.id.tab);
         pager = view.findViewById(R.id.pager);
         tab.setupWithViewPager(pager);
 
-        tv_title = view.findViewById(R.id.tv_title);
-        tv_title.setText(getString(R.string.water_delivery_order));
 
-
-        fragments.add(Fragment_Water_Delivery_Current_Order.newInstance());
-        fragments.add(Fragment_Water_Delivery_Previous_Order.newInstance());
+        fragments.add(Fragment_Current_Order.newInstance());
+        fragments.add(Fragment_Previous_Order.newInstance());
 
         titles.add(getString(R.string.current));
         titles.add(getString(R.string.previou));
@@ -90,12 +75,6 @@ public class Fragment_Water_Delivery_Orders extends Fragment {
         pager_adapter.setTitles(titles);
         pager.setAdapter(pager_adapter);
 
-        ll_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activity.Back();
-            }
-        });
 
     }
 }

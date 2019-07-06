@@ -316,4 +316,11 @@ public interface Services {
     @POST("api/refuse_offer")
     Call<ResponseBody> clientRefuseOffer(@Field("offer_id") String offer_id
     );
+
+    @FormUrlEncoded
+    @POST("api/profile/company/available")
+    Call<ResponseBody> changeAvailability(@Field("available") int available,
+                                          @Field("user_id") int user_id
+
+    );
 }

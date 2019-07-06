@@ -810,14 +810,13 @@ public class Fragment_Water_Delivery extends Fragment implements OnMapReadyCallb
     @Override
     public void onDestroy() {
         super.onDestroy();
-        /*if (handler!=null&&runnable!=null)
-        {
-            handler.removeCallbacks(runnable);
-
-        }*/
         if (googleApiClient!=null)
         {
-            LocationServices.getFusedLocationProviderClient(activity).removeLocationUpdates(locationCallback);
+            if (locationCallback!=null)
+            {
+                LocationServices.getFusedLocationProviderClient(activity).removeLocationUpdates(locationCallback);
+
+            }
             googleApiClient.disconnect();
             googleApiClient = null;
         }

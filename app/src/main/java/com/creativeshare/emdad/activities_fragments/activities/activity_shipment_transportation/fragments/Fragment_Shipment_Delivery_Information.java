@@ -2,8 +2,10 @@ package com.creativeshare.emdad.activities_fragments.activities.activity_shipmen
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -774,9 +776,22 @@ public class Fragment_Shipment_Delivery_Information extends Fragment implements 
         }
         if (googleApiClient!=null)
         {
-            LocationServices.getFusedLocationProviderClient(activity).removeLocationUpdates(locationCallback);
-            googleApiClient.disconnect();
-            googleApiClient = null;
+            if (locationCallback!=null)
+            {
+                LocationServices.getFusedLocationProviderClient(activity).removeLocationUpdates(locationCallback);
+                googleApiClient.disconnect();
+                googleApiClient = null;
+            }
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100&&resultCode== Activity.RESULT_OK)
+        {
+
+            startLocationUpdate();
         }
     }
 

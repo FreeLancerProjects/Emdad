@@ -227,6 +227,7 @@
     <string name="prop_type">نوع العقار</string>
     <string name="prop_image">صورة العقار</string>
     <string name="sar">ر.س</string>
+    <string name="no_orders_to_display">لا توجد طلبات لعرضها</string>
 
 
 </resources>

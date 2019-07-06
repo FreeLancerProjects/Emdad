@@ -58,6 +58,7 @@ public class UserModel implements Serializable {
         private String average_rate;
         private String city;
         private String address;
+        private int is_avaliable;
 
         public int getId() {
             return id;
@@ -97,6 +98,14 @@ public class UserModel implements Serializable {
 
         public String getAddress() {
             return address;
+        }
+
+        public int getIs_avaliable() {
+            return is_avaliable;
+        }
+
+        public void setIs_avaliable(int is_avaliable) {
+            this.is_avaliable = is_avaliable;
         }
     }
 

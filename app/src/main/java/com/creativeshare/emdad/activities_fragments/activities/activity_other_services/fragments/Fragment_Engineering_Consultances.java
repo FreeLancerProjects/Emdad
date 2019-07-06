@@ -737,9 +737,12 @@ public class Fragment_Engineering_Consultances extends Fragment implements OnMap
     public void onDestroy() {
         super.onDestroy();
         if (googleApiClient != null) {
-            LocationServices.getFusedLocationProviderClient(activity).removeLocationUpdates(locationCallback);
-            googleApiClient.disconnect();
-            googleApiClient = null;
+            if (locationCallback!=null)
+            {
+                LocationServices.getFusedLocationProviderClient(activity).removeLocationUpdates(locationCallback);
+                googleApiClient.disconnect();
+                googleApiClient = null;
+            }
         }
     }
 
@@ -772,7 +775,11 @@ public class Fragment_Engineering_Consultances extends Fragment implements OnMap
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == IMG_REQ1 && resultCode == Activity.RESULT_OK && data != null) {
+        if (requestCode==100&&resultCode==Activity.RESULT_OK)
+        {
+         startLocationUpdate();
+
+        }else if (requestCode == IMG_REQ1 && resultCode == Activity.RESULT_OK && data != null) {
 
             imgUri1 = data.getData();
             icon.setVisibility(View.GONE);

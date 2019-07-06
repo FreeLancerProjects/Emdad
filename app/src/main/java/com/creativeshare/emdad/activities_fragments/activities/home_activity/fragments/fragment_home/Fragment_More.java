@@ -1,9 +1,11 @@
 package com.creativeshare.emdad.activities_fragments.activities.home_activity.fragments.fragment_home;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,11 +24,19 @@ import com.creativeshare.emdad.R;
 import com.creativeshare.emdad.activities_fragments.activities.home_activity.activity.Home_Activity;
 import com.creativeshare.emdad.models.UserModel;
 import com.creativeshare.emdad.preferences.Preferences;
+import com.creativeshare.emdad.remote.Api;
+import com.creativeshare.emdad.share.Common;
+import com.creativeshare.emdad.tags.Tags;
 import com.zcw.togglebutton.ToggleButton;
 
+import java.io.IOException;
 import java.util.Locale;
 
 import io.paperdb.Paper;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class Fragment_More extends Fragment {
@@ -92,6 +103,16 @@ public class Fragment_More extends Fragment {
 
         toggle_btn = view.findViewById(R.id.toggle_btn);
 
+        if (userModel.getUser().getCompany_information()!=null)
+        {
+            if (userModel.getUser().getCompany_information().getIs_avaliable()==0)
+            {
+                toggle_btn.setToggleOff();
+            }else
+                {
+                    toggle_btn.setToggleOn();
+                }
+        }
         cons_rate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,10 +168,10 @@ public class Fragment_More extends Fragment {
             public void onToggle(boolean on) {
                 if (on)
                 {
-                    updateState("on");
+                    updateState(1);
                 }else
                 {
-                    updateState("off");
+                    updateState(0);
 
                 }
             }
@@ -172,33 +193,47 @@ public class Fragment_More extends Fragment {
 
     }
 
-    private void updateState(final String state)
-    {/*
+    private void updateState(final int state)
+    {
         final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
         dialog.show();
 
         Api.getService(Tags.base_url)
-                .updateDelegateAvailable(userModel.getData().getUser_id(),state)
-                .enqueue(new Callback<UserModel>() {
+                .changeAvailability(state,userModel.getUser().getId())
+                .enqueue(new Callback<ResponseBody>() {
                     @Override
-                    public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         dialog.dismiss();
-                        if (response.isSuccessful()&&response.body()!=null&&response.body().getData()!=null)
-                        {
-                            UpdateUserData(response.body());
-                        }else
+                        if (response.isSuccessful())
                         {
 
-                            if (state.equals("on"))
+                            Log.e("sss",state+"_");
+                            userModel.getUser().getCompany_information().setIs_avaliable(state);
+                            activity.updateUserData(userModel);
+
+                            if (state ==0)
                             {
                                 toggle_btn.setToggleOff();
+
 
                             }else
                             {
                                 toggle_btn.setToggleOn();
 
                             }
+                        }else
+                        {
 
+                            if (state ==0)
+                            {
+                                toggle_btn.setToggleOff();
+
+
+                            }else
+                            {
+                                toggle_btn.setToggleOn();
+
+                            }
                             Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                             try {
                                 Log.e("Error_code",response.code()+"_"+response.errorBody().string());
@@ -209,11 +244,12 @@ public class Fragment_More extends Fragment {
                     }
 
                     @Override
-                    public void onFailure(Call<UserModel> call, Throwable t) {
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
                         try {
-                            if (state.equals("on"))
+                            if (state ==0)
                             {
                                 toggle_btn.setToggleOff();
+
 
                             }else
                             {
@@ -225,7 +261,7 @@ public class Fragment_More extends Fragment {
                             Log.e("Error",t.getMessage());
                         }catch (Exception e){}
                     }
-                });*/
+                });
 
     }
 

@@ -458,6 +458,7 @@
     <string name="prop_type">پراپرٹی کی قسم</string>
     <string name="prop_image">پراپرٹی کی تصویر</string>
     <string name="sar">SAR</string>
+    <string name="no_orders_to_display">ظاہر کرنے کے لئے کوئی حکم نہیں</string>
 
 
 </resources>

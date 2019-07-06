@@ -236,5 +236,6 @@
     <string name="prop_type">Property type</string>
     <string name="prop_image">Property image</string>
     <string name="sar">SAR</string>
+    <string name="no_orders_to_display">No orders to display</string>
 
 </resources>
