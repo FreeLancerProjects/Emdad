@@ -27,6 +27,7 @@ public class OrderDataModel implements Serializable {
         private String order_status;
         private String to_name;
         private String from_name;
+        private String offer_price;
 
         public int getId() {
             return id;
@@ -62,6 +63,12 @@ public class OrderDataModel implements Serializable {
 
         public String getFrom_name() {
             return from_name;
+
+
+        }
+
+        public String getOffer_price() {
+            return offer_price;
         }
     }
     public class Meta implements Serializable

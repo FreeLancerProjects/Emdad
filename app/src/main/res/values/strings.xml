@@ -237,5 +237,8 @@
     <string name="prop_image">Property image</string>
     <string name="sar">SAR</string>
     <string name="no_orders_to_display">No orders to display</string>
+    <string name="order_accepted">Order accepted</string>
+    <string name="done">done</string>
+    <string name="we_pleaser">We are pleased to serve you</string>
 
 </resources>

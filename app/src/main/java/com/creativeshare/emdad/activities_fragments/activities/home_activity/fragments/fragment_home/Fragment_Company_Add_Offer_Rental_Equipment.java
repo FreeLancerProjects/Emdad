@@ -224,7 +224,7 @@ public class Fragment_Company_Add_Offer_Rental_Equipment extends Fragment {
         dialog.show();
 
         Api.getService(Tags.base_url)
-                .companySendOffer(userModel.getUser().getCompany_information().getId(),rentalOrderDetailsModel.getOrder_details().getOrder_id(),cost)
+                .companySendOffer(userModel.getUser().getCompany_information().getId(),rentalOrderDetailsModel.getOrder_details().getOrder_id(),String.valueOf(notification_id),cost)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

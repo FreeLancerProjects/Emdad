@@ -228,6 +228,9 @@
     <string name="prop_image">صورة العقار</string>
     <string name="sar">ر.س</string>
     <string name="no_orders_to_display">لا توجد طلبات لعرضها</string>
+    <string name="order_accepted">تم الموافقة على طلبك</string>
+    <string name="done">تم الانجاز</string>
+    <string name="we_pleaser">سعداك لخدمة سيادتكم.</string>
 
 
 </resources>

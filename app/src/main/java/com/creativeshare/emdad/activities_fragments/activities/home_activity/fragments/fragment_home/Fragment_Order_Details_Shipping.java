@@ -45,46 +45,45 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Fragment_Client_Offer_Shipping extends Fragment {
+public class Fragment_Order_Details_Shipping extends Fragment {
     private static final String TAG = "ORDER_ID";
     private static final String TAG2 = "PRICE";
-    private static final String TAG3 = "OFFER_ID";
-    private static final String TAG4 = "NOTIFICATION_ID";
 
     private ImageView image_back, image_map_arrow1, image_map_arrow2;
-    private LinearLayout ll_back, ll;
+    private LinearLayout ll_back, ll,ll_order_state;
     private CircleImageView image;
     private TextView tv_client_name, tv_order_num, tv_truck_number, tv_truck, tv_load_type, tv_truck_size, tv_from_company_name, tv_from_company_phone, tv_from_responsible, tv_from_address, tv_from_city, tv_load_time, tv_to_company_name, tv_to_company_phone, tv_to_responsible, tv_to_address, tv_to_city, tv_shipment_number, tv_arrival_time, tv_description,tv_value,tv_weight,tv_cost;
     private ProgressBar progBar;
     private CoordinatorLayout cord_layout;
     private FrameLayout fl_view_location1, fl_view_location2;
     private AppBarLayout app_bar;
-    private Button btn_accept, btn_refused;
+    private Button btn_done;
     private String current_language;
     private UserModel userModel;
     private Preferences preferences;
     private Home_Activity activity;
-    private String price,offer_id,notification_id;
+    private String price;
+    ////////////////////////
+    private ImageView image1,image5;
+    private TextView tv1, tv5, tv_order_id;
+    private View view1;
 
 
     private ShippingOrderDetailsModel shippingOrderDetailsModel;
 
-    public static Fragment_Client_Offer_Shipping newInstance(int notification_id, int order_id, String offer_id, String price) {
+    public static Fragment_Order_Details_Shipping newInstance(int order_id, String price) {
         Bundle bundle = new Bundle();
         bundle.putInt(TAG, order_id);
         bundle.putString(TAG2,price);
-        bundle.putString(TAG3,offer_id);
-        bundle.putInt(TAG4,notification_id);
-
-        Fragment_Client_Offer_Shipping fragment_company_add_offer_water_delivery = new Fragment_Client_Offer_Shipping();
-        fragment_company_add_offer_water_delivery.setArguments(bundle);
-        return fragment_company_add_offer_water_delivery;
+        Fragment_Order_Details_Shipping fragment_order_details_shipping = new Fragment_Order_Details_Shipping();
+        fragment_order_details_shipping.setArguments(bundle);
+        return fragment_order_details_shipping;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_client_offer_shipment, container, false);
+        View view = inflater.inflate(R.layout.fragment_order_details_shipment, container, false);
         initView(view);
         return view;
     }
@@ -140,8 +139,14 @@ public class Fragment_Client_Offer_Shipping extends Fragment {
 
         tv_cost = view.findViewById(R.id.tv_cost);
         app_bar = view.findViewById(R.id.app_bar);
-        btn_accept = view.findViewById(R.id.btn_accept);
-        btn_refused = view.findViewById(R.id.btn_refused);
+        btn_done = view.findViewById(R.id.btn_done);
+        ll_order_state = view.findViewById(R.id.ll_order_state);
+        image1 = view.findViewById(R.id.image1);
+        image5 = view.findViewById(R.id.image5);
+        tv1 = view.findViewById(R.id.tv1);
+        tv5 = view.findViewById(R.id.tv5);
+        tv_order_id = view.findViewById(R.id.tv_order_id);
+        view1 = view.findViewById(R.id.view1);
 
         app_bar.addOnOffsetChangedListener(new AppBarLayout.BaseOnOffsetChangedListener() {
             @Override
@@ -161,8 +166,6 @@ public class Fragment_Client_Offer_Shipping extends Fragment {
         if (bundle != null) {
             int order_id = bundle.getInt(TAG);
             price = bundle.getString(TAG2);
-            offer_id = bundle.getString(TAG3);
-            notification_id = String.valueOf(bundle.getInt(TAG4));
 
             getOrderData(order_id);
         }
@@ -186,29 +189,22 @@ public class Fragment_Client_Offer_Shipping extends Fragment {
                 activity.Back();
             }
         });
-        btn_accept.setOnClickListener(new View.OnClickListener() {
+        btn_done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Accept();
+                FinishOrder();
             }
         });
 
-        btn_refused.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Refuse();
-            }
-        });
     }
 
-    private void Refuse() {
-
+    private void FinishOrder() {
         final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
 
         Api.getService(Tags.base_url)
-                .clientRefuseOffer(offer_id,notification_id)
+                .companyFinishOrder(shippingOrderDetailsModel.getOrder_details().getOrder_id())
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -216,49 +212,8 @@ public class Fragment_Client_Offer_Shipping extends Fragment {
                         if (response.isSuccessful())
                         {
                             Toast.makeText(activity, getString(R.string.suc), Toast.LENGTH_SHORT).show();
-                            activity.updateNotificationData();
-                        }else
-                        {
-                            try {
-                                Log.e("code_error",response.code()+"_"+response.errorBody().string());
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                            Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-                        try {
-                            Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
-                            Log.e("error",t.getMessage());
-                        }catch (Exception e)
-                        {
-
-                        }
-
-
-                    }
-                });
-    }
-    private void Accept() {
-        final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
-        dialog.setCancelable(false);
-        dialog.show();
-
-        Api.getService(Tags.base_url)
-                .clientAcceptOffer(offer_id,notification_id,userModel.getUser().getId())
-                .enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        dialog.dismiss();
-                        if (response.isSuccessful())
-                        {
-                            Toast.makeText(activity, getString(R.string.suc), Toast.LENGTH_SHORT).show();
-                            activity.updateNotificationData();
+                            activity.Back();
+                            activity.refreshFragmentOrder();
                         }else
                         {
                             try {
@@ -317,10 +272,20 @@ public class Fragment_Client_Offer_Shipping extends Fragment {
 
     private void updateUI(ShippingOrderDetailsModel shippingOrderDetailsModel) {
         this.shippingOrderDetailsModel = shippingOrderDetailsModel;
-        Picasso.with(activity).load(Uri.parse(Tags.base_url + shippingOrderDetailsModel.getOrder().getTo_user_image())).placeholder(R.drawable.logo_512).fit().into(image);
         cord_layout.setVisibility(View.VISIBLE);
-        ll.setVisibility(View.VISIBLE);
-        tv_client_name.setText(shippingOrderDetailsModel.getOrder().getTo_user_name());
+
+        if (userModel.getUser().getCompany_information()==null)
+        {
+            Picasso.with(activity).load(Uri.parse(Tags.base_url+shippingOrderDetailsModel.getOrder().getTo_user_image())).placeholder(R.drawable.logo_512).fit().into(image);
+            tv_client_name.setText(shippingOrderDetailsModel.getOrder().getTo_user_name());
+            ll.setVisibility(View.GONE);
+        }else
+        {
+            Picasso.with(activity).load(Uri.parse(Tags.base_url+shippingOrderDetailsModel.getOrder().getFrom_user_image())).placeholder(R.drawable.logo_512).fit().into(image);
+            tv_client_name.setText(shippingOrderDetailsModel.getOrder().getFrom_user_name());
+            ll.setVisibility(View.VISIBLE);
+
+        }
         tv_order_num.setText(String.format("%s %s", "#", shippingOrderDetailsModel.getOrder_details().getOrder_id()));
         tv_truck_number.setText(shippingOrderDetailsModel.getOrder_details().getNum_of_tran());
 
@@ -363,5 +328,46 @@ public class Fragment_Client_Offer_Shipping extends Fragment {
         tv_weight.setText(shippingOrderDetailsModel.getOrder_details().getWeight());
         tv_cost.setText(String.format("%s %s",price,getString(R.string.sar)));
 
+        tv_order_id.setText(String.format("%s %s","#",shippingOrderDetailsModel.getOrder_details().getOrder_id()));
+
+        if (userModel.getUser().getCompany_information()==null)
+        {
+            ll_order_state.setVisibility(View.VISIBLE);
+        }else
+        {
+            ll_order_state.setVisibility(View.GONE);
+
+        }
+        updateStepView(Integer.parseInt(shippingOrderDetailsModel.getOrder().getOrder_status()));
+
+        if (shippingOrderDetailsModel.getOrder().getOrder_status().equals("2"))
+        {
+            btn_done.setVisibility(View.GONE);
+        }
+
     }
+    public void updateStepView(int completePosition) {
+        switch (completePosition) {
+
+            case 1:
+                image1.setBackgroundResource(R.drawable.step_green_circle);
+                image1.setImageResource(R.drawable.step_green_true);
+                view1.setBackgroundColor(ContextCompat.getColor(activity, R.color.done));
+                tv1.setTextColor(ContextCompat.getColor(activity, R.color.colorPrimary));
+
+                break;
+            case 2:
+                image1.setBackgroundResource(R.drawable.step_green_circle);
+                image1.setImageResource(R.drawable.step_green_true);
+                view1.setBackgroundColor(ContextCompat.getColor(activity, R.color.done));
+                tv1.setTextColor(ContextCompat.getColor(activity, R.color.colorPrimary));
+
+                image5.setBackgroundResource(R.drawable.step_green_circle);
+                image5.setImageResource(R.drawable.step_green_heart);
+                tv5.setTextColor(ContextCompat.getColor(activity, R.color.colorPrimary));
+
+
+        }
+    }
+
 }

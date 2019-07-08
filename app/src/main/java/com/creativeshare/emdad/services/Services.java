@@ -11,6 +11,7 @@ import com.creativeshare.emdad.models.EngineeringOrderDetailsModel;
 import com.creativeshare.emdad.models.Engineering_Type_Model;
 import com.creativeshare.emdad.models.Equipment_Model;
 import com.creativeshare.emdad.models.NotificationDataModel;
+import com.creativeshare.emdad.models.OrderDataModel;
 import com.creativeshare.emdad.models.OrderIdModel;
 import com.creativeshare.emdad.models.OtherServiceContainerSizeModel;
 import com.creativeshare.emdad.models.PlaceGeocodeData;
@@ -297,6 +298,7 @@ public interface Services {
     @POST("api/offer/make")
     Call<ResponseBody> companySendOffer(@Field("campany_id") int campany_id,
                                         @Field("order_id") String order_id,
+                                        @Field("notification_id") String notification_id,
                                         @Field("price") String price
     );
 
@@ -309,18 +311,36 @@ public interface Services {
     @FormUrlEncoded
     @POST("api/offer/accept")
     Call<ResponseBody> clientAcceptOffer(@Field("offer_id") String offer_id,
+                                         @Field("notification_id") String notification_id,
                                          @Field("user_id") int user_id
     );
 
     @FormUrlEncoded
     @POST("api/refuse_offer")
-    Call<ResponseBody> clientRefuseOffer(@Field("offer_id") String offer_id
+    Call<ResponseBody> clientRefuseOffer(@Field("offer_id") String offer_id,
+                                         @Field("notification_id") String notification_id
     );
 
     @FormUrlEncoded
     @POST("api/profile/company/available")
     Call<ResponseBody> changeAvailability(@Field("available") int available,
                                           @Field("user_id") int user_id
+
+    );
+
+    @FormUrlEncoded
+    @POST("api/finished_offer")
+    Call<ResponseBody> companyFinishOrder(@Field("order_id") String order_id
+
+    );
+
+    @GET("api/my-orders")
+    Call<OrderDataModel> getOrders(@Query("user_type") String user_type,
+                                   @Query("user_id") int user_id,
+                                   @Query("company_id") int company_id,
+                                   @Query("order_status") String order_status,
+                                   @Query("page") int page
+
 
     );
 }

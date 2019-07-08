@@ -46,6 +46,8 @@ import retrofit2.Response;
 public class Fragment_Client_Offer_Customs extends Fragment {
     private static final String TAG = "ORDER_ID";
     private static final String TAG2 = "PRICE";
+    private static final String TAG3 = "OFFER_ID";
+    private static final String TAG4 = "NOTIFICATION_ID";
 
     private ImageView image_back;
     private LinearLayout ll_back, ll;
@@ -60,15 +62,18 @@ public class Fragment_Client_Offer_Customs extends Fragment {
     private UserModel userModel;
     private Preferences preferences;
     private Home_Activity activity;
-    private String price;
+    private String price,offer_id,notification_id;
 
 
     private CustomClearanceOrderDetailsModel customClearanceOrderDetailsModel;
 
-    public static Fragment_Client_Offer_Customs newInstance(int order_id, String price) {
+    public static Fragment_Client_Offer_Customs newInstance(int notification_id, int order_id, String offer_id, String price) {
         Bundle bundle = new Bundle();
         bundle.putInt(TAG, order_id);
         bundle.putString(TAG2,price);
+        bundle.putString(TAG3,offer_id);
+        bundle.putInt(TAG4,notification_id);
+
         Fragment_Client_Offer_Customs fragment_company_add_offer_water_delivery = new Fragment_Client_Offer_Customs();
         fragment_company_add_offer_water_delivery.setArguments(bundle);
         return fragment_company_add_offer_water_delivery;
@@ -130,6 +135,8 @@ public class Fragment_Client_Offer_Customs extends Fragment {
         if (bundle != null) {
             int order_id = bundle.getInt(TAG);
             price = bundle.getString(TAG2);
+            offer_id =bundle.getString(TAG3);
+            notification_id = String.valueOf(bundle.getInt(TAG4));
 
             getOrderData(order_id);
         }
@@ -184,10 +191,10 @@ public class Fragment_Client_Offer_Customs extends Fragment {
     }
     private void updateUI(CustomClearanceOrderDetailsModel customClearanceOrderDetailsModel) {
         this.customClearanceOrderDetailsModel = customClearanceOrderDetailsModel;
-        Picasso.with(activity).load(Uri.parse(Tags.base_url + customClearanceOrderDetailsModel.getOrder().getTo_user_id())).placeholder(R.drawable.logo_512).fit().into(image);
+        Picasso.with(activity).load(Uri.parse(Tags.base_url + customClearanceOrderDetailsModel.getOrder().getTo_user_image())).placeholder(R.drawable.logo_512).fit().into(image);
         cord_layout.setVisibility(View.VISIBLE);
         ll.setVisibility(View.VISIBLE);
-        tv_client_name.setText(customClearanceOrderDetailsModel.getOrder().getTo_user_id());
+        tv_client_name.setText(customClearanceOrderDetailsModel.getOrder().getTo_user_name());
         tv_order_num.setText(String.format("%s %s", "#", customClearanceOrderDetailsModel.getOrder_details().getOrder_id()));
         tv_shipment_type.setText(customClearanceOrderDetailsModel.getOrder_details().getDescription());
         tv_cost.setText(String.format("%s %s",price,getString(R.string.sar)));
@@ -208,7 +215,7 @@ public class Fragment_Client_Offer_Customs extends Fragment {
         dialog.show();
 
         Api.getService(Tags.base_url)
-                .clientRefuseOffer(customClearanceOrderDetailsModel.getOrder().getOffer_id())
+                .clientRefuseOffer(offer_id,notification_id)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -252,7 +259,7 @@ public class Fragment_Client_Offer_Customs extends Fragment {
         dialog.show();
 
         Api.getService(Tags.base_url)
-                .clientAcceptOffer(customClearanceOrderDetailsModel.getOrder().getOffer_id(),userModel.getUser().getId())
+                .clientAcceptOffer(offer_id,notification_id,userModel.getUser().getId())
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -24,14 +23,13 @@ import androidx.fragment.app.Fragment;
 
 import com.creativeshare.emdad.R;
 import com.creativeshare.emdad.activities_fragments.activities.home_activity.activity.Home_Activity;
-import com.creativeshare.emdad.models.EngineeringOrderDetailsModel;
+import com.creativeshare.emdad.models.ContainersOrderDetailsModel;
 import com.creativeshare.emdad.models.UserModel;
 import com.creativeshare.emdad.preferences.Preferences;
 import com.creativeshare.emdad.remote.Api;
 import com.creativeshare.emdad.share.Common;
 import com.creativeshare.emdad.tags.Tags;
 import com.google.android.material.appbar.AppBarLayout;
-import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -44,48 +42,43 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Fragment_Client_Offer_Engineering extends Fragment {
+public class Fragment_Order_Details_Containers extends Fragment {
     private static final String TAG = "ORDER_ID";
     private static final String TAG2 = "PRICE";
-    private static final String TAG3 = "OFFER_ID";
-    private static final String TAG4 = "NOTIFICATION_ID";
 
-    private ImageView image_back,image_map_arrow;
-    private LinearLayout ll_back,ll;
+    private ImageView image_back;
+    private LinearLayout ll_back,ll,ll_order_state;
     private CircleImageView image;
-    private RoundedImageView img_property;
-    private TextView tv_client_name,tv_order_num,tv_property_type,tv_address,tv_area,tv_cost;
+    private TextView tv_client_name,tv_order_num,tv_size,tv_address,tv_type,tv_cost;
     private ProgressBar progBar;
     private CoordinatorLayout cord_layout;
-    private FrameLayout fl_view_location;
     private AppBarLayout app_bar;
-    private Button btn_accept,btn_refused;
+    private Button btn_done;
     private String current_language;
     private UserModel userModel;
     private Preferences preferences;
     private Home_Activity activity;
-    private String price,offer_id,notification_id;
+    private String price;
+    private ContainersOrderDetailsModel containersOrderDetailsModel;
+    ////////////////
+    private ImageView image1,image5;
+    private TextView tv1, tv5, tv_order_id;
+    private View view1;
 
-
-    private EngineeringOrderDetailsModel engineeringOrderDetailsModel;
-
-    public static Fragment_Client_Offer_Engineering newInstance(int notification_id, int order_id, String offer_id, String price)
+    public static Fragment_Order_Details_Containers newInstance(int order_id, String price)
     {
         Bundle bundle = new Bundle();
         bundle.putInt(TAG,order_id);
         bundle.putString(TAG2,price);
-        bundle.putString(TAG3,offer_id);
-        bundle.putInt(TAG4,notification_id);
-
-        Fragment_Client_Offer_Engineering fragment_company_add_offer_water_delivery = new Fragment_Client_Offer_Engineering();
-        fragment_company_add_offer_water_delivery.setArguments(bundle);
-        return fragment_company_add_offer_water_delivery;
+        Fragment_Order_Details_Containers fragment_order_details_containers = new Fragment_Order_Details_Containers();
+        fragment_order_details_containers.setArguments(bundle);
+        return fragment_order_details_containers;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_client_offer_engineering,container,false);
+        View view = inflater.inflate(R.layout.fragment_order_details_containers,container,false);
         initView(view);
         return view;
     }
@@ -97,29 +90,32 @@ public class Fragment_Client_Offer_Engineering extends Fragment {
         Paper.init(activity);
         current_language = Paper.book().read("lang", Locale.getDefault().getLanguage());
         image_back = view.findViewById(R.id.image_back);
-        image_map_arrow = view.findViewById(R.id.image_map_arrow);
         if (current_language.equals("ar")||current_language.equals("ur")){
             image_back.setRotation(180.0f);
-            image_map_arrow.setRotation(180.0f);
         }
         ll_back = view.findViewById(R.id.ll_back);
         ll = view.findViewById(R.id.ll);
         image = view.findViewById(R.id.image);
-        img_property = view.findViewById(R.id.img_property);
         tv_client_name = view.findViewById(R.id.tv_client_name);
         tv_order_num = view.findViewById(R.id.tv_order_num);
-        tv_property_type = view.findViewById(R.id.tv_property_type);
+        tv_size = view.findViewById(R.id.tv_size);
         tv_address = view.findViewById(R.id.tv_address);
-        tv_area = view.findViewById(R.id.tv_area);
+        tv_type = view.findViewById(R.id.tv_type);
 
         progBar = view.findViewById(R.id.progBar);
         progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity,R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         cord_layout = view.findViewById(R.id.cord_layout);
-        fl_view_location = view.findViewById(R.id.fl_view_location);
         tv_cost = view.findViewById(R.id.tv_cost);
         app_bar = view.findViewById(R.id.app_bar);
-        btn_accept = view.findViewById(R.id.btn_accept);
-        btn_refused = view.findViewById(R.id.btn_refused);
+        btn_done = view.findViewById(R.id.btn_done);
+        ll_order_state = view.findViewById(R.id.ll_order_state);
+        image1 = view.findViewById(R.id.image1);
+        image5 = view.findViewById(R.id.image5);
+        tv1 = view.findViewById(R.id.tv1);
+        tv5 = view.findViewById(R.id.tv5);
+        tv_order_id = view.findViewById(R.id.tv_order_id);
+        view1 = view.findViewById(R.id.view1);
+
 
         app_bar.addOnOffsetChangedListener(new AppBarLayout.BaseOnOffsetChangedListener() {
             @Override
@@ -142,9 +138,6 @@ public class Fragment_Client_Offer_Engineering extends Fragment {
         {
             int order_id = bundle.getInt(TAG);
             price = bundle.getString(TAG2);
-            offer_id =bundle.getString(TAG3);
-            notification_id = String.valueOf(bundle.getInt(TAG4));
-
             getOrderData(order_id);
         }
 
@@ -154,162 +147,181 @@ public class Fragment_Client_Offer_Engineering extends Fragment {
                 activity.Back();
             }
         });
-        btn_accept.setOnClickListener(new View.OnClickListener() {
+
+        btn_done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Accept();
+                FinishOrder();
             }
         });
-        btn_refused.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Refuse();
-            }
-        });
+
+
     }
 
-    private void Refuse() {
-
-        final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
-        dialog.setCancelable(false);
-        dialog.show();
-
-        Api.getService(Tags.base_url)
-                .clientRefuseOffer(offer_id,notification_id)
-                .enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        dialog.dismiss();
-                        if (response.isSuccessful())
-                        {
-                            Toast.makeText(activity, getString(R.string.suc), Toast.LENGTH_SHORT).show();
-                            activity.updateNotificationData();
-                        }else
-                        {
-                            try {
-                                Log.e("code_error",response.code()+"_"+response.errorBody().string());
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                            Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-                        try {
-                            Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
-                            Log.e("error",t.getMessage());
-                        }catch (Exception e)
-                        {
-
-                        }
-
-
-                    }
-                });
-    }
-    private void Accept() {
-        final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
-        dialog.setCancelable(false);
-        dialog.show();
-
-        Api.getService(Tags.base_url)
-                .clientAcceptOffer(offer_id,notification_id,userModel.getUser().getId())
-                .enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        dialog.dismiss();
-                        if (response.isSuccessful())
-                        {
-                            Toast.makeText(activity, getString(R.string.suc), Toast.LENGTH_SHORT).show();
-                            activity.updateNotificationData();
-                        }else
-                        {
-                            try {
-                                Log.e("code_error",response.code()+"_"+response.errorBody().string());
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                            Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-                        try {
-                            Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
-                            Log.e("error",t.getMessage());
-                        }catch (Exception e)
-                        {
-
-                        }
-
-
-                    }
-                });
-
-    }
     private void getOrderData(int order_id) {
 
         Api.getService(Tags.base_url)
-                .getEngineeringOrderDetails(order_id,Tags.ENGINEERING_ORDER)
-                .enqueue(new Callback<EngineeringOrderDetailsModel>() {
+                .getContainersOrderDetails(order_id,Tags.CONTAINERS_ORDER)
+                .enqueue(new Callback<ContainersOrderDetailsModel>() {
                     @Override
-                    public void onResponse(Call<EngineeringOrderDetailsModel> call, Response<EngineeringOrderDetailsModel> response) {
+                    public void onResponse(Call<ContainersOrderDetailsModel> call, Response<ContainersOrderDetailsModel> response) {
                         if (response.isSuccessful())
                         {
                             progBar.setVisibility(View.GONE);
                             updateUI(response.body());
                         }else
-                            {
-                                try {
-                                    Log.e("code_error",response.code()+"_"+response.errorBody().string());
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                                Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                        {
+                            try {
+                                Log.e("code_error",response.code()+"_"+response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
                             }
+                            Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
-                    public void onFailure(Call<EngineeringOrderDetailsModel> call, Throwable t) {
-                        Log.e("error",t.getMessage());
+                    public void onFailure(Call<ContainersOrderDetailsModel> call, Throwable t) {
+                        try {
+                            Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                            Log.e("error",t.getMessage());
+
+                        }catch (Exception e)
+                        {
+
+                        }
+
                     }
                 });
-        fl_view_location.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activity.DisplayFragmentMapLocation_Details(Double.parseDouble(engineeringOrderDetailsModel.getOrder_details().getLatitude()),Double.parseDouble(engineeringOrderDetailsModel.getOrder_details().getLongitude()),engineeringOrderDetailsModel.getOrder_details().getAddress());
-            }
-        });
+
     }
 
-    private void updateUI(EngineeringOrderDetailsModel engineeringOrderDetailsModel) {
-        this.engineeringOrderDetailsModel = engineeringOrderDetailsModel;
+    private void updateUI(ContainersOrderDetailsModel containersOrderDetailsModel) {
+        this.containersOrderDetailsModel = containersOrderDetailsModel;
+
+        if (userModel.getUser().getCompany_information()==null)
+        {
+            Picasso.with(activity).load(Uri.parse(Tags.base_url+containersOrderDetailsModel.getOrder().getTo_user_image())).placeholder(R.drawable.logo_512).fit().into(image);
+            tv_client_name.setText(containersOrderDetailsModel.getOrder().getTo_user_name());
+            ll.setVisibility(View.GONE);
+
+        }else
+            {
+                Picasso.with(activity).load(Uri.parse(Tags.base_url+containersOrderDetailsModel.getOrder().getFrom_user_image())).placeholder(R.drawable.logo_512).fit().into(image);
+                tv_client_name.setText(containersOrderDetailsModel.getOrder().getFrom_user_name());
+                ll.setVisibility(View.VISIBLE);
+
+            }
+
         cord_layout.setVisibility(View.VISIBLE);
-        ll.setVisibility(View.VISIBLE);
 
-        Picasso.with(activity).load(Uri.parse(Tags.base_url+engineeringOrderDetailsModel.getOrder().getTo_user_image())).placeholder(R.drawable.logo_512).fit().into(image);
-        Picasso.with(activity).load(Uri.parse(Tags.eng_url+engineeringOrderDetailsModel.getOrder_details().getPropertyImage())).fit().into(img_property);
 
-        tv_client_name.setText(engineeringOrderDetailsModel.getOrder().getTo_user_name());
-        tv_order_num.setText(String.format("%s %s","#",engineeringOrderDetailsModel.getOrder_details().getOrder_id()));
-        tv_address.setText(engineeringOrderDetailsModel.getOrder_details().getAddress());
-        tv_area.setText(engineeringOrderDetailsModel.getOrder_details().getPropertyArea());
+        tv_order_num.setText(String.format("%s %s","#",containersOrderDetailsModel.getOrder_details().getOrder_id()));
+        tv_address.setText(containersOrderDetailsModel.getOrder_details().getAddress());
         tv_cost.setText(String.format("%s %s",price,getString(R.string.sar)));
 
         if (current_language.equals("ar")||current_language.equals("ur"))
         {
-            tv_property_type.setText(engineeringOrderDetailsModel.getOrder_details().getAr_type());
+            tv_type.setText(containersOrderDetailsModel.getOrder_details().getAr_type());
+            tv_size.setText(containersOrderDetailsModel.getOrder_details().getAr_size());
+        }else
+        {
+            tv_type.setText(containersOrderDetailsModel.getOrder_details().getEn_type());
+            tv_size.setText(containersOrderDetailsModel.getOrder_details().getEn_size());
+
+        }
+
+
+
+        updateStepView(Integer.parseInt(containersOrderDetailsModel.getOrder().getOrder_status()));
+
+        tv_order_id.setText(String.format("%s %s","#",containersOrderDetailsModel.getOrder_details().getOrder_id()));
+
+        if (userModel.getUser().getCompany_information()==null)
+        {
+            ll_order_state.setVisibility(View.VISIBLE);
+
         }else
             {
-                tv_property_type.setText(engineeringOrderDetailsModel.getOrder_details().getEn_type());
+                ll_order_state.setVisibility(View.GONE);
 
             }
+
+        if (containersOrderDetailsModel.getOrder().getOrder_status().equals("2"))
+        {
+            btn_done.setVisibility(View.GONE);
+        }
     }
-}
+
+
+    private void FinishOrder() {
+        final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+
+        Api.getService(Tags.base_url)
+                .companyFinishOrder(containersOrderDetailsModel.getOrder_details().getOrder_id())
+                .enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful())
+                        {
+                            Toast.makeText(activity, getString(R.string.suc), Toast.LENGTH_SHORT).show();
+                            activity.Back();
+                            activity.refreshFragmentOrder();
+                        }else
+                        {
+                            try {
+                                Log.e("code_error",response.code()+"_"+response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                        try {
+                            Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                            Log.e("error",t.getMessage());
+                        }catch (Exception e)
+                        {
+
+                        }
+
+
+                    }
+                });
+
+    }
+
+
+    public void updateStepView(int completePosition) {
+        switch (completePosition) {
+
+            case 1:
+                image1.setBackgroundResource(R.drawable.step_green_circle);
+                image1.setImageResource(R.drawable.step_green_true);
+                view1.setBackgroundColor(ContextCompat.getColor(activity, R.color.done));
+                tv1.setTextColor(ContextCompat.getColor(activity, R.color.colorPrimary));
+
+                break;
+            case 2:
+                image1.setBackgroundResource(R.drawable.step_green_circle);
+                image1.setImageResource(R.drawable.step_green_true);
+                view1.setBackgroundColor(ContextCompat.getColor(activity, R.color.done));
+                tv1.setTextColor(ContextCompat.getColor(activity, R.color.colorPrimary));
+
+                image5.setBackgroundResource(R.drawable.step_green_circle);
+                image5.setImageResource(R.drawable.step_green_heart);
+                tv5.setTextColor(ContextCompat.getColor(activity, R.color.colorPrimary));
+
+
+        }
+    }
+
+   }

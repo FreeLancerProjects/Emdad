@@ -24,17 +24,18 @@ import androidx.fragment.app.Fragment;
 
 import com.creativeshare.emdad.R;
 import com.creativeshare.emdad.activities_fragments.activities.home_activity.activity.Home_Activity;
-import com.creativeshare.emdad.models.EngineeringOrderDetailsModel;
 import com.creativeshare.emdad.models.UserModel;
+import com.creativeshare.emdad.models.WaterOrderDetailsModel;
 import com.creativeshare.emdad.preferences.Preferences;
 import com.creativeshare.emdad.remote.Api;
 import com.creativeshare.emdad.share.Common;
 import com.creativeshare.emdad.tags.Tags;
 import com.google.android.material.appbar.AppBarLayout;
-import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -44,48 +45,46 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Fragment_Client_Offer_Engineering extends Fragment {
+public class Fragment_Order_Details_Water_Delivery extends Fragment {
     private static final String TAG = "ORDER_ID";
     private static final String TAG2 = "PRICE";
-    private static final String TAG3 = "OFFER_ID";
-    private static final String TAG4 = "NOTIFICATION_ID";
 
     private ImageView image_back,image_map_arrow;
-    private LinearLayout ll_back,ll;
+    private LinearLayout ll_back,ll,ll_order_state;
     private CircleImageView image;
-    private RoundedImageView img_property;
-    private TextView tv_client_name,tv_order_num,tv_property_type,tv_address,tv_area,tv_cost;
+    private TextView tv_client_name,tv_order_num,tv_size,tv_address,tv_city,tv_delivery_time,tv_cost;
     private ProgressBar progBar;
     private CoordinatorLayout cord_layout;
     private FrameLayout fl_view_location;
     private AppBarLayout app_bar;
-    private Button btn_accept,btn_refused;
+    private Button btn_done;
     private String current_language;
     private UserModel userModel;
     private Preferences preferences;
     private Home_Activity activity;
-    private String price,offer_id,notification_id;
+    private String price;
+    ///////////////////////////
+    private ImageView image1,image5;
+    private TextView tv1, tv5, tv_order_id;
+    private View view1;
 
 
-    private EngineeringOrderDetailsModel engineeringOrderDetailsModel;
+    private WaterOrderDetailsModel waterOrderDetailsModel;
 
-    public static Fragment_Client_Offer_Engineering newInstance(int notification_id, int order_id, String offer_id, String price)
+    public static Fragment_Order_Details_Water_Delivery newInstance(int order_id, String price)
     {
         Bundle bundle = new Bundle();
         bundle.putInt(TAG,order_id);
         bundle.putString(TAG2,price);
-        bundle.putString(TAG3,offer_id);
-        bundle.putInt(TAG4,notification_id);
-
-        Fragment_Client_Offer_Engineering fragment_company_add_offer_water_delivery = new Fragment_Client_Offer_Engineering();
-        fragment_company_add_offer_water_delivery.setArguments(bundle);
-        return fragment_company_add_offer_water_delivery;
+        Fragment_Order_Details_Water_Delivery fragment_order_details_water_delivery = new Fragment_Order_Details_Water_Delivery();
+        fragment_order_details_water_delivery.setArguments(bundle);
+        return fragment_order_details_water_delivery;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_client_offer_engineering,container,false);
+        View view = inflater.inflate(R.layout.fragment_order_details_water_delivery,container,false);
         initView(view);
         return view;
     }
@@ -105,12 +104,12 @@ public class Fragment_Client_Offer_Engineering extends Fragment {
         ll_back = view.findViewById(R.id.ll_back);
         ll = view.findViewById(R.id.ll);
         image = view.findViewById(R.id.image);
-        img_property = view.findViewById(R.id.img_property);
         tv_client_name = view.findViewById(R.id.tv_client_name);
         tv_order_num = view.findViewById(R.id.tv_order_num);
-        tv_property_type = view.findViewById(R.id.tv_property_type);
+        tv_size = view.findViewById(R.id.tv_size);
         tv_address = view.findViewById(R.id.tv_address);
-        tv_area = view.findViewById(R.id.tv_area);
+        tv_city = view.findViewById(R.id.tv_city);
+        tv_delivery_time = view.findViewById(R.id.tv_delivery_time);
 
         progBar = view.findViewById(R.id.progBar);
         progBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity,R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
@@ -118,8 +117,14 @@ public class Fragment_Client_Offer_Engineering extends Fragment {
         fl_view_location = view.findViewById(R.id.fl_view_location);
         tv_cost = view.findViewById(R.id.tv_cost);
         app_bar = view.findViewById(R.id.app_bar);
-        btn_accept = view.findViewById(R.id.btn_accept);
-        btn_refused = view.findViewById(R.id.btn_refused);
+        btn_done = view.findViewById(R.id.btn_done);
+        ll_order_state = view.findViewById(R.id.ll_order_state);
+        image1 = view.findViewById(R.id.image1);
+        image5 = view.findViewById(R.id.image5);
+        tv1 = view.findViewById(R.id.tv1);
+        tv5 = view.findViewById(R.id.tv5);
+        tv_order_id = view.findViewById(R.id.tv_order_id);
+        view1 = view.findViewById(R.id.view1);
 
         app_bar.addOnOffsetChangedListener(new AppBarLayout.BaseOnOffsetChangedListener() {
             @Override
@@ -142,8 +147,6 @@ public class Fragment_Client_Offer_Engineering extends Fragment {
         {
             int order_id = bundle.getInt(TAG);
             price = bundle.getString(TAG2);
-            offer_id =bundle.getString(TAG3);
-            notification_id = String.valueOf(bundle.getInt(TAG4));
 
             getOrderData(order_id);
         }
@@ -154,28 +157,22 @@ public class Fragment_Client_Offer_Engineering extends Fragment {
                 activity.Back();
             }
         });
-        btn_accept.setOnClickListener(new View.OnClickListener() {
+        btn_done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Accept();
+                FinishOrder();
             }
         });
-        btn_refused.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Refuse();
-            }
-        });
+
     }
 
-    private void Refuse() {
-
+    private void FinishOrder() {
         final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
 
         Api.getService(Tags.base_url)
-                .clientRefuseOffer(offer_id,notification_id)
+                .companyFinishOrder(waterOrderDetailsModel.getOrder_details().getOrder_id())
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -183,49 +180,8 @@ public class Fragment_Client_Offer_Engineering extends Fragment {
                         if (response.isSuccessful())
                         {
                             Toast.makeText(activity, getString(R.string.suc), Toast.LENGTH_SHORT).show();
-                            activity.updateNotificationData();
-                        }else
-                        {
-                            try {
-                                Log.e("code_error",response.code()+"_"+response.errorBody().string());
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                            Toast.makeText(activity, getString(R.string.failed), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-                        try {
-                            Toast.makeText(activity, getString(R.string.something), Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
-                            Log.e("error",t.getMessage());
-                        }catch (Exception e)
-                        {
-
-                        }
-
-
-                    }
-                });
-    }
-    private void Accept() {
-        final ProgressDialog dialog = Common.createProgressDialog(activity,getString(R.string.wait));
-        dialog.setCancelable(false);
-        dialog.show();
-
-        Api.getService(Tags.base_url)
-                .clientAcceptOffer(offer_id,notification_id,userModel.getUser().getId())
-                .enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        dialog.dismiss();
-                        if (response.isSuccessful())
-                        {
-                            Toast.makeText(activity, getString(R.string.suc), Toast.LENGTH_SHORT).show();
-                            activity.updateNotificationData();
+                            activity.Back();
+                            activity.refreshFragmentOrder();
                         }else
                         {
                             try {
@@ -257,10 +213,10 @@ public class Fragment_Client_Offer_Engineering extends Fragment {
     private void getOrderData(int order_id) {
 
         Api.getService(Tags.base_url)
-                .getEngineeringOrderDetails(order_id,Tags.ENGINEERING_ORDER)
-                .enqueue(new Callback<EngineeringOrderDetailsModel>() {
+                .getWaterOrderDetails(order_id,Tags.WATER_ORDER)
+                .enqueue(new Callback<WaterOrderDetailsModel>() {
                     @Override
-                    public void onResponse(Call<EngineeringOrderDetailsModel> call, Response<EngineeringOrderDetailsModel> response) {
+                    public void onResponse(Call<WaterOrderDetailsModel> call, Response<WaterOrderDetailsModel> response) {
                         if (response.isSuccessful())
                         {
                             progBar.setVisibility(View.GONE);
@@ -277,39 +233,96 @@ public class Fragment_Client_Offer_Engineering extends Fragment {
                     }
 
                     @Override
-                    public void onFailure(Call<EngineeringOrderDetailsModel> call, Throwable t) {
+                    public void onFailure(Call<WaterOrderDetailsModel> call, Throwable t) {
                         Log.e("error",t.getMessage());
                     }
                 });
         fl_view_location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.DisplayFragmentMapLocation_Details(Double.parseDouble(engineeringOrderDetailsModel.getOrder_details().getLatitude()),Double.parseDouble(engineeringOrderDetailsModel.getOrder_details().getLongitude()),engineeringOrderDetailsModel.getOrder_details().getAddress());
+                activity.DisplayFragmentMapLocation_Details(Double.parseDouble(waterOrderDetailsModel.getOrder_details().getLatitude()),Double.parseDouble(waterOrderDetailsModel.getOrder_details().getLongitude()),waterOrderDetailsModel.getOrder_details().getAddress());
             }
         });
     }
 
-    private void updateUI(EngineeringOrderDetailsModel engineeringOrderDetailsModel) {
-        this.engineeringOrderDetailsModel = engineeringOrderDetailsModel;
+    private void updateUI(WaterOrderDetailsModel waterOrderDetailsModel) {
+        this.waterOrderDetailsModel = waterOrderDetailsModel;
+        if (userModel.getUser().getCompany_information()==null)
+        {
+            Picasso.with(activity).load(Uri.parse(Tags.base_url+waterOrderDetailsModel.getOrder().getTo_user_image())).placeholder(R.drawable.logo_512).fit().into(image);
+            tv_client_name.setText(waterOrderDetailsModel.getOrder().getTo_user_name());
+            ll.setVisibility(View.GONE);
+
+        }else
+        {
+            Picasso.with(activity).load(Uri.parse(Tags.base_url+waterOrderDetailsModel.getOrder().getFrom_user_image())).placeholder(R.drawable.logo_512).fit().into(image);
+            tv_client_name.setText(waterOrderDetailsModel.getOrder().getFrom_user_name());
+            ll.setVisibility(View.VISIBLE);
+
+        }
         cord_layout.setVisibility(View.VISIBLE);
-        ll.setVisibility(View.VISIBLE);
-
-        Picasso.with(activity).load(Uri.parse(Tags.base_url+engineeringOrderDetailsModel.getOrder().getTo_user_image())).placeholder(R.drawable.logo_512).fit().into(image);
-        Picasso.with(activity).load(Uri.parse(Tags.eng_url+engineeringOrderDetailsModel.getOrder_details().getPropertyImage())).fit().into(img_property);
-
-        tv_client_name.setText(engineeringOrderDetailsModel.getOrder().getTo_user_name());
-        tv_order_num.setText(String.format("%s %s","#",engineeringOrderDetailsModel.getOrder_details().getOrder_id()));
-        tv_address.setText(engineeringOrderDetailsModel.getOrder_details().getAddress());
-        tv_area.setText(engineeringOrderDetailsModel.getOrder_details().getPropertyArea());
+        tv_order_num.setText(String.format("%s %s","#",waterOrderDetailsModel.getOrder_details().getOrder_id()));
+        tv_address.setText(waterOrderDetailsModel.getOrder_details().getAddress());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm aa",Locale.ENGLISH);
+        String date = dateFormat.format(new Date(Long.parseLong(waterOrderDetailsModel.getOrder_details().getArrival_time())*1000));
+        tv_delivery_time.setText(date);
         tv_cost.setText(String.format("%s %s",price,getString(R.string.sar)));
 
         if (current_language.equals("ar")||current_language.equals("ur"))
         {
-            tv_property_type.setText(engineeringOrderDetailsModel.getOrder_details().getAr_type());
+            tv_city.setText(waterOrderDetailsModel.getOrder_details().getAr_city_title());
+            tv_size.setText(waterOrderDetailsModel.getOrder_details().getAr_size_title());
         }else
             {
-                tv_property_type.setText(engineeringOrderDetailsModel.getOrder_details().getEn_type());
+                tv_city.setText(waterOrderDetailsModel.getOrder_details().getEn_city_title());
+                tv_size.setText(waterOrderDetailsModel.getOrder_details().getEn_size_title());
 
             }
+
+        updateStepView(Integer.parseInt(waterOrderDetailsModel.getOrder().getOrder_status()));
+
+        tv_order_id.setText(String.format("%s %s","#",waterOrderDetailsModel.getOrder_details().getOrder_id()));
+
+        if (userModel.getUser().getCompany_information()==null)
+        {
+            ll_order_state.setVisibility(View.VISIBLE);
+        }else
+        {
+            ll_order_state.setVisibility(View.GONE);
+
+        }
+
+        if (waterOrderDetailsModel.getOrder().getOrder_status().equals("2"))
+        {
+            btn_done.setVisibility(View.GONE);
+        }
+        Log.e("order_state",waterOrderDetailsModel.getOrder().getOrder_status());
+
+
     }
+
+    public void updateStepView(int completePosition) {
+        switch (completePosition) {
+
+            case 1:
+                image1.setBackgroundResource(R.drawable.step_green_circle);
+                image1.setImageResource(R.drawable.step_green_true);
+                view1.setBackgroundColor(ContextCompat.getColor(activity, R.color.done));
+                tv1.setTextColor(ContextCompat.getColor(activity, R.color.colorPrimary));
+
+                break;
+            case 2:
+                image1.setBackgroundResource(R.drawable.step_green_circle);
+                image1.setImageResource(R.drawable.step_green_true);
+                view1.setBackgroundColor(ContextCompat.getColor(activity, R.color.done));
+                tv1.setTextColor(ContextCompat.getColor(activity, R.color.colorPrimary));
+
+                image5.setBackgroundResource(R.drawable.step_green_circle);
+                image5.setImageResource(R.drawable.step_green_heart);
+                tv5.setTextColor(ContextCompat.getColor(activity, R.color.colorPrimary));
+
+
+        }
+    }
+
 }

@@ -5,12 +5,13 @@
     android:background="@color/gray0">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/current_order"
+        android:id="@+id/recView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/gray_transparent" />
+
+        />
     <ProgressBar
-        android:id="@+id/progBar_current"
+        android:id="@+id/progBar"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_gravity="center" />

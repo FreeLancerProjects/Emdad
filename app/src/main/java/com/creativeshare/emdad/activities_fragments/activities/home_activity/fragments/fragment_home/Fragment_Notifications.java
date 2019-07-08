@@ -284,26 +284,26 @@ public class Fragment_Notifications extends Fragment {
             activity.DisplayFragmentCompanyAddEngineeringOffer(Integer.parseInt(notificationModel.getOrder_id()),notificationModel.getId());
         }else if (notificationModel.getAction_type().equals("2")&&notificationModel.getOrder_type().equals(Tags.WATER_ORDER))
         {
-            activity.DisplayFragmentClientWaterOffer(Integer.parseInt(notificationModel.getOrder_id()),notificationModel.getOffer_price());
+            activity.DisplayFragmentClientWaterOffer(notificationModel.getId(),Integer.parseInt(notificationModel.getOrder_id()),notificationModel.getOffer_id(),notificationModel.getOffer_price());
         }else if (notificationModel.getAction_type().equals("2")&&notificationModel.getOrder_type().equals(Tags.SHIPPING_ORDER))
         {
-            activity.DisplayFragmentClientShipmentOffer(Integer.parseInt(notificationModel.getOrder_id()),notificationModel.getOffer_price());
+            activity.DisplayFragmentClientShipmentOffer(notificationModel.getId(),Integer.parseInt(notificationModel.getOrder_id()),notificationModel.getOffer_id(),notificationModel.getOffer_price());
         }
         else if (notificationModel.getAction_type().equals("2")&&notificationModel.getOrder_type().equals(Tags.RENTAL_ORDER))
         {
-            activity.DisplayFragmentClientRentalEquipmentOffer(Integer.parseInt(notificationModel.getOrder_id()),notificationModel.getOffer_price());
+            activity.DisplayFragmentClientRentalEquipmentOffer(notificationModel.getId(),Integer.parseInt(notificationModel.getOrder_id()),notificationModel.getOffer_id(),notificationModel.getOffer_price());
         }
         else if (notificationModel.getAction_type().equals("2")&&notificationModel.getOrder_type().equals(Tags.CONTAINERS_ORDER))
         {
-            activity.DisplayFragmentClientContainersOffer(Integer.parseInt(notificationModel.getOrder_id()),notificationModel.getOffer_price());
+            activity.DisplayFragmentClientContainersOffer(notificationModel.getId(),Integer.parseInt(notificationModel.getOrder_id()),notificationModel.getOffer_id(),notificationModel.getOffer_price());
         }
         else if (notificationModel.getAction_type().equals("2")&&notificationModel.getOrder_type().equals(Tags.CLEARANCE_ORDER))
         {
-            activity.DisplayFragmentClientCustomsOffer(Integer.parseInt(notificationModel.getOrder_id()),notificationModel.getOffer_price());
+            activity.DisplayFragmentClientCustomsOffer(notificationModel.getId(),Integer.parseInt(notificationModel.getOrder_id()),notificationModel.getOffer_id(),notificationModel.getOffer_price());
         }
         else if (notificationModel.getAction_type().equals("2")&&notificationModel.getOrder_type().equals(Tags.ENGINEERING_ORDER))
         {
-            activity.DisplayFragmentClientEngineeringOffer(Integer.parseInt(notificationModel.getOrder_id()),notificationModel.getOffer_price());
+            activity.DisplayFragmentClientEngineeringOffer(notificationModel.getId(),Integer.parseInt(notificationModel.getOrder_id()),notificationModel.getOffer_id(),notificationModel.getOffer_price());
         }
     }
 
